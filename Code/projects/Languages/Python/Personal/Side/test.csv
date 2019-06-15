@@ -1,0 +1,3 @@
+Name,PhoneNumber,EmailAddress,Address
+/home/river/Desktop/Code/projects/Languages/Python/Personal,1234567891,sample_name@example.com,"['Street Line1', 'City Name', 'AE', '12345']"
+random name 2,1234567891,sample_name1@example.com,"['Current Address', 'Los Angeles', 'CA', '56666']"

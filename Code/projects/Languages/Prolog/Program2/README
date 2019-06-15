@@ -1,0 +1,27 @@
+Program 2 Readme
+---------------------------------------------------------------------
+Program 2a:
+The disjoint program implementation uses the law of contradication. 
+I implemented a function that essentially is the intersection function 
+that takes two lists, compares the elements within the lists, and returns a list that contains the elements that they share.
+By the law of contradiction, if the personal intersection function (named disjoint_check within my code) returns an empty list, then the lists are disjoint by default. 
+
+There is a statement that prints to the screen only if the two lists share elements. It states that the lists are not disjoint, and gives a list of what the two lists share as far as elements (i.e. the intersection of the two lists)
+
+There is a statement that prints to the screen if and only if the two lists do not share any elements. It states, per element, that the element does not appear in the other list. Once the comparisons between elements are finished and it is shown that they contain none of the same elements, then an empty list is returned, thus proving that the two lists are disjoint.
+
+There is a comment within the code that gives a sample input to check.
+It is slightly different than the example given in the instruction because I'm using the logic of (intersections)' = disjoint. So the list parameter is needed.
+
+That is the only difference between the sample given and the one I am submitting. The functionality is the same.
+---------------------------------------------------------------------
+Program 2b:
+The program has built a family tree of my immediate family.
+The only note I have on it is this:
+In the intstructions, the given relationships we are to define include
+(mother, father, grandmother, grandfather, sister, brother, cousin, son, daughter).
+All of which work, and to define cousin, he is the son of my moms brother, making him my cousin.
+
+Uncle relationship was not required, but it made cousin easier to define, so I added it.
+
+
