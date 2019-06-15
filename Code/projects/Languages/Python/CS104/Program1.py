@@ -3,6 +3,7 @@
 # Date: June 12th, 2019
 # Run and Tested on Python 3.7.3 Anaconda
 # Purpose: To calculate the BMI given a user entered height and weight
+# Another comment added to see if the repo works
 
 
 ''' Start of program '''
