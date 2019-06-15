@@ -1,5 +1,5 @@
 @ File: ExampleButtons.s
-@ Author: R. Kevin Preston
+@ Author: Scott Holley
 @ Purpose: Provide the assemble code on how to use the four 
 @ buttons on the circuit boards in the Hardware Lab. 
 @
