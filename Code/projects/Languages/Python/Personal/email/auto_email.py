@@ -46,7 +46,7 @@ def mailing_setup():
 
 def main():
     mailing_setup()
-    print("\n\nProgram will exit after the messages are sent***")
+    print("\n\n***Program will exit after the messages are sent***")
     quit()
 
 

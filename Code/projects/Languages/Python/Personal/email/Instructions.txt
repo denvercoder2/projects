@@ -1,0 +1,67 @@
+--- INSTRUCTIONS TO RUN AUTO EMAIL ---
+
+
+------ Important Note --------
+It is recommended (by me), to leave this project on your desktop.
+The program will work wherever you have it directory wise, but you have to jump
+through more hoops in order for it to work if you don't leave it on the desktop.
+If for some reason it ever gets moved or deleted, I can easily fix that, but just as
+a warning, leave the folder on your desktop.
+------ Important Note --------
+
+
+--- Steps ---
+
+Step 1) 
+Hit the windows key, and type in cmd
+After that, type in "cd Desktop\project\email\"
+This will take you to the projects main directory.
+
+Step 2)
+There will be 3 files in this directory.
+They should be named "auto_email.py", "auto_email_gui.py", and "residents.csv"
+You'll want to type this command into your terminal screen (The screen you got to in step one): python auto_email_gui.py
+This will make a popup window.
+
+Step 3)
+When the popup window comes up, click the button in the window.
+This will allow you to type a message into the terminal screen to send to all residents
+who are on the mailing list.
+
+Step 4)
+When you are finished with the text, hit enter. The program will then take that message,
+format it, and send it to all residents on email list.
+After the program is finished, the program will exit.
+That's all.
+
+
+--- Sample Execution ---
+
+
+--- Ignore here ---
+C:\Users\River>cd Desktop
+
+C:\Users\River\Desktop>cd code
+
+C:\Users\River\Desktop\Code>cd projects\Code\projects\Languages\Python\Personal\email
+
+C:\Users\River\Desktop\Code\projects\Code\projects\Languages\Python\Personal\email>python auto_email_gui.py
+--- To here ---
+Yours will just be on the desktop
+
+Enter your message below. When finished, press Enter:
+Test for sample execution.
+
+Email was sent to:  riverholley0923@gmail.com
+
+
+Email was sent to:  sh0121@uah.edu
+
+Email was sent to all residents on mailing list
+
+
+Program will exit after the messages are sent***
+
+C:\Users\River\Desktop\Code\projects\Code\projects\Languages\Python\Personal\email>
+
+--- Sample Execution --- 
