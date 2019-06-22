@@ -18,13 +18,8 @@ float Utilities(float z){
     return z * scale;
 }
 
-int web(int w){
-    int r = 35;
-    return w - r;
-}
-
-float sum_bill(float x, int y, float z, int w){
-    return x + y + z + w;
+float sum_bill(int y, float z, int w){
+    return y + z + w;
 }
 
 void report(){
@@ -47,21 +42,16 @@ void report(){
     cout << "\nWater Bill for Roy is: " << water - h2o(40) << "\n";
 
     cout << "-------------------------------------------------------";
-    
-    cout << "\nInternet Bill for Scott is: " << web(90) << "\n";
-    cout << "\nInternet Bill for Roy is: " << 90 - web(90) << "\n";
-
-    cout << "-------------------------------------------------------";
-    
-    float Scott_total = sum_bill(Rent(785), h2o(40), Utilities(Util_total), web(90));
-    int complete_total = 785 + 40 + 90 + Util_total;
+        
+    // when the internet is added as a bill, add 90 to the total, and subtract 90 from roys total
+    float Scott_total = sum_bill(Rent(785), h2o(40), Utilities(Util_total));
+    int complete_total = 785 + 40 + Util_total;
     cout << "\nTotal Bill amount for Scott (Rounded): " << int(Scott_total) << "\n";
-    cout << "\nTotal Bill amount for Roy (Rounded): " <<   int(complete_total - Scott_total) << "\n";
+    cout << "\nTotal Bill amount for Roy (Rounded): " <<   int(complete_total - Scott_total) << "\nNo internet included this month\n";
 
     cout << "-------------------------------------------------------\n";
 
 }
-
 int main(){
     report();    
 }
