@@ -1,68 +1,44 @@
-# Prelab 5
+# Scott Holley
+# Lab 5 part 1
+# June 27th, 2018
 
-''' Part one '''
-
-# 1
-N = int(input("Please input a value for N: \n"))
-
-# # #2
-def question_1(N: int):
-    while N > 1:
-        N -= 1
-        print("Current Number - 1 is: ", N)
+# def factorial_func(N: int):
+#     factorial = 1
+#     while N > 1:
+#         factorial = factorial * N
+#         N -= 1
+#     return factorial
 
 
-#3
-# factorial should be initialized to one before starting the loop
-# because if it's set at 0, the factorial in the while loop
-# will multiply N by 0, returning 0
-def factorial_func(N: int):
-    factorial = 1
-    while N >= 1:
-        factorial = factorial * N
-        N = N - 1
-    return factorial
+# def main_part_1():
+#     N = int(input("Please input a value for N: \n"))
+#     print("The factorial value for", N, "is: ", factorial_func(N))
 
 
-''' 
-output 
-Please input a value for N: 
-5
-120
-'''
+# if __name__ == "__main__":
+#     main_part_1()
 
-''' Part 2 '''
-
+# ''' output '''
+# '''
+# Please input a value for N: 
+# 10
+# The factorial value for 10 is:  3628800
+# '''
 # 1 
-def checks(x: int):
-    # here is part 1 (Check that x isn't 0)
-    while x > 0:
-        if x % 2 == 0:
-            print(x, "is Even and positive")
-            break
-        else:
-            print (x, "is Odd and positive")
-            break
+
+num = int(input("Please give a value for the num: "))
+while num != 0:
+    if num % 2 == 0:
+        print(num, "is Even")
     else:
-        print("Number given is 0 or negative")
+        print(num, "is Odd")
+    num = int(input("Please input another number: "))
+    if num == 0:
+        print("\nYou entered 0. Goodbye")
+
     
-    return x
 
 
+        
 
-output_part_2 = checks(N)
 
-'''
-output
-Please input a value for N: 
--1
-Number given is 0 or negative
-(base) river@riv-laplnx:~/Desktop/Git/projects$ /usr/bin/python3 /home/river/Desktop/Git/projects/Code/projects/Languages/Python/CS104/prelab5.py
-Please input a value for N: 
-8
-8 is Even and positive
-(base) river@riv-laplnx:~/Desktop/Git/projects$ /usr/bin/python3 /home/river/Desktop/Git/projects/Code/projects/Languages/Python/CS104/prelab5.py
-Please input a value for N: 
-3
-3 is Odd and positive
-'''
