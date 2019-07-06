@@ -19,7 +19,7 @@ def user_invoice():
 
 
 '''
-gross_income function takes an a pay parameter, that is an float, and
+gross_income function takes an a pay parameter, that being float, and
 returns the product of the hours and the user's inputted rate
 '''
 def gross_income(pay: float):
