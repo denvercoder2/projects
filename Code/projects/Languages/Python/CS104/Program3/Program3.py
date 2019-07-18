@@ -16,12 +16,16 @@ def get_file(fileIn: str):
     by other functions
     '''
     item_list = []
-
-    with open (fileIn, "r") as fileIn:
-        lines = fileIn.readlines()
-
-    for line in lines:
-        item_list.append(int(line))
+    try:
+    
+        with open (fileIn, "r") as fileIn:
+            lines = fileIn.readlines()
+        for line in lines:
+            item_list.append(int(line))
+    
+    except FileNotFoundError:
+        print("File does not exist in directory")
+        exit()
 
     return item_list
 
@@ -99,19 +103,6 @@ def letter_grade_tally(letter_grade_list: list):
     return A,B,C,D,F
 
 
-def get_grade_count(grade_list: list):
-    '''
-    This function takes a list and returns a count of the
-    number of elements in the list. Not entirely needed, but
-    to keep everything modular, I added it as a function.
-    '''
-    count = 0
-    for element in grade_list:
-        count += 1
-    
-    return count
-    
-
 def compute_average_grade(grade_list: list):
     '''
     This function takes a list and adds all
@@ -123,7 +114,10 @@ def compute_average_grade(grade_list: list):
     for element in range(0, len(grade_list)):
         all_scores = all_scores + grade_list[element]
 
-    return all_scores/len(grade_list)
+    if len(grade_list) == 0:
+        print("Cannot divide by 0 (There are no items in the list gathered from reading the file)")
+    else:
+        return all_scores/len(grade_list)
 
 def main():
     '''
@@ -132,7 +126,7 @@ def main():
     grades_list: generates a list from the lines in the file specified by the user
     sorted_list: the sorted version of grades_list (low to high)
     letter_grade_list: The letter grade equivalent based on the scale, for each item in sorted list
-    grade_count: A count of all the items in grade list
+    grade_count: A count of all the items in grade list using length to get number of elements
     class_average: The sum of all elements of grades_list, divided by the total number of elements in list
     fileout: Asks the user for a filename to write the report to
     A,B,C,D and F: Corresponding return values for letter_grade_tally function's counts of those grades
@@ -144,7 +138,7 @@ def main():
     grades_list = get_file(filein)
     sorted_list = sort_list(grades_list)
     letter_grade_list = letter_grades(sorted_list)
-    grade_count = get_grade_count(grades_list)
+    grade_count = len(grades_list)
     class_average = compute_average_grade(grades_list)  
     fileout = str(input("\n\nPlease enter the name of the output data file: "))
     A,B,C,D,F = letter_grade_tally(letter_grade_list)
@@ -156,7 +150,7 @@ def main():
         print("The lowest test grade was: ", sorted_list[0], file = outfile)
         print("\n\nThe total of each grade is as follows:\n    A:",A, "\n    B:", B, "\n    C:", C, "\n    D:", D, "\n    F:", F, file = outfile)
 
-    outfile.close()
+    
 
     print("\nReporting Complete - stored in file: ", fileout, "\nExiting Program 3")
 
