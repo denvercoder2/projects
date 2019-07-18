@@ -13,7 +13,8 @@ def get_file(fileIn: str):
     This function will take a filename(fileIn) and open it
     It will then place all of the numbers(line) within the file
     into a list. That list is returned so it can be used
-    by other functions
+    by other functions, I implemented some exception handling,
+    but assuming that the file contains only valid numbers.
     '''
     item_list = []
     try:
@@ -114,7 +115,7 @@ def compute_average_grade(grade_list: list):
     for element in range(0, len(grade_list)):
         all_scores = all_scores + grade_list[element]
 
-    if len(grade_list) == 0:
+    if len(grade_list) is 0:
         print("Cannot divide by 0 (There are no items in the list gathered from reading the file)")
     else:
         return all_scores/len(grade_list)
