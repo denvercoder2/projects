@@ -150,7 +150,7 @@ def main():
     A,B,C,D,F = letter_grade_tally(letter_grade_list)
     with open (fileout, "w") as outfile:
         print('---------------- Test Profile ----------------\n', file = outfile)
-        print("There were",grade_count, "test grades read from the input file", file = outfile)
+        print("There were",grade_count, "test grade(s) read from the input file", file = outfile)
         print("The average is: ","%.2f" %class_average, file = outfile)
         print("The highest test grade was: ", sorted_list[-1], file = outfile)
         print("The lowest test grade was: ", sorted_list[0], file = outfile)
