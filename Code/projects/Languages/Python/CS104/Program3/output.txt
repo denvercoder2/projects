@@ -1,0 +1,14 @@
+---------------- Test Profile ----------------
+
+There were 12 test grades read from the input file
+The average is:  7.75
+The highest test grade was:  12
+The lowest test grade was:  3
+
+
+The total of each grade is as follows:
+    A: 0 
+    B: 0 
+    C: 0 
+    D: 0 
+    F: 12
