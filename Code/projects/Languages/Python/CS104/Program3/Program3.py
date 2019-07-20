@@ -5,10 +5,15 @@
 # Written in Python 3.7.3 Anaconda
 # Purpose: To read in and interpret data from a file 
 # and send the answer to an outfile
+
+# Note: Style changed slightly to add in better
+# practices in my code. New thing I learned
+# is to use the -> operator to hint at what the function returns
+# in a similar way that GO does
 # --------------- Introductory --------------#
 
 
-def get_file(fileIn: str):
+def get_file(fileIn: str) -> list:
     '''
     This function will take a filename(fileIn) and open it
     It will then place all of the numbers(line) within the file
@@ -31,7 +36,7 @@ def get_file(fileIn: str):
     return item_list
 
 
-def sort_list(item_list: list):
+def sort_list(item_list: list) -> list:
     '''
     Python's default sort is a timsort
     I've never used it since I had to roll 
@@ -43,7 +48,7 @@ def sort_list(item_list: list):
 
     return item_list
 
-def grading_scale(score: int):
+def grading_scale(score: int) -> str:
     '''
     This function will take the grades and assign 
     the grade based on the score given per element in the
@@ -62,7 +67,7 @@ def grading_scale(score: int):
 
     return grade
 
-def letter_grades(grades_list: list):
+def letter_grades(grades_list: list) -> list:
     '''
     This function will take a list of grades
     and return a list of letter grades corresponding
@@ -80,7 +85,7 @@ def letter_grades(grades_list: list):
 
     return letter_grade_list
 
-def letter_grade_tally(letter_grade_list: list):
+def letter_grade_tally(letter_grade_list: list) -> int:
     '''
     This function takes a list and returns the
     count of the corresponding letter grades from that list in a set
@@ -104,7 +109,7 @@ def letter_grade_tally(letter_grade_list: list):
     return A,B,C,D,F
 
 
-def compute_average_grade(grade_list: list):
+def compute_average_grade(grade_list: list) -> float:
     '''
     This function takes a list and adds all
     of the elements together in said list.
