@@ -4,22 +4,16 @@
 # Date: July 17th, 2019
 # Written in Python 3.7.3 Anaconda
 # Purpose: To read in and interpret data from a file 
-# and send the answer to an outfile
-
-# Note: Style changed slightly to add in better
-# practices in my code. New thing I learned
-# is to use the -> operator to hint at what the function returns
-# in a similar way that GO does
+# and send the formatted output to an outfile
 # --------------- Introductory --------------#
 
-
-def get_file(fileIn: str) -> list:
+def make_list_from_file(fileIn: str) -> list:
     '''
     This function will take a filename(fileIn) and open it
     It will then place all of the numbers(line) within the file
     into a list. That list is returned so it can be used
     by other functions, I implemented some exception handling,
-    but assuming that the file contains only valid numbers.
+    but I assumed that the file contains only valid numbers.
     '''
     item_list = []
     try:
@@ -35,26 +29,13 @@ def get_file(fileIn: str) -> list:
 
     return item_list
 
-
-def sort_list(item_list: list) -> list:
-    '''
-    Python's default sort is a timsort
-    I've never used it since I had to roll 
-    my own most of the time, so this seemed like
-    a good time. Seems to be a pretty good option
-    considering it's a stable and in place sort
-    '''
-    item_list.sort()
-
-    return item_list
-
 def grading_scale(score: int) -> str:
     '''
     This function will take the grades and assign 
     the grade based on the score given per element in the
     list. This grade is returned.
     '''
-    if score >= 90:
+    if score >= 90 and score <= 100:
         grade = 'A'
     elif score >= 80 and score < 90:
         grade = 'B'
@@ -141,8 +122,8 @@ def main():
     Outfile is closed and saved, then program exits
     '''
     filein = str(input("\n\nPlease enter the name of the file you want to read in: "))
-    grades_list = get_file(filein)
-    sorted_list = sort_list(grades_list)
+    grades_list = make_list_from_file(filein)
+    sorted_list = sorted(grades_list)
     letter_grade_list = letter_grades(sorted_list)
     grade_count = len(grades_list)
     class_average = compute_average_grade(grades_list)  
@@ -155,11 +136,9 @@ def main():
         print("The highest test grade was: ", sorted_list[-1], file = outfile)
         print("The lowest test grade was: ", sorted_list[0], file = outfile)
         print("\n\nThe total of each grade is as follows:\n    A:",A, "\n    B:", B, "\n    C:", C, "\n    D:", D, "\n    F:", F, file = outfile)
-
     
 
     print("\nReporting Complete - stored in file: ", fileout, "\nExiting Program 3")
-
 
 if __name__ == "__main__":
     print("\nWelcome to the test profiler.",
