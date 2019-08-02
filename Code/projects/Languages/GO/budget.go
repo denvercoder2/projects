@@ -92,7 +92,7 @@ Purpose: Take the bill array and return
 	 a sum of all its elements
 */
 func sumElements([]float64) float64 {
-	//var givenMap map[string]float64
+	var givenMap map[string]float64
 	var sortedList []float64
 	var sum float64
 	givenMap = readBills(0.00)
