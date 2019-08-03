@@ -7,9 +7,17 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"sort"
 )
+
+func getInput() float64 {
+	var input float64
+
+	fmt.Print("What was the utility bill? \n")
+	fmt.Scan(&input)
+
+	return input
+}
 
 /*
 * Function Name: readBills
@@ -17,14 +25,12 @@ import (
 * Return Type: map of string keys, float64 values
 
 * Purpose: Returns a mapping of bills to be used in
-	   scope for other functions and mitigate
-	   unwanted side effects
+	   	   scope for other functions and mitigate
+	       unwanted side effects
 */
-func readBills(utility float64) map[string]float64 {
+func readBills(newUtility float64) map[string]float64 {
 
-	var newUtility float64
-
-	newUtility = math.Pow(utility, .5)
+	newUtility = (newUtility / 2)
 	billMap := map[string]float64{
 		"Rent":        410.555,
 		"Water":       20.00,
@@ -44,14 +50,14 @@ func readBills(utility float64) map[string]float64 {
 
 * Purpose: Given a map of bills, this function
            will	take the values and return
-	   a sorted array slice of the values
+	       a sorted array slice of the values
 */
 func sortBills(map[string]float64) []float64 {
 
 	var givenMap map[string]float64
 	var onlyNums []float64
 
-	givenMap = readBills(0.00)
+	givenMap = readBills(187.00)
 	keys := make([]string, 0, len(givenMap))
 
 	for k := range givenMap {
@@ -72,8 +78,8 @@ func sortBills(map[string]float64) []float64 {
 * Return Type: savings (float64)
 
 * Purpose: Takes a total and returns the
-	   appropriate saving amount from
-	   that total
+	       appropriate saving amount from
+	       that total
 */
 
 func getSaving(total float64) float64 {
@@ -89,13 +95,13 @@ Parameters: array of bills ([]float64)
 Return Type: sum (float64)
 
 Purpose: Take the bill array and return
-	 a sum of all its elements
+	     a sum of all its elements
 */
 func sumElements([]float64) float64 {
 	var givenMap map[string]float64
 	var sortedList []float64
 	var sum float64
-	givenMap = readBills(0.00)
+	givenMap = readBills(187.00)
 	sortedList = sortBills(givenMap)
 
 	for i := 0; i < len(sortedList); i++ {
@@ -113,15 +119,11 @@ func sumElements([]float64) float64 {
 * Purpose: Setup and run this program
  */
 func main() {
-	var utility float64
 	var pay float64
 	var netPay float64
 	pay = 2280.00
 
-	fmt.Print("What was the utility bill? \n")
-	fmt.Scan(&utility)
-
-	newMap := readBills(utility)
+	newMap := readBills(187.00)
 	sortedMap := sortBills(newMap)
 
 	fmt.Print("Bills from least to most expensive: ", sortedMap, "\n")
@@ -130,5 +132,5 @@ func main() {
 	netPay = pay - totalBills
 	fmt.Print("\nMoney after Bills: $", netPay)
 	savings := getSaving(netPay)
-	fmt.Print("\nYou should save: $", savings)
+	fmt.Print("\nYou should save: $", savings, "\n")
 }
