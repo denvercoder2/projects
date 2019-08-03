@@ -10,15 +10,6 @@ import (
 	"sort"
 )
 
-func getInput() float64 {
-	var input float64
-
-	fmt.Print("What was the utility bill? \n")
-	fmt.Scan(&input)
-
-	return input
-}
-
 /*
 * Function Name: readBills
 * Parameters: Utility bill (float64)
