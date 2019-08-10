@@ -7,10 +7,14 @@ def test_connection(filename: str):
     and returns the results from subprocess
     '''
     with open(filename, 'w') as out:
+        start = 0
+        counter = 100
         try:
-            for tries in range(2):
+            for tries in range(counter):
+                print("Currently on Test #", start, "out of: ",counter)
                 process = 'speedtest-cli'
                 subprocess.call(process, stdout=out)
+                start += 1
         except subprocess.CalledProcessError:
             main()
 
