@@ -7,11 +7,11 @@ def test_connection(filename: str):
     and returns the results from subprocess
     '''
     with open(filename, 'w') as out:
-        start = 0
-        counter = 100
+        start = 1
+        counter = 1000
         try:
             for tries in range(counter):
-                print("Currently on Test #", start, "out of: ",counter)
+                print("Currently on Test #", start, "out of: ",counter, '\n')
                 process = 'speedtest-cli'
                 subprocess.call(process, stdout=out)
                 start += 1
@@ -69,7 +69,7 @@ def main():
     '''
     Main function setup 
     '''
-    print("Report Running ...\n")
+    print("Report Running (Ethernet)...\n")
     test_connection('output.txt')
     lineBreak('output.txt', 8)
     speed_list = get_results('output.txt')
