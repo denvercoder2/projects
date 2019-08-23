@@ -26,7 +26,7 @@ def main():
     Main function setup
     '''
     lines = get_file('output.txt')
-    return_csv('test.csv', lines)
+    return_csv('bill_report.csv', lines)
 
 
 
