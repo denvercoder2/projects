@@ -48,7 +48,7 @@ func sortBills(map[string]float64) []float64 {
 	var givenMap map[string]float64
 	var onlyNums []float64
 
-	givenMap = readBills(187.00)
+	givenMap = readBills(170.00)
 	keys := make([]string, 0, len(givenMap))
 
 	for k := range givenMap {

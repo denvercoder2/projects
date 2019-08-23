@@ -1,0 +1,5 @@
+Bills from least to most expensive: [20 50 55 85 160 221.14 410.555]
+
+Total Bill value is: $1001.6949999999999
+Money after Bills: $1278.305
+You should save: $447.40675
