@@ -1,17 +1,46 @@
 #include<iostream>
 #include<fstream>
 
+/*
+Purpose:
+    Calculate the bills for the month
+*/
 using namespace std;
 
+
+
+/*
+Function Name: Rent
+Purpose: Return persons ratio of rent
+Parameters: Float x
+Variables:
+Scale = the percent each person pays
+*/
 float Rent(float x){
     float scale = .523;
     return x * scale;
 }
 
+/*
+Function Name: h2o
+Purpose: Return persons ratio of water bill
+Parameters: integer y
+Variables:
+Scale = the percent each person pays
+*/
 int h2o(int y){
     double scale = .5;
     return y * scale;
 }
+
+
+/*
+Function Name: Utilities
+Purpose: Return persons ratio of utility bill
+Parameters: Float z
+Variables:
+Scale = the percent each person pays
+*/
 
 float Utilities(float z){
     double scale = .5;
@@ -19,12 +48,27 @@ float Utilities(float z){
 }
 
 
+
+/*
+Function Name: sum_bills
+Purpose: Returns the sum of bills
+Parameters: two ints and a float
+Variables:
+Scale = the percent each person pays
+*/
 float sum_bill(int y, float z, int w){
     return y + z + w;
 }
 
 
 
+/*
+Function Name: report 
+Purpose: Write the report
+Parameters: None
+Variables:
+Scale = the percent each person pays
+*/
 void report(){
     int Rent_total = 785;
     // !!!
