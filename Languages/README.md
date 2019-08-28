@@ -25,5 +25,10 @@ coming
 # for Rust code
 rustc somefile.rc
 ./somefile
+
+
+# for Java code
+javac somefile.java
+java somefile
 ```
   
