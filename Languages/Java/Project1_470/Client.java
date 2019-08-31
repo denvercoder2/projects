@@ -45,7 +45,8 @@ public class Client
   
         // string to read message from input 
         String line = ""; 
-  
+
+
         // keep reading until "Over" is input 
         while (!line.equals("Over")) 
         { 

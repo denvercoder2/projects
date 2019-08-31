@@ -8,6 +8,13 @@ Purpose:
     Display message from clinet as well as clients IP
     Return newest software if client agrees
 */
+
+
+
+/*
+Server should compare version on client and ask if they want to update
+If yes, send the update and overwrite, if no, do nothing
+*/
 import java.net.*; 
 import java.io.*; 
   
@@ -39,7 +46,7 @@ public class Server
             String line = ""; 
   
             // reads message from client until "Over" is sent 
-            while (!line.equals("Over")) 
+            while (!line.equals("Exit")) 
             { 
                 try
                 { 
