@@ -1,0 +1,46 @@
+CS 470/570 Project 1  Socket Programming
+
+Suppose that you are designing a smart appliance and you want to make sure the appliance will have the latest version of the software. So, when a user turns on the appliance for the first time, it will connect to your server on the Internet to check whether it has the latest version of the software.
+
+ 
+
+Build the following client and server programs. 
+
+ 
+
+The client (appliance) connects to your server when you start the program.
+The server waits on a fixed IP address and a port number. (You may hard code the numbers in your program.)
+The client sends its current version of the software.
+The server displays the message from the client and also displays the client’s IP address on its screen. The client’s IP address should not be hard coded in its message.
+The server returns a newer version of the software.
+The client displays a message which asks user to confirm the upgrade of the software.
+ 
+
+You may program in C, C++, C#, or Java.
+
+Your program will run in the CS department PC lab.
+
+ 
+
+Prepare to show a demo.
+
+ 
+
+You are to deliver
+
+1.A (commented) code listing (hard copy).
+
+2.Source and binary via Canvas.
+
+3.The screen shots of your test cases (hard copy). Make sure that you test edge cases.
+
+ 
+
+If you use code from elsewhere, you should give credit in the comments.
+
+Your code should be thoroughly commented.
+
+Your score on this assignment will include consideration of the correctness of your code, readability of the code, and quality of internal documentation (commenting).
+
+ 
+
