@@ -21,8 +21,8 @@ def main():
     '''
     Call to other functions 
     '''
-    cpp_path = '/home/river/Desktop/Git/projects/Code/Languages/C++/'
-    python_path = '/home/river/Desktop/Git/projects/Code/Languages/Python/Personal/'
+    cpp_path = '/home/river/Desktop/Git_projects/Languages/C++/'
+    python_path = '/home/river/Desktop/Git_projects/Languages/Python/Personal/'
     run(cpp_path, python_path)
 
 

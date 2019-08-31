@@ -6,7 +6,7 @@ def get_file(filename: str) -> list:
     Function will read in a file and return
     a list containing all lines within the file
     '''
-    path = '/home/river/Desktop/Git/projects/Code/Languages/C++/'
+    path = '/home/river/Desktop/Git_projects/Languages/C++/'
     with open (path+filename, "r") as infile:
         lines = infile.readlines()
 
