@@ -23,14 +23,20 @@ public class Server
     //initialize socket and input stream 
     private Socket          socket   = null; 
     private ServerSocket    server   = null; 
-    private DataInputStream in       =  null; 
+    private DataInputStream in       = null; 
   
     // constructor with port 
-    public Server(int port) 
+    public Server(String ip,int port) 
     { 
+
+        File clientSide = new File("client-software.txt");
+        File serverSide = new File("server-software.txt");
+        
         // starts server and waits for a connection 
         try
-        { 
+        {   
+            String update_key = "1.1"; 
+
             server = new ServerSocket(port); 
             System.out.println("Server started"); 
   
@@ -73,6 +79,7 @@ public class Server
   
     public static void main(String args[]) 
     { 
-        Server server = new Server(5000); 
+        String ip_addr = "192.168.1.2";
+        Server server = new Server(ip_addr ,5000); 
     } 
 } 

@@ -3,10 +3,10 @@
 ## Components
 
 * Client and Server Steps: 
-    1.  Build a client/server connection to run software "up to date" check when device is turned on
+    1. Build a client/server connection to run software "up to date" check when device is turned on
     The client connects to the server when program starts
 
-    2.  Server will wait on fixed IP address and port number (Hardcoded)
+    2. Server will wait on fixed IP address and port number (Hardcoded)
 
     3. Client will send its current vewrsion of software to server
 
