@@ -15,71 +15,66 @@ Purpose:
 Server should compare version on client and ask if they want to update
 If yes, send the update and overwrite, if no, do nothing
 */
-import java.net.*; 
-import java.io.*; 
-  
-public class Server 
-{ 
-    //initialize socket and input stream 
-    private Socket          socket   = null; 
-    private ServerSocket    server   = null; 
-    private DataInputStream in       = null; 
-  
-    // constructor with port 
-    public Server(String ip,int port) 
-    { 
 
-        File clientSide = new File("client-software.txt");
-        File serverSide = new File("server-software.txt");
-        
-        // starts server and waits for a connection 
-        try
-        {   
-            String update_key = "1.1"; 
+// TODO: 
+// Server should start first so client automatically connects
+// Client should send software version to server
+// Server should display message from client and contain ip address from it
+// Server should send new version to client
+// Client should choose whether or not to update
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+import java.util.concurrent.Executors;
 
-            server = new ServerSocket(port); 
-            System.out.println("Server started"); 
-  
-            System.out.println("Waiting for a client ..."); 
-  
-            socket = server.accept(); 
-            System.out.println("Client accepted"); 
-  
-            // takes input from the client socket 
-            in = new DataInputStream( 
-                new BufferedInputStream(socket.getInputStream())); 
-  
-            String line = ""; 
-  
-            // reads message from client until "Over" is sent 
-            while (!line.equals("Exit")) 
-            { 
-                try
-                { 
-                    line = in.readUTF(); 
-                    System.out.println(line); 
-  
-                } 
-                catch(IOException i) 
-                { 
-                    System.out.println(i); 
-                } 
-            } 
-            System.out.println("Closing connection"); 
-  
-            // close connection 
-            socket.close(); 
-            in.close(); 
-        } 
-        catch(IOException i) 
-        { 
-            System.out.println(i); 
-        } 
-    } 
-  
-    public static void main(String args[]) 
-    { 
-        String ip_addr = "192.168.1.2";
-        Server server = new Server(ip_addr ,5000); 
-    } 
-} 
+/**
+ * A server program which accepts requests from clients to capitalize strings. When
+ * a client connects, a new thread is started to handle it. Receiving client data,
+ * capitalizing it, and sending the response back is all done on the thread, allowing
+ * much greater throughput because more clients can be handled concurrently.
+ */
+public class CapitalizeServer {
+
+    /**
+     * Runs the server. When a client connects, the server spawns a new thread to do
+     * the servicing and immediately returns to listening. The application limits the
+     * number of threads via a thread pool (otherwise millions of clients could cause
+     * the server to run out of resources by allocating too many threads).
+     */
+    public static void main(String[] args) throws Exception {
+        try (var listener = new ServerSocket(59898)) {
+            System.out.println("The capitalization server is running...");
+            var pool = Executors.newFixedThreadPool(20);
+            while (true) {
+                pool.execute(new Capitalizer(listener.accept()));
+            }
+        }
+    }
+
+    private static class Capitalizer implements Runnable {
+        private Socket socket;
+
+        Capitalizer(Socket socket) {
+            this.socket = socket;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("Connected: " + socket);
+            try {
+                var in = new Scanner(socket.getInputStream());
+                var out = new PrintWriter(socket.getOutputStream(), true);
+                while (in.hasNextLine()) {
+                    out.println("Message from Server:" + in.nextLine());
+                }
+            } catch (Exception e) {
+                System.out.println("Error:" + socket);
+            } finally {
+                try { socket.close(); } catch (IOException e) {}
+                System.out.println("Closed: " + socket);
+            }
+        }
+    }
+}

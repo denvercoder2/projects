@@ -8,81 +8,27 @@ Purpose:
     Check for update;
     Decide whether to update or not;
 */
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Scanner;
 
-import java.net.*;
-import java.io.*;
-
-public class Client  
-{ 
-    // initialize socket and input output streams 
-    private Socket socket            = null; 
-    private DataInputStream input    = null; 
-    private DataOutputStream out     = null; 
-  
-
-
-    
-    // constructor to put ip address and port 
-    public Client(String address, int port) 
-    { 
-        // establish a connection 
-        try
-        { 
-            String update_key = "1.0";
-
-            socket = new Socket(address, port); 
-            System.out.println("Connected"); 
-  
-            // takes input from terminal 
-            input  = new DataInputStream(System.in); 
-  
-            // sends output to the socket 
-            out    = new DataOutputStream(socket.getOutputStream()); 
-        } 
-        catch(UnknownHostException u) 
-        { 
-            System.out.println(u); 
-        } 
-        catch(IOException i) 
-        { 
-            System.out.println(i); 
-        } 
-  
-        // string to read message from input 
-        String line = ""; 
-
-
-        // keep reading until "Over" is input 
-        while (!line.equals("Over")) 
-        { 
-            try
-            { 
-                line = input.readLine(); 
-                out.writeUTF(line); 
-            } 
-            catch(IOException i) 
-            { 
-                System.out.println(i); 
-            } 
-        } 
-  
-        // close the connection 
-        try
-        { 
-            input.close(); 
-            out.close(); 
-            socket.close(); 
-        } 
-        catch(IOException i) 
-        { 
-            System.out.println(i); 
-        } 
-    } 
-  
-    public static void main(String args[]) 
-    { 
-        String ip_addr = "";
-
-        Client client = new Client(ip_addr, 5000); 
-    } 
-} 
+public class CapitalizeClient {
+    public static void main(String[] args) throws Exception {
+        if (args.length != 1) {
+            System.err.println("Pass the server IP as the sole command line argument");
+            return;
+        }
+        try (var socket = new Socket(args[0], 59898)) {
+            System.out.println("Enter lines of text then Ctrl+D or Ctrl+C to quit");
+            var scanner = new Scanner(System.in);
+            var in = new Scanner(socket.getInputStream());
+            var out = new PrintWriter(socket.getOutputStream(), true);
+            while (scanner.hasNextLine()) {
+                out.println(scanner.nextLine());
+                System.out.println(in.nextLine());
+            }
+        }
+    }
+}
