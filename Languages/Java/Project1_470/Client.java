@@ -9,6 +9,7 @@ Purpose:
     Decide whether to update or not;
 */
 import java.net.*;
+import java.util.Scanner;
 import java.io.*;
 
 public class Client {
@@ -27,11 +28,14 @@ public class Client {
             String soft_vers = " 1.1";
             // Sending the data stream to server
             out.writeUTF("Current Software version is: " + soft_vers);
+
             InputStream inFromServer = client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServer);
             // Reading back the data from server
             System.out.println(in.readUTF());
             client.close();
+
+        
             } catch (IOException e) {
             e.printStackTrace();
             }
