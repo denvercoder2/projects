@@ -8,27 +8,32 @@ Purpose:
     Check for update;
     Decide whether to update or not;
 */
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.Scanner;
+import java.net.*;
+import java.io.*;
 
-public class CapitalizeClient {
-    public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
-            System.err.println("Pass the server IP as the sole command line argument");
-            return;
-        }
-        try (var socket = new Socket(args[0], 59898)) {
-            System.out.println("Enter lines of text then Ctrl+D or Ctrl+C to quit");
-            var scanner = new Scanner(System.in);
-            var in = new Scanner(socket.getInputStream());
-            var out = new PrintWriter(socket.getOutputStream(), true);
-            while (scanner.hasNextLine()) {
-                out.println(scanner.nextLine());
-                System.out.println(in.nextLine());
+public class Client {
+
+    public static void main(String [] args) {
+       // Making the server name as the local host port number
+        String serverName = "127.0.0.1";
+        int port = 12896;
+        try {
+            System.out.println("Connecting to " + serverName + " on port " + port);
+            // Setting up the socket for client
+            Socket client = new Socket(serverName, port);
+            System.out.println("Client is now connected at: " + client.getRemoteSocketAddress());
+            OutputStream outToServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            String soft_vers = " 1.1";
+            // Sending the data stream to server
+            out.writeUTF("Current Software version is: " + soft_vers);
+            InputStream inFromServer = client.getInputStream();
+            DataInputStream in = new DataInputStream(inFromServer);
+            // Reading back the data from server
+            System.out.println(in.readUTF());
+            client.close();
+            } catch (IOException e) {
+            e.printStackTrace();
             }
         }
     }
-}

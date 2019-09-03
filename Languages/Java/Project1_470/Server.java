@@ -22,59 +22,65 @@ If yes, send the update and overwrite, if no, do nothing
 // Server should display message from client and contain ip address from it
 // Server should send new version to client
 // Client should choose whether or not to update
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
+// File Name Server.java
+import java.net.*;
+import java.io.*;
 import java.util.Scanner;
-import java.util.concurrent.Executors;
 
-/**
- * A server program which accepts requests from clients to capitalize strings. When
- * a client connects, a new thread is started to handle it. Receiving client data,
- * capitalizing it, and sending the response back is all done on the thread, allowing
- * much greater throughput because more clients can be handled concurrently.
- */
-public class CapitalizeServer {
+public class Server extends Thread {
+    private ServerSocket serverSocket;
 
-    /**
-     * Runs the server. When a client connects, the server spawns a new thread to do
-     * the servicing and immediately returns to listening. The application limits the
-     * number of threads via a thread pool (otherwise millions of clients could cause
-     * the server to run out of resources by allocating too many threads).
-     */
-    public static void main(String[] args) throws Exception {
-        try (var listener = new ServerSocket(59898)) {
-            System.out.println("The capitalization server is running...");
-            var pool = Executors.newFixedThreadPool(20);
-            while (true) {
-                pool.execute(new Capitalizer(listener.accept()));
-            }
-        }
+    public Server(int port) throws IOException {
+    // Initializing the server
+    serverSocket = new ServerSocket(port);
+    serverSocket.setSoTimeout(30000);
     }
 
-    private static class Capitalizer implements Runnable {
-        private Socket socket;
+    public void run() {
+    while(true) {
+    try {
+        
+    System.out.println("Waiting for client on port " +
+    serverSocket.getLocalPort() + "...");
+    // Waiting for connection
+    Socket server = serverSocket.accept();
+    // IP Address and client port number
+    System.out.println("Connected to IP: " + server.getInetAddress());
+    // Reading the stream sent by the client
+    DataInputStream in = new DataInputStream(server.getInputStream());
+    System.out.println(in.readUTF());
+    // Sending back the newer version
+    String soft_vers = " 1.2";
 
-        Capitalizer(Socket socket) {
-            this.socket = socket;
-        }
+    Scanner version = new Scanner(System.in);
+    System.out.println("Would you like to update your client software? [Y or N]");
+    if (version.equals("Y")|| version.equals("y")) {
+        DataOutputStream out = new DataOutputStream(server.getOutputStream());
+        out.writeUTF("You are now connected to: " + server.getLocalSocketAddress()
+        + "\nSoftware has been updated to version: " + soft_vers);
+        server.close();   
+    }
+    else{
+        System.out.println("Software was not updated");
+    }
 
-        @Override
-        public void run() {
-            System.out.println("Connected: " + socket);
-            try {
-                var in = new Scanner(socket.getInputStream());
-                var out = new PrintWriter(socket.getOutputStream(), true);
-                while (in.hasNextLine()) {
-                    out.println("Message from Server:" + in.nextLine());
-                }
-            } catch (Exception e) {
-                System.out.println("Error:" + socket);
-            } finally {
-                try { socket.close(); } catch (IOException e) {}
-                System.out.println("Closed: " + socket);
-            }
+    } catch (SocketTimeoutException s) {
+    System.out.println("Socket timed out!");
+        break;
+    } catch (IOException e) {
+    e.printStackTrace();
+        break;
+        }   
+    }
+}
+
+public static void main(String [] args) {
+    int port = 12896;
+        try {
+    Thread t = new Server(port);
+    t.start();
+    } catch (IOException e) {
+    e.printStackTrace();
         }
     }
 }
