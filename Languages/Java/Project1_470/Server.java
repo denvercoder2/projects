@@ -52,17 +52,18 @@ public class Server extends Thread {
     // Sending back the newer version
     String soft_vers = " 1.2";
 
-    Scanner version = new Scanner(System.in);
+    // Scanner version = new Scanner(System.in);
+    // var yes = "y";
     System.out.println("Would you like to update your client software? [Y or N]");
-    if (version.equals("Y")|| version.equals("y")) {
-        DataOutputStream out = new DataOutputStream(server.getOutputStream());
-        out.writeUTF("You are now connected to: " + server.getLocalSocketAddress()
-        + "\nSoftware has been updated to version: " + soft_vers);
-        server.close();   
-    }
-    else{
-        System.out.println("Software was not updated");
-    }
+    // if (version.equals(yes)){
+    DataOutputStream out = new DataOutputStream(server.getOutputStream());
+    out.writeUTF("You are now connected to: " + server.getLocalSocketAddress()
+    + "\nSoftware has been updated to version: " + soft_vers);
+    server.close();   
+    // }
+    // else{
+    //     System.out.println("Software was not updated");
+    // }
 
     } catch (SocketTimeoutException s) {
     System.out.println("Socket timed out!");
