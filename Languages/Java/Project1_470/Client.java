@@ -8,36 +8,21 @@ Purpose:
     Check for update;
     Decide whether to update or not;
 */
-import java.net.*;
-import java.util.Scanner;
 import java.io.*;
+import java.net.*;
 
-public class Client {
-
-    public static void main(String [] args) {
-       // Making the server name as the local host port number
-        String serverName = "127.0.0.1";
-        int port = 12896;
-        try {
-            System.out.println("Connecting to " + serverName + " on port " + port);
-            // Setting up the socket for client
-            Socket client = new Socket(serverName, port);
-            System.out.println("Client is now connected at: " + client.getRemoteSocketAddress());
-            OutputStream outToServer = client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-            String soft_vers = " 1.1";
-            // Sending the data stream to server
-            out.writeUTF("Current Software version is: " + soft_vers);
-
-            InputStream inFromServer = client.getInputStream();
-            DataInputStream in = new DataInputStream(inFromServer);
-            // Reading back the data from server
-            System.out.println(in.readUTF());
-            client.close();
-
-        
-            } catch (IOException e) {
-            e.printStackTrace();
-            }
-        }
-    }
+class TCPClient {
+ public static void main(String argv[]) throws Exception {
+  String sentence;
+  String modifiedSentence;
+  BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+  Socket clientSocket = new Socket("localhost", 6789);
+  DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+  BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+  sentence = inFromUser.readLine();
+  outToServer.writeBytes(sentence + 'n');
+  modifiedSentence = inFromServer.readLine();
+  System.out.println("FROM SERVER: " + modifiedSentence);
+  clientSocket.close();
+ }
+}

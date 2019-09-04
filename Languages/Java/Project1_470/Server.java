@@ -23,57 +23,24 @@ If yes, send the update and overwrite, if no, do nothing
 // Server should send new version to client
 // Client should choose whether or not to update
 // File Name Server.java
-import java.net.*;
 import java.io.*;
-import java.util.Scanner;
+import java.net.*;
 
-public class Server extends Thread {
-    private ServerSocket serverSocket;
+class TCPServer {
+ public static void main(String argv[]) throws Exception {
+  String clientSentence;
+  String capitalizedSentence;
+  ServerSocket welcomeSocket = new ServerSocket(6789);
 
-    
-    public Server(int port) throws IOException {
-    // Initializing the server
-    serverSocket = new ServerSocket(port);
-    serverSocket.setSoTimeout(30000);
-    }
-
-    public void run() {
-    while(true) {
-    try {
-        
-    System.out.println("Waiting for client on port " +
-    serverSocket.getLocalPort() + "...");
-    // Waiting for connection
-    Socket server = serverSocket.accept();
-    // IP Address and client port number
-    System.out.println("Connected to IP: " + server.getInetAddress());
-    // Reading the stream sent by the client
-    DataInputStream in = new DataInputStream(server.getInputStream());
-    System.out.println(in.readUTF());
-    // Sending back the newer version
-    String soft_vers = " 1.2";
-    DataOutputStream out = new DataOutputStream(server.getOutputStream());
-    out.writeUTF("You are now connected to: " + server.getLocalSocketAddress()
-    + "\nSoftware has been updated to version: " + soft_vers);
-    server.close();   
-
-    } catch (SocketTimeoutException s) {
-    System.out.println("Socket timed out!");
-        break;
-    } catch (IOException e) {
-    e.printStackTrace();
-        break;
-        }   
-    }
-}
-
-public static void main(String [] args) {
-    int port = 12896;
-        try {
-    Thread t = new Server(port);
-    t.start();
-    } catch (IOException e) {
-    e.printStackTrace();
-        }
-    }
+  while (true) {
+   Socket connectionSocket = welcomeSocket.accept();
+   BufferedReader inFromClient =
+    new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+   DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+   clientSentence = inFromClient.readLine();
+   System.out.println("Received: " + clientSentence);
+   capitalizedSentence = clientSentence.toUpperCase() + 'n';
+   outToClient.writeBytes(capitalizedSentence);
+  }
+ }
 }
