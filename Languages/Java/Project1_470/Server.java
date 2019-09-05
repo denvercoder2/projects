@@ -25,8 +25,7 @@ public class Server
     public Server(String ip,int portNum) 
     { 
         
-       
-         
+  
         try
         { 
             // starts server and waits for a connections
@@ -45,8 +44,6 @@ public class Server
                 
             // Initially set the client string to an empty string
             String client_line = "";
-
-            // String new_soft = "1.1";
             
             /* 
             read in the client_line var and conditionally decide whether or
@@ -60,7 +57,7 @@ public class Server
             }
             // Case 2: User chooses to update the software
             else{ 
-                System.out.println("Client has chosen to update their software"); 
+                System.out.println("Latest version sent to client");
             } 
                 
             // After the action is done, close the connection

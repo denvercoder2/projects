@@ -25,7 +25,8 @@ public class Client
     // constructor to put ip address and port 
     public Client(String ip, int portNum) 
     { 
-        // establish a connection 
+        // Establish a connection;
+        // Give a status update message for completion
         try
         { 
             String current_soft = "1.0"; 
@@ -38,10 +39,12 @@ public class Client
             // sends output to the socket 
             output = new DataOutputStream(socket.getOutputStream()); 
         } 
+        // Catch if the host can't be found
         catch(UnknownHostException u) 
         { 
             System.out.println("Could not connect to server"); 
         } 
+        // Catch if the server is not started when the client runs
         catch(IOException i) 
         { 
             System.out.println("You need to start the server before attempting to connect the client");
@@ -49,6 +52,8 @@ public class Client
         } 
   
         // string to read message from input 
+        // based on the input, update the software or
+        // leave it alone
         String checker = "";
         String soft_vers = "1.0";
         System.out.println("Would the client like to update it's software [Y or N]? ");
