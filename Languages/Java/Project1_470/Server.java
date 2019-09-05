@@ -1,0 +1,54 @@
+import java.net.*; 
+import java.io.*; 
+  
+public class Server 
+{ 
+    //initialize socket and input stream 
+    private Socket          socket   = null; 
+    private ServerSocket    server   = null; 
+    private DataInputStream input       =  null; 
+  
+    // constructor with port 
+    public Server(int portNum) 
+    { 
+        // starts server and waits for a connection 
+        try
+        { 
+            server = new ServerSocket(portNum); 
+            System.out.println("Server started"); 
+            socket = server.accept(); 
+            System.out.println("Client accepted"); 
+  
+            // takes input from the client socket 
+            input = new DataInputStream( 
+                new BufferedInputStream(socket.getInputStream())); 
+   
+            String client_line = "";
+            // reads message from client until "Over" is sent 
+            if (!client_line.equals("N")) 
+            { 
+                String new_soft = "1.1";
+                System.out.println("Software has been upgraded to: "+new_soft); 
+            }
+            else{ 
+                System.out.println("Software was not updated, Goodbye");
+                System.exit(0); 
+                } 
+            
+            System.out.println("Closing connection"); 
+  
+            // close connection 
+            socket.close(); 
+            input.close(); 
+        } 
+        catch(IOException i) 
+        { 
+            System.out.println("yo"); 
+        } 
+    } 
+  
+    public static void main(String args[]) 
+    { 
+        Server server = new Server(5000); 
+    } 
+} 
