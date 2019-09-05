@@ -4,9 +4,11 @@ CS470
 Project 1: Client/Server update connection
 
 Purpose: 
-    Start connection at beginning of run;
-    Check for update;
-    Decide whether to update or not;
+    Connect to the server;
+    Answer whether or not to update software;
+    Update if answer is yes;
+    Don't update if answer is no, or
+    client already has latest version
 */
 
 // A Java program for a Client 
@@ -48,16 +50,17 @@ public class Client
   
         // string to read message from input 
         String checker = "";
-        String new_soft = "1.1";
+        String soft_vers = "1.0";
         System.out.println("Would the client like to update it's software [Y or N]? ");
         try{ 
             checker = input.readLine(); 
             output.writeUTF(checker); 
             if (!checker.equals("Y")){
-                System.out.println("Software has not been updated, program exiting");
+                System.out.println("Software has not been updated, version is: " + soft_vers);
             }
             else{
-                System.out.println("Software has been updated to version: " + new_soft);
+                soft_vers = "1.1";
+                System.out.println("Software has been updated to version: " + soft_vers);
             }
         } 
         catch(IOException i) { 
