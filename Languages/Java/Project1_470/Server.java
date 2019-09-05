@@ -15,7 +15,7 @@ public class Server
         try
         { 
             server = new ServerSocket(portNum); 
-            System.out.println("Server up"); 
+            System.out.println("Server up and waiting for client"); 
             socket = server.accept(); 
             System.out.println("Client accepted at IP: " + ip); 
             System.out.println("Awaiting Client decision on updating Software");
@@ -29,15 +29,15 @@ public class Server
 
             String new_soft = "1.1";
             client_line = input.readUTF();
-            if (!client_line.equals("N")){
-                System.out.println("Software has been updated to version: "+new_soft); 
-            }
-            else{ 
+            if (!client_line.equals("Y")){
                 System.out.println("Software was not updated, Goodbye");
                 System.exit(0); 
-                } 
+            }
+            else{ 
+                System.out.println("Software has been updated to version: "+new_soft); 
+            } 
                 
-            System.out.println("Closing connection"); 
+            System.out.println("Connection is closed"); 
 
             // close connection 
             socket.close(); 

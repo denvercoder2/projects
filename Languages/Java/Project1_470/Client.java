@@ -50,25 +50,20 @@ public class Client
         String checker = "";
         String new_soft = "1.1";
         System.out.println("Would the client like to update it's software [Y or N]? ");
-        // keep reading until "Over" is input 
-        // if (!checker.equals("N")){ 
-            try{ 
-                checker = input.readLine(); 
-                output.writeUTF(checker); 
-                if (!checker.equals("N")){
-                    System.out.println("Software has been updated to version: " + new_soft);
-                }
-                else{
-                    System.out.println("Software has not been updated");
-                }
-            } 
-            catch(IOException i) { 
-                System.out.println("You entered an option that was not Y or N");
-                System.exit(0); 
+        try{ 
+            checker = input.readLine(); 
+            output.writeUTF(checker); 
+            if (!checker.equals("Y")){
+                System.out.println("Software has not been updated");
             }
-        
-    
-
+            else{
+                System.out.println("Software has been updated to version: " + new_soft);
+            }
+        } 
+        catch(IOException i) { 
+            System.out.println("You entered an option that was not Y or N");
+            System.exit(0); 
+        }
         // close the connection 
         try
         { 
