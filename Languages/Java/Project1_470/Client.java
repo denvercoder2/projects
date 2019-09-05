@@ -12,14 +12,13 @@ Purpose:
 // A Java program for a Client 
 import java.net.*; 
 import java.io.*; 
-import java.util.*;
   
 public class Client 
 { 
     // initialize socket and input output streams 
     private Socket socket            = null; 
     private DataInputStream  input   = null; 
-    private DataOutputStream out     = null; 
+    private DataOutputStream output  = null; 
   
     // constructor to put ip address and port 
     public Client(String ip, int portNum) 
@@ -35,11 +34,11 @@ public class Client
             input  = new DataInputStream(System.in); 
   
             // sends output to the socket 
-            out    = new DataOutputStream(socket.getOutputStream()); 
+            output = new DataOutputStream(socket.getOutputStream()); 
         } 
         catch(UnknownHostException u) 
         { 
-            System.out.println("yeet"); 
+            System.out.println("Could not connect to server"); 
         } 
         catch(IOException i) 
         { 
@@ -48,25 +47,33 @@ public class Client
         } 
   
         // string to read message from input 
-       
-        Scanner choice = new Scanner(System.in);
-        System.out.println("Would you like to update your Software? [Y or N] ");
-        String answer = choice.nextLine();
-        String new_soft = "1.1"; 
-  
+        String checker = "";
+        String new_soft = "1.1";
+        System.out.println("Would the client like to update it's software [Y or N]? ");
         // keep reading until "Over" is input 
-        if (!answer.equals("Close")){ 
-            System.out.println("Software has been updated to version: " + new_soft); 
-        }
-        else{
-            System.out.println("Software was not updated");
-        }
+        // if (!checker.equals("N")){ 
+            try{ 
+                checker = input.readLine(); 
+                output.writeUTF(checker); 
+                if (!checker.equals("N")){
+                    System.out.println("Software has been updated to version: " + new_soft);
+                }
+                else{
+                    System.out.println("Software has not been updated");
+                }
+            } 
+            catch(IOException i) { 
+                System.out.println("You entered an option that was not Y or N");
+                System.exit(0); 
+            }
+        
+    
 
         // close the connection 
         try
         { 
             input.close(); 
-            out.close(); 
+            output.close(); 
             socket.close(); 
         } 
         catch(IOException i) 
