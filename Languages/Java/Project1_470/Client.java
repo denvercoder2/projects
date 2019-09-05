@@ -54,7 +54,7 @@ public class Client
             checker = input.readLine(); 
             output.writeUTF(checker); 
             if (!checker.equals("Y")){
-                System.out.println("Software has not been updated");
+                System.out.println("Software has not been updated, program exiting");
             }
             else{
                 System.out.println("Software has been updated to version: " + new_soft);
