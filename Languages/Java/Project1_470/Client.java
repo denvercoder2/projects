@@ -31,11 +31,9 @@ public class Client
         { 
             String current_soft = "1.0"; 
             socket = new Socket(ip, portNum); 
-            System.out.println("Connected at: "+ip+ "\nCurrent software is: "+current_soft); 
-  
+            System.out.println("Connected at: "+ip+ "\nCurrent software is: " + current_soft + "\n"); 
             // takes input from terminal 
             input  = new DataInputStream(System.in); 
-  
             // sends output to the socket 
             output = new DataOutputStream(socket.getOutputStream()); 
         } 
@@ -56,19 +54,22 @@ public class Client
         // leave it alone
         String checker = "";
         String soft_vers = "1.0";
-        System.out.println("Would the client like to update it's software [Y or N]? ");
+        System.out.println("\nWould the client like to update it's software [Y or N]? ");
         try{ 
             checker = input.readLine(); 
             output.writeUTF(checker); 
             if (!checker.equals("Y")){
                 System.out.println("Software has not been updated, version is: " + soft_vers);
+                System.out.println("\n========Client End========\n");
             }
             else{
-                soft_vers = "1.1";
-                System.out.println("Software has been updated to version: " + soft_vers);
-                InputStream in = socket.getInputStream();
-                ObjectInputStream obj = new ObjectInputStream(in);
-                String stringFromServer = (String) obj.readObject();
+                InputStream input = socket.getInputStream();
+                InputStreamReader inputReader = new InputStreamReader(input);
+                BufferedReader breader = new BufferedReader(inputReader);
+                String message = breader.readLine();
+                System.out.println("Version recieved from server : " +message);
+                System.out.println("Software has been updated to version: " +message);
+                System.out.println("\n========Client End========\n");
             }
         } 
         catch(IOException i) { 
@@ -82,14 +83,18 @@ public class Client
             output.close(); 
             socket.close(); 
         } 
+        // Catch if all connections can't be closed
         catch(IOException i) 
         { 
             System.out.println("Could not close all connections"); 
         } 
     } 
   
+    // Call the code above to start the client
     public static void main(String args[]) 
     { 
-        Client client = new Client("127.0.0.1", 5000); 
+        System.out.println("\n========Client Start========\n");
+        // pass in ip and port as parameters
+        Client client = new Client("127.0.0.1", 5000);
     } 
 } 
