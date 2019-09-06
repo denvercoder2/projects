@@ -66,6 +66,9 @@ public class Client
             else{
                 soft_vers = "1.1";
                 System.out.println("Software has been updated to version: " + soft_vers);
+                InputStream in = socket.getInputStream();
+                ObjectInputStream obj = new ObjectInputStream(in);
+                String stringFromServer = (String) obj.readObject();
             }
         } 
         catch(IOException i) { 

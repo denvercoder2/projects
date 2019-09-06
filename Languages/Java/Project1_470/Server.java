@@ -20,6 +20,7 @@ public class Server
     private Socket socket           = null; 
     private ServerSocket server     = null; 
     private DataInputStream input   = null; 
+    private DataOutputStream output = null;
   
     // constructor with port 
     public Server(String ip,int portNum) 
@@ -57,7 +58,13 @@ public class Server
             }
             // Case 2: User chooses to update the software
             else{ 
-                System.out.println("Latest version sent to client");
+                try{
+                    ObjectOutputStream to_client = new ObjectOutputStream(output);
+                    to_client.writeObject("1.1");
+                }
+                catch(ClassNotFoundException e){
+                    System.out.println(e);
+                }
             } 
                 
             // After the action is done, close the connection
