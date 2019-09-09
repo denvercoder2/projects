@@ -22,20 +22,20 @@ public class Server
     private DataInputStream input   = null; 
   
     // constructor with port 
-    public Server(String ip,int portNum) 
+    public Server(int portNum) 
     { 
-        
-  
+        // try for connection to client
         try
         { 
             // starts server and waits for a connections
             server = new ServerSocket(portNum); 
-            System.out.println("Server up and waiting for client"); 
+            System.out.println("Server up and waiting for client..."); 
             // Accept the connection from client and grab the ip via parameter
             socket = server.accept(); 
-            System.out.println("Client accepted at IP: " + ip); 
+            String IPaddress = socket.getLocalSocketAddress().toString();
+            System.out.println("Client accepted at IP and port: " + IPaddress); 
             // Then, it's up to the client to answer for the program to continue
-            System.out.println("Awaiting Client decision on updating Software");
+            System.out.println("Awaiting Client decision on updating Software...");
   
             // Input to read in from the client
             input = new DataInputStream( 
@@ -44,7 +44,7 @@ public class Server
                 
             // Initially set the client string to an empty string
             String client_line = "";
-            
+            String new_software = "1.1";
             /* 
             read in the client_line var and conditionally decide whether or
             not to update the software on the client side 
@@ -52,12 +52,22 @@ public class Server
             client_line = input.readUTF();
             // Case 1: User chooses to not update the software
             if (!client_line.equals("Y")){
-                System.out.println("Software was not updated, Goodbye");
+                System.out.println("Client chose not to update.\nSoftware still at version: 1.0" );
+                System.out.println("\n========Server=End==========\n");
                 System.exit(0); 
+
             }
             // Case 2: User chooses to update the software
+            // we send the message containing the new software version
+            // to the client
             else{ 
-                System.out.println("Latest version sent to client");
+                System.out.println("\nClient has decided to update\n");
+                OutputStream output = socket.getOutputStream();
+                OutputStreamWriter outWriter = new OutputStreamWriter(output);
+                BufferedWriter bwriter = new BufferedWriter(outWriter);
+                bwriter.write(new_software);
+                System.out.println("\nSoftware version sent to client: " + new_software);
+                bwriter.flush();
             } 
                 
             // After the action is done, close the connection
@@ -79,6 +89,9 @@ public class Server
     // Call the function, this is essentially a driver function
     public static void main(String args[]) 
     { 
-        Server server = new Server("127.0.0.1",5000); 
+        System.out.println("\n========Server Start========\n");
+        // pass in port as parameter
+        Server server = new Server(5000); 
+        System.out.println("\n========Server End==========\n");
     } 
 } 
