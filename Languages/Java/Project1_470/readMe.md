@@ -21,6 +21,7 @@
 ---
 * Running the code
 ```bash
+# Linux
 javac Server.java # Compile the class to translate into bytecode
 javac Client.java # Compile the class to translate into bytecode
 
