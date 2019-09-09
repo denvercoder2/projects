@@ -52,7 +52,8 @@ public class Server
             client_line = input.readUTF();
             // Case 1: User chooses to not update the software
             if (!client_line.equals("Y")){
-                System.out.println("Client chose not to update.\nSoftware still at version: 1.0" );
+                System.out.println("Client chose not to update or entered an unrecognized character" + 
+                "\nSoftware still at version: 1.0" );
                 System.out.println("\n========Server=End==========\n");
                 System.exit(0); 
 
