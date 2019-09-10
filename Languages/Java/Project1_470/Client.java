@@ -19,7 +19,7 @@ public class Client
 { 
     // initialize socket and input output streams 
     private Socket socket            = null; 
-    private DataInputStream  input   = null; 
+    private BufferedReader   input   = null; 
     private DataOutputStream output  = null; 
   
     // constructor to put ip address and port 
@@ -33,7 +33,7 @@ public class Client
             socket = new Socket(ip, portNum); 
             System.out.println("Connected at: "+ip+ "\nCurrent software is: " + current_soft + "\n"); 
             // takes input from terminal 
-            input  = new DataInputStream(System.in); 
+            input  = new BufferedReader(new InputStreamReader(System.in)); 
             // sends output to the socket 
             output = new DataOutputStream(socket.getOutputStream()); 
         } 

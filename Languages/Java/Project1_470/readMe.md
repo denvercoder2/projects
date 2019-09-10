@@ -21,12 +21,17 @@
 ---
 * Running the code
 ```bash
-# Linux
-javac Server.java # Compile the class to translate into bytecode
-javac Client.java # Compile the class to translate into bytecode
+#------------------------------------------------------------------
+# Linux and Windows instructions
 
-java Server       # Start the Server 
-java Client       # Start the Client
+javac Server.java   # Compile the class to translate into bytecode
+javac Client.java   # Compile the class to translate into bytecode
+
+java Server         # Start the Server 
+java Client         # Start the Client
+#------------------------------------------------------------------
+
+
 ```
 * The remainder of the program is handled via terminal prompts
 ---   
