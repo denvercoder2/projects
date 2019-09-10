@@ -51,17 +51,10 @@ public class Server
             */
             client_line = input.readUTF();
             // Case 1: User chooses to not update the software
-            if (!client_line.equals("Y")){
-                System.out.println("Client chose not to update or entered an unrecognized character" + 
-                "\nSoftware still at version: 1.0" );
-                System.out.println("\n========Server=End==========\n");
-                System.exit(0); 
-
-            }
             // Case 2: User chooses to update the software
             // we send the message containing the new software version
             // to the client
-            else{ 
+            if(client_line.equals("Y")){ 
                 System.out.println("\nClient has decided to update\n");
                 OutputStream output = socket.getOutputStream();
                 OutputStreamWriter outWriter = new OutputStreamWriter(output);
@@ -70,7 +63,13 @@ public class Server
                 System.out.println("\nSoftware version sent to client: " + new_software);
                 bwriter.flush();
             } 
-                
+            else if (!client_line.equals("Y")){
+                System.out.println("Client chose not to update" + 
+                "\nSoftware still at version: 1.0" );
+                System.out.println("\n========Server=End==========\n");
+                System.exit(0); 
+
+            }
             // After the action is done, close the connection
             System.out.println("Connection is closed"); 
 

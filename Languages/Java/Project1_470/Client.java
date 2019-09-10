@@ -58,22 +58,26 @@ public class Client
         try{ 
             checker = input.readLine(); 
             output.writeUTF(checker); 
-            if (!checker.equals("Y")){
-                System.out.println("Software has not been updated, version is: " + soft_vers);
-                System.out.println("\n========Client End========\n");
-            }
-            else{
-                InputStream input = socket.getInputStream();
-                InputStreamReader inputReader = new InputStreamReader(input);
-                BufferedReader breader = new BufferedReader(inputReader);
-                String message = breader.readLine();
-                System.out.println("Version recieved from server : " +message);
-                System.out.println("Software has been updated to version: " +message);
-                System.out.println("\n========Client End========\n");
-            }
+        if (checker.equals("Y")){
+            InputStream input = socket.getInputStream();
+            InputStreamReader inputReader = new InputStreamReader(input);
+            BufferedReader breader = new BufferedReader(inputReader);
+            String message = breader.readLine();
+            System.out.println("Version recieved from server : " +message);
+            System.out.println("Software has been updated to version: " +message);
+            System.out.println("\n========Client End========\n");
+        }
+        else if (checker.equals("N")){
+            System.out.println("Software has not been updated, version is: " + soft_vers);
+            System.out.println("\n========Client End========\n");
+        }
+        else{
+            System.out.println("You entered an option that was not Y or N, please run again");
+            System.exit(0); 
+        }
         } 
         catch(IOException i) { 
-            System.out.println("You entered an option that was not Y or N");
+            System.out.println("There was an issue reading in your characters, please run again");
             System.exit(0); 
         }
         // close the connection 
