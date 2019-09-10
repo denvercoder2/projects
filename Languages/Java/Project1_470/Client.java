@@ -56,25 +56,25 @@ public class Client
         String soft_vers = "1.0";
         System.out.println("\nWould the client like to update it's software [Y or N]? ");
         try{ 
-            checker = input.readLine(); 
-            output.writeUTF(checker); 
-        if (checker.equals("Y")){
-            InputStream input = socket.getInputStream();
-            InputStreamReader inputReader = new InputStreamReader(input);
-            BufferedReader breader = new BufferedReader(inputReader);
-            String message = breader.readLine();
-            System.out.println("Version recieved from server : " +message);
-            System.out.println("Software has been updated to version: " +message);
-            System.out.println("\n========Client End========\n");
-        }
-        else if (checker.equals("N")){
-            System.out.println("Software has not been updated, version is: " + soft_vers);
-            System.out.println("\n========Client End========\n");
-        }
-        else{
-            System.out.println("You entered an option that was not Y or N, please run again");
-            System.exit(0); 
-        }
+                checker = input.readLine(); 
+                output.writeUTF(checker); 
+            if (checker.equals("Y")){
+                InputStream input = socket.getInputStream();
+                InputStreamReader inputReader = new InputStreamReader(input);
+                BufferedReader breader = new BufferedReader(inputReader);
+                String message = breader.readLine();
+                System.out.println("Version recieved from server : " +message);
+                System.out.println("Software has been updated to version: " +message);
+                System.out.println("\n========Client End========\n");
+            }
+            else if (checker.equals("N")){
+                System.out.println("Software has not been updated, version is: " + soft_vers);
+                System.out.println("\n========Client End========\n");
+            }
+            else{
+                System.out.println("You entered an option that was not Y or N, please run again");
+                System.exit(0); 
+            }
         } 
         catch(IOException i) { 
             System.out.println("There was an issue reading in your characters, please run again");
