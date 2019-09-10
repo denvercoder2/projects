@@ -63,12 +63,15 @@ public class Server
                 System.out.println("\nSoftware version sent to client: " + new_software);
                 bwriter.flush();
             } 
-            else if (!client_line.equals("Y")){
+            else if (client_line.equals("N")){
                 System.out.println("Client chose not to update" + 
-                "\nSoftware still at version: 1.0" );
+                "\nSoftware on client still at version: 1.0" );
                 System.out.println("\n========Server=End==========\n");
                 System.exit(0); 
-
+            }
+            else{
+                System.out.println("Client entered an option that was not Y or N, please run again");
+                System.exit(0); 
             }
             // After the action is done, close the connection
             System.out.println("Connection is closed"); 
