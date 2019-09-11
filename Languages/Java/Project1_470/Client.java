@@ -55,9 +55,14 @@ public class Client
         String checker = "";
         String soft_vers = "1.0";
         System.out.println("\nWould the client like to update it's software [Y or N]? ");
+        // check the input from the client
+        // depending on the input go to the 
+        // correct branch
         try{ 
+            // try to go through conditional
                 checker = input.readLine(); 
                 output.writeUTF(checker); 
+            // if client chooses Y
             if (checker.equals("Y")){
                 InputStream input = socket.getInputStream();
                 InputStreamReader inputReader = new InputStreamReader(input);
@@ -67,15 +72,18 @@ public class Client
                 System.out.println("Software has been updated to version: " +message);
                 System.out.println("\n========Client End========\n");
             }
+            // if client chooses N
             else if (checker.equals("N")){
                 System.out.println("Software has not been updated, version is: " + soft_vers);
                 System.out.println("\n========Client End========\n");
             }
+            // if user enters neither Y or N
             else{
                 System.out.println("You entered an option that was not Y or N, please run again");
                 System.exit(0); 
             }
         } 
+        // Catch if there was an issue
         catch(IOException i) { 
             System.out.println("There was an issue reading in your characters, please run again");
             System.exit(0); 

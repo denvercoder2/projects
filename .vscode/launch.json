@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TCPServer",
+            "request": "launch",
+            "mainClass": "TCPServer"
+        }
+    ]
+}

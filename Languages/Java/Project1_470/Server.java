@@ -32,7 +32,7 @@ public class Server
             System.out.println("Server up and waiting for client..."); 
             // Accept the connection from client and grab the ip via parameter
             socket = server.accept(); 
-            String IPaddress = socket.getLocalSocketAddress().toString();
+            String IPaddress = socket.getRemoteSocketAddress().toString();
             System.out.println("Client accepted at IP and port: " + IPaddress); 
             // Then, it's up to the client to answer for the program to continue
             System.out.println("Awaiting Client decision on updating Software...");
