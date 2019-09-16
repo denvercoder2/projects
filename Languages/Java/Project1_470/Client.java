@@ -8,7 +8,7 @@ Purpose:
     Answer whether or not to update software;
     Update if answer is yes;
     Don't update if answer is no, or
-    client already has latest version
+    user enters unknown characters
 */
 
 // A Java program for a Client 

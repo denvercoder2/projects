@@ -71,6 +71,7 @@ public class Server
             }
             else{
                 System.out.println("Client entered an option that was not Y or N, please run again");
+                System.out.println("\n========Server End==========\n");
                 System.exit(0); 
             }
             // After the action is done, close the connection
