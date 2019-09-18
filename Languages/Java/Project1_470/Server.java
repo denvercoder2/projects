@@ -63,12 +63,14 @@ public class Server
                 System.out.println("\nSoftware version sent to client: " + new_software);
                 bwriter.flush();
             } 
+            // client chooses N
             else if (client_line.equals("N")){
                 System.out.println("Client chose not to update" + 
                 "\nSoftware on client still at version: 1.0" );
                 System.out.println("\n========Server=End==========\n");
                 System.exit(0); 
             }
+            // client chooses neither Y or N
             else{
                 System.out.println("Client entered an option that was not Y or N, please run again");
                 System.out.println("\n========Server End==========\n");
