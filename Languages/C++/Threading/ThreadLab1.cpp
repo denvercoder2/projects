@@ -35,7 +35,7 @@ void ThreadTwo()
 }
 
 void main(void)
-
+{
   HANDLE ThreadHandles[2];            // A handle is a pointer to an object
   DWORD ThreadOneID, ThreadTwoID;     // A thread has an id as well as a handle
                                          
