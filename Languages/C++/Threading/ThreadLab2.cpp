@@ -23,21 +23,20 @@ volatile int  tally;   // Parent process's global data
 void AddThread(int iterations)
 {
   
- int i;
- int x;
+  int i;
+  int x;
 
-for (i = 0; i < iterations; i++)
-{
-	x = tally;
-	x = x + 1;
-	tally = x;
-	}
+  for (i = 0; i < iterations; i++){
+    x = tally;
+    x = x + 1;
+    tally = x;
+    }
 
-}
+  }
 
 const  INT numThreads = 4;
 
-void main(void)
+int main()
 {
   HANDLE ThreadHandles[numThreads];
   DWORD ThreadID;
