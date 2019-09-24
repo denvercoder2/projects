@@ -72,7 +72,7 @@ Scale = the percent each person pays
 void report(){
     int Rent_total = 785;
     // !!!
-    int Util_total = 170;
+    int Util_total = 185;
     int water = 40;
     int internet = 90;
     
@@ -103,10 +103,12 @@ void report(){
     // when the internet is added as a bill, add 90 to the total, and subtract 90 from roys total
     float Scott_total = sum_bill(Rent(785), h2o(40), Utilities(Util_total) + 55);
     int complete_total = 785 + 40 + Util_total + internet;
+    int royTotal = int(complete_total - Scott_total);
     myfile << "\nTotal Bills for this month: " << complete_total << "\n";
     myfile << "\n\n------------- Split -------------\n\n";
     myfile << "\nTotal Bill amount for Scott (Rounded): " << int(Scott_total) << "\n";
-    myfile << "\nTotal Bill amount for Roy (Rounded): " <<   int(complete_total - Scott_total);
+    myfile << "\nTotal Bill amount for Roy (Rounded): " <<   royTotal;
+    myfile << "\n35 dollars from your total is for your portion of the internet, so you give me: " << royTotal - 35; 
 
     myfile << "\n-------------------------------------------------------\n";
 
