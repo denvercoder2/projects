@@ -1,12 +1,12 @@
 # formatting bills for csv reading (easier via email)
 # Scott Holley
-
+ 
 def get_file(filename: str) -> list:
     '''
     Function will read in a file and return
     a list containing all lines within the file
     '''
-    path = '/home/river/Desktop/Git_projects/Languages/C++/'
+    path = '/home/river/Desktop/Git_projects/Languages/C++/General/'
     with open (path+filename, "r") as infile:
         lines = infile.readlines()
 
@@ -20,13 +20,13 @@ def return_csv(filename: str, lines: list):
     with open (filename, "w") as outfile:
         for line in lines:
             outfile.write(line)
-        
+
 def main():
     '''
     Main function setup
     '''
     lines = get_file('output.txt')
-    return_csv('bill_report.csv', lines)
+    return_csv('bill_report.pdf', lines)
 
 
 
