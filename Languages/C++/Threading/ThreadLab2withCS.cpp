@@ -41,7 +41,7 @@ LeaveCriticalSection(&cs);
 
 const  INT numThreads = 4;
 
-void main(void)
+int main()
 {
   HANDLE ThreadHandles[numThreads];
   DWORD ThreadID;

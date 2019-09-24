@@ -15,7 +15,7 @@ void ThreadOne()
 {
   int temp;
 
-  Sleep(10);       // Sleep(t) blocks a thread for t milliseconds 
+  // Sleep(10);       // Sleep(t) blocks a thread for t milliseconds 
   
   temp = A;
   temp++;
@@ -26,7 +26,7 @@ void ThreadTwo()
 {
  int temp;
 
-//Sleep(10);
+// Sleep(10);
   temp = B;
   temp--;
   B = temp; 
@@ -34,7 +34,7 @@ void ThreadTwo()
   A = B;
 }
 
-void main(void)
+int main()
 {
   HANDLE ThreadHandles[2];            // A handle is a pointer to an object
   DWORD ThreadOneID, ThreadTwoID;     // A thread has an id as well as a handle
@@ -70,6 +70,7 @@ void main(void)
    cout << "Value of B: " << B << "\n";
 
    system("pause");
+
 }
 
 
