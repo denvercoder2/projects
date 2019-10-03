@@ -1,6 +1,0 @@
-// invalid package type
-letter
-20
-25
-15
-25
