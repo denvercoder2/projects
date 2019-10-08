@@ -81,7 +81,12 @@ This function is to print out a menu of options.
 The getInteger function exists to error check this function
 */
 void printMenu(){
-    // TBD
+    cout << "*************** Generic Menu ***************" << endl;
+    cout << "==> Enter 1 to test 1 <==" << endl;
+    cout << "==> Enter 2 to test 2 <==" << endl;
+    cout << "==> Enter 3 to test 3 <==" << endl;
+    cout << "==> Enter 4 to test 4 <==" << endl;
+    cout << "***********************************************" << endl;
 }
 
 
@@ -91,10 +96,11 @@ int main(){
     int interval; // this will be used to determine the montecarlo method iterations
     cout << "How many iterations for the MonteCarlo Method?: " << endl;
     cin >> interval; 
-    
+
+    printMenu();
     // user defined number of iterations
-    for (int i = 0; i < interval; i++){
-        // call the void function
-        CalculatePi();
-    }
+    // for (int i = 0; i < interval; i++){
+    //     // call the void function
+    //     CalculatePi();
+    // }
 }
