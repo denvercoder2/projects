@@ -1,0 +1,18 @@
+Design a communication mechanism that uses unicast, multicast, TCP, and UDP.  Below is a scenario.
+A university has smart projectors installed in classrooms and dorms. In a classroom, you may use a projector for presentations. In your dorm, you may use a projector for games or movies. The display content is sent from the mobile device that you carry with you.
+
+Your approach should also meet the following requirements.
+
+ 
+
+a.      The projectors (a program) run at different places do not run on the same IP address, instead they have their own IP addresses. You do not always know the IP address of a projector. But you may assume that your mobile device (another program)  and the projector are on the same network.
+
+b.     Your mobile device discovers the projector by specifying the following attribute – display:projector.
+
+c.      If there is a projector available, your approach will enable your mobile device to use it.
+
+d.     Mimic live sports being sent from your mobile device to the projector. That is your program sending UDP packets.
+
+e.      In your code (comments), indicate the unicast, multicast, TCP, and UDP that you use.
+
+ 
