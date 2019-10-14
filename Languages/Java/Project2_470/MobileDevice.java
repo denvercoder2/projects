@@ -16,16 +16,24 @@
 | In this project, we are to mimic live sports being sent to the projector                       |
 ======================================== GENERAL OVERVIEW ========================================
 */
+
+/*
+There should be functions dictatating which cast to use
+Ask the mobile device which type it'd like to use and 
+go from there
+*/
 import java.net.*;
 import java.io.*; 
 
-// The mobile device acts like a client
-public class MobileDevice{
 
+
+// TCP Connection
+public class MobileDevice{
+    // TCP connection
     private Socket socket            = null; 
     private BufferedReader   input   = null; 
     private DataOutputStream output  = null; 
-  
+
 
     public static void main(String[] args) {
         System.out.println("TBD");

@@ -14,8 +14,10 @@ import java.io.*;
 | The projector should have two modes (Classroom, or dorm).                                      |
 | This is to be specified to the mobile device, and from there, the type of media                |
 | that can be displayed is determined.                                                           |
+| There is also a choice on what type of cast to use                                             |
 ======================================== GENERAL OVERVIEW ========================================
 */
+import java.io.*;
 import java.net.*;
 
 // The projector acts like the server
