@@ -1,12 +1,12 @@
- /*
-    Scott Holley
-    CS470 Project 2
-    Due: November 4th
-    Filename: Projector
- */
+
+/*
+   Scott Holley
+   CS470 Project 2
+   Due: November 4th
+   Filename: Projector
+*/
 import java.net.*;
-import java.io.*; 
-  
+import java.io.*;
 
 /*
 ======================================== GENERAL OVERVIEW ========================================
@@ -17,33 +17,30 @@ import java.io.*;
 | There is also a choice on what type of cast to use                                             |
 ======================================== GENERAL OVERVIEW ========================================
 */
+
+// TCP: Socket
+// UDP DataGram
+// Multicast, unicast
+
 import java.io.*;
 import java.net.*;
 
-// The projector acts like the server
-public class Projector{
-    // TCP connection initilization
-    private Socket socket           = null; 
-    private ServerSocket projector  = null; 
-    private DataInputStream input   = null; 
+class Projector {
 
-    // constructor
-    public Projector(int portNum){
-        try {
-            projector = new ServerSocket(portNum); 
-            System.out.println("Server up and waiting for client..."); 
-            // Accept the connection from client and grab the ip via parameter
-            socket = server.accept(); 
-            String IPaddress = socket.getRemoteSocketAddress().toString();
-            System.out.println("Client accepted at IP and port: " + IPaddress); 
+    public static void main(String argv[]) throws Exception {
+        String clientSentence;
+        String capitalizedSentence;
+        ServerSocket welcomeSocket = new ServerSocket(6789);
 
-        } catch (Exception e) {
-            System.out.println("Connection to projector could not be established");
+        while (true) {
+            Socket connectionSocket = welcomeSocket.accept();
+            BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+            clientSentence = inFromClient.readLine();
+            System.out.println("Received: " + clientSentence);
+            capitalizedSentence = clientSentence.toUpperCase() + 'n';
+            outToClient.writeBytes(capitalizedSentence);
+            
         }
-    }
-
-
-    public static void main(String[] args) {
-        System.out.println("TBD");
     }
 }

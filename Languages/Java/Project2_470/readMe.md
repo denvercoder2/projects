@@ -6,7 +6,11 @@
 
 ```bash
     # running the build tool
-    python3.7 buildTool.py  # Use your instance of python to call the script 
+    python3.7 buildTool.py  # Use your instance of python to call the 
+
+    
+    # This may act weird due to some java environments
+    # if so, just disregard and use other instructions 
 ```
 
 ---
