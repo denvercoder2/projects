@@ -17,10 +17,41 @@
 */
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 
 public class MobileDevice {
 
+    /*
+    Function: fakeData
+    Parameters: Counter (int)
+    ================== Purpose ==================
+    Generate some fake data to send over the connection
+    or broadcast
+    */
+    public static ArrayList fakeData(int counter){
+        Random random = new Random();
+        ArrayList<Integer> randomInts = new ArrayList<>();
+        for (int i = 0; i < counter; i++){
+            randomInts.add(random.nextInt(counter));
+        }
+        return randomInts;
+    }
+    /*
+    Function: slides
+    Parameters: Counter (int)
+    ================== Purpose ==================
+    Generate some fake slide data to represent a 
+    slideshow on a school projector
+    */
+    public static int slides(int counter){
+        int slide = 0;
+        for(int i = 0; i < counter; i++){
+            slide += 1;
+        }
+        return slide;
+
+    }
     /*
     Function name: getChoice
     Parameters: None (void)
@@ -68,20 +99,56 @@ public class MobileDevice {
     }
 
 // -------------------------------------- //
-    // TCP Function spot
+    /*
+    Function: TCP
+    Parameters: None (void)
+    ================== Purpose ==================
+    Perform TCP connection if selected
+    */
     public static void TCP(){
         System.out.println("TBD");
     }
 // -------------------------------------- //
-    // UDP Function spot
+    /*
+    Function: UDP
+    Parameters: None (void)
+    ================== Purpose ==================
+    Perform UDP connection if selected
+    */
     public static void UDP(){
         System.out.println("TBD");
     }
 // -------------------------------------- //
-
+    /*
+    Function: Multicast
+    Parameters: None (void)
+    ================== Purpose ==================
+    Perform Multicast broadcasting if selected
+    */
+    public static void Multicast(){
+        System.out.println("TBD");
+    }
+// -------------------------------------- //
+    
+    /*
+    Function: Unicast
+    Parameters: None (void)
+    ================== Purpose ==================
+    Perform Unicast broadcasting if selected
+    */
+    public static void Unicast(){
+        System.out.println("TBD");
+    }
+// -------------------------------------- //
     
     public static void main(String[] args)throws Exception{
         String protocal = getChoice();
+        int counter = 100;
+        ArrayList<String> movie_data = fakeData(counter);
+        for (int i = 0; i < counter; i++){
+            System.out.println(movie_data);
+        }
+        
 
         // Going through the functions defined above
         // depending on the return from getChoice
@@ -92,6 +159,7 @@ public class MobileDevice {
             UDP();
         }
         else if(protocal.equals("Multicast")){
+
         }
         else if(protocal.equals("Unicast")){
 
