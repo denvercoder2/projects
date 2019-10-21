@@ -2,10 +2,12 @@
 Placement for new bill itemiser
 '''
 
+
 def rent(rent_bill: int) -> float:
     '''
     Function will return the rent ratio for Scott
-    Our rent includes water
+    Our rent includes water. This function goes
+    to whoever has the bigger room
     '''
     return rent_bill * .523
 
@@ -49,8 +51,8 @@ def main():
 
     if make_app == 1:
         print("Rent for the month (total) is: ", rent_total)
-        print("Utility bill for the month is: ", utility)
-        print("Internet bill for the month is: ", internets)
+        print("Utility bill for the month (total) is: ", utility)
+        print("Internet bill for the month (total) is: ", internets)
         print("*************************************** Payment breakdown ***************************************")
         print("---- Rent Breakdown ----")
         print("Rent bill for Scott: ", Scott_rent)
