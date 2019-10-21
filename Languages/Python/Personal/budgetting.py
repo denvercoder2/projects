@@ -5,8 +5,8 @@ def bills():
     # items (bills can be added if needed)
     montly_bills = {
         'Car ----->':  214,
-        'Car Insurance ----->': 140,
-        'Rent ----->': 415,
+        'Car Insurance ----->': 160,
+        'Rent ----->': 600,
         'Internet ----->': 55,
         'Phone, ----->': 40,
         'Utilities, ----->': 50,
