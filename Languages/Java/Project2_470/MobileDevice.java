@@ -105,9 +105,62 @@ public class MobileDevice {
     ================== Purpose ==================
     Perform TCP connection if selected
     */
-    public static void TCP(){
-        System.out.println("TBD");
-    }
+    public static void TCP(String address, int port){
+            Socket socket            = null; 
+            DataInputStream  input   = null; 
+            DataOutputStream out     = null; 
+  
+        // establish a connection 
+        try
+        { 
+            socket = new Socket(address, port); 
+            System.out.println("Connected"); 
+  
+            // takes input from terminal 
+            input  = new DataInputStream(System.in); 
+  
+            // sends output to the socket 
+            out    = new DataOutputStream(socket.getOutputStream()); 
+        } 
+        catch(UnknownHostException u) 
+        { 
+            System.out.println(u); 
+        } 
+        catch(IOException i) 
+        { 
+            System.out.println(i); 
+        } 
+  
+        // string to read message from input 
+        String line = ""; 
+  
+        // keep reading until "Over" is input 
+        while (!line.equals("Quit")) 
+        { 
+            try
+            { 
+                line = input.readLine(); 
+                out.writeUTF(line); 
+            } 
+            catch(IOException i) 
+            { 
+                System.out.println(i); 
+            } 
+        } 
+  
+        // close the connection 
+        try
+        { 
+            input.close(); 
+            out.close(); 
+            socket.close(); 
+        } 
+        catch(IOException i) 
+        { 
+            System.out.println(i); 
+        } 
+    } 
+
 // -------------------------------------- //
     /*
     Function: UDP
@@ -145,15 +198,15 @@ public class MobileDevice {
         String protocal = getChoice();
         int counter = 100;
         ArrayList<String> movie_data = fakeData(counter);
-        for (int i = 0; i < counter; i++){
-            System.out.println(movie_data);
-        }
+        // for (int i = 0; i < counter; i++){
+        //     System.out.println(movie_data);
+        // }
         
 
         // Going through the functions defined above
         // depending on the return from getChoice
         if(protocal.equals("TCP")){
-            TCP();
+            TCP("127.0.0.1", 5000);
         }
         else if(protocal.equals("UDP")){
             UDP();
