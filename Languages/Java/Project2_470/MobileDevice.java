@@ -53,13 +53,13 @@ public class MobileDevice {
 
     }
     /*
-    Function name: getChoice
+    Function name: getProtocal
     Parameters: None (void)
     ================== Purpose ==================
     To ask and return the user's choice to decide the correct
     type of protocal to use
     */
-    public static String getChoice() throws IOException{
+    public static String getProtocal() throws IOException{
         BufferedReader input     = null;
         DataOutputStream output  = null; 
         
@@ -105,7 +105,7 @@ public class MobileDevice {
     ================== Purpose ==================
     Perform TCP connection if selected
     */
-    public static void TCP(String address, int port){
+    public static void TCP(String address, int port) throws NullPointerException{
             Socket socket            = null; 
             DataInputStream  input   = null; 
             DataOutputStream out     = null; 
@@ -195,7 +195,7 @@ public class MobileDevice {
 // -------------------------------------- //
     
     public static void main(String[] args)throws Exception{
-        String protocal = getChoice();
+        String protocal = getProtocal();
         int counter = 100;
         ArrayList<String> movie_data = fakeData(counter);
         // for (int i = 0; i < counter; i++){
@@ -204,7 +204,7 @@ public class MobileDevice {
         
 
         // Going through the functions defined above
-        // depending on the return from getChoice
+        // depending on the return from getProtocal
         if(protocal.equals("TCP")){
             TCP("127.0.0.1", 5000);
         }
