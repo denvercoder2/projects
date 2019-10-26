@@ -69,7 +69,7 @@ def main():
         print("Roy Internet bill: ", internet_payment)
         print("---- Internet Breakdown ----\n")
 
-        print("----------------- Total amount owed by both parties -----------------")
+        print("*************************************** Total amount owed by both parties ***************************************")
         print("Scott total for month: ", totals(Scott_rent, utility_payment, internet_payment))
         print("Roy total for month: ", totals(Roy_rent, utility_payment, internet_payment))
 
