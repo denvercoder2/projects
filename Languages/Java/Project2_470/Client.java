@@ -2,7 +2,7 @@
    Scott Holley
    CS470 Project 2
    Due: November 4th
-   Filename: MobileDevice
+   Filename: Client
 */
 
 /*
@@ -20,7 +20,7 @@ import java.net.*;
 import java.util.*;
 
 
-public class MobileDevice {
+public class Client {
 
     /*
     Function: fakeData
