@@ -1,13 +1,21 @@
 
+Rent Bill : 785
+
+Water Bill: 40
+
+Internet Bill: 90
+
+Utilties: 142
+
 ------------- Bill Breakdown -------------
 
 Rent Bill for Scott is: 410.555
 
 Rent Bill for Roy is: 374.445
 -------------------------------------------------------
-Utilities Bill for Scott is: 92.5
+Utilities Bill for Scott is: 71
 
-Utilities Bill for Roy is: 92.5
+Utilities Bill for Roy is: 71
 -------------------------------------------------------
 Water Bill for Scott is: 20
 
@@ -17,14 +25,14 @@ Internet Bill for Scott is: 55
 
 Internet Bill for Roy is: 35
 -------------------------------------------------------
-Total Bills for this month: 1100
+Total Bills for this month: 1057
 
 
 ------------- Split -------------
 
 
-Total Bill amount for Scott (Rounded): 577
+Total Bill amount for Scott (Rounded): 556
 
-Total Bill amount for Roy (Rounded): 523
-35 dollars from your total is for your portion of the internet, so you give me: 488
+Total Bill amount for Roy (Rounded): 501
+35 dollars from your total is for your portion of the internet, so you give me: 466
 -------------------------------------------------------

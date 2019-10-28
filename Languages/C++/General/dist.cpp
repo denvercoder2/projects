@@ -72,14 +72,20 @@ Scale = the percent each person pays
 void report(){
     int Rent_total = 785;
     // !!!
-    int Util_total = 185;
+    int Util_total = 142;
     int water = 40;
     int internet = 90;
     
     ofstream myfile;
     myfile.open("output.txt");
+    //https://www.pdfconvertonline.com/results.php
 
+    myfile << "\nRent Bill : " <<  Rent_total << "\n";
+    myfile << "\nWater Bill: " <<  water << "\n";
+    myfile << "\nInternet Bill: " <<  internet << "\n";
+    myfile << "\nUtilties: " <<  Util_total << "\n";
 
+    
     myfile << "\n------------- Bill Breakdown -------------\n";
     myfile << "\nRent Bill for Scott is: " <<  Rent(785.00) << "\n";
     myfile << "\nRent Bill for Roy is: " << 785 - Rent(785.00) << "\n";
