@@ -81,7 +81,6 @@ def main():
         print("Roy Internet bill: ", internet_payment)
         print("---- Internet Breakdown ----\n")
 
-<<<<<<< HEAD
 
         print("---- Renters Insurance Breakdown ----")
         print("Scott insurance bill: ", renters_payment)
@@ -92,11 +91,6 @@ def main():
         print("----------------- Total amount owed by both parties -----------------")
         print("Scott total for month: ", totals(Scott_rent, utility_payment, internet_payment, renters_payment))
         print("Roy total for month: ", totals(Roy_rent, utility_payment, internet_payment, renters_payment))
-=======
-        print("*************************************** Total amount owed by both parties ***************************************")
-        print("Scott total for month: ", totals(Scott_rent, utility_payment, internet_payment))
-        print("Roy total for month: ", totals(Roy_rent, utility_payment, internet_payment))
->>>>>>> c101e3a7899dd5efbad486639b7a74158f2384f3
 
 
 if __name__ == "__main__":
