@@ -25,13 +25,23 @@ def internet(internet_bill: float) -> float:
     '''
     return internet_bill * .5
 
+def rInsurance(rent_insurance: float) -> float:
+    '''
+    Function will return the rent insurance for each
+    tenant
+    '''
+    return rent_insurance * .5
 
-def totals(x: int, y: float, z: float) -> float:
+
+
+def totals(x: int, y: float, w: float, z: float) -> float:
     '''
     Function will return the totals for both paying members
     '''
-    total = x + y + z 
+    total = x + y + w + z
     return total
+
+
 
 def main():
     rent_total = 1115.0
@@ -40,6 +50,8 @@ def main():
 
     Scott_rent = rent(rent_total)
     Roy_rent = 1115.0 - Scott_rent
+    Renters_insurance = 12.75
+    renters_payment = rInsurance(Renters_insurance)
 
     utility_payment = utilities(utility)
     internet_payment = internet(internets)
@@ -69,9 +81,16 @@ def main():
         print("Roy Internet bill: ", internet_payment)
         print("---- Internet Breakdown ----\n")
 
+
+        print("---- Renters Insurance Breakdown ----")
+        print("Scott insurance bill: ", renters_payment)
+        print("Roy insurance bill: ", renters_payment)
+        print("---- Renters Insurance Breakdown ----\n")
+
+        
         print("----------------- Total amount owed by both parties -----------------")
-        print("Scott total for month: ", totals(Scott_rent, utility_payment, internet_payment))
-        print("Roy total for month: ", totals(Roy_rent, utility_payment, internet_payment))
+        print("Scott total for month: ", totals(Scott_rent, utility_payment, internet_payment, renters_payment))
+        print("Roy total for month: ", totals(Roy_rent, utility_payment, internet_payment, renters_payment))
 
 
 if __name__ == "__main__":
