@@ -20,7 +20,7 @@ import java.net.*;
 import java.util.*;
 
 
-public class Client {
+public class TCPClient {
 
     /*
     Function: fakeData
@@ -106,9 +106,9 @@ public class Client {
     Perform TCP connection if selected
     */
     public static void TCP(String address, int port) throws NullPointerException{
-            Socket socket            = null; 
-            DataInputStream  input   = null; 
-            DataOutputStream out     = null; 
+        Socket socket            = null; 
+        DataInputStream  input   = null; 
+        DataOutputStream out     = null; 
   
         // establish a connection 
         try
