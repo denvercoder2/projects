@@ -19,11 +19,13 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class TCPClient {
+public class Client {
 
     /*
-     * Function: fakeData Parameters: Counter (int) ================== Purpose
-     * ================== Generate some fake data to send over the connection or
+     * Function: fakeData 
+     * Parameters: Counter (int) 
+     * ================== Purpose ================== 
+     * Generate some fake data to send over the connection or
      * broadcast
      */
     public static ArrayList fakeData(int counter) {
@@ -36,8 +38,10 @@ public class TCPClient {
     }
 
     /*
-     * Function: slides Parameters: Counter (int) ================== Purpose
-     * ================== Generate some fake slide data to represent a slideshow on
+     * Function: slides
+     * Parameters: Counter (int) 
+     * ================== Purpose ================== 
+     * Generate some fake slide data to represent a slideshow on
      * a school projector
      */
     public static int slides(int counter) {
@@ -50,8 +54,10 @@ public class TCPClient {
     }
 
     /*
-     * Function name: getProtocal Parameters: None (void) ================== Purpose
-     * ================== To ask and return the user's choice to decide the correct
+     * Function name: getProtocal 
+     * Parameters: None (void) 
+     * ================== Purpose ================== 
+     * To ask and return the user's choice to decide the correct
      * type of protocal to use
      */
     public static String getProtocal() throws IOException {
@@ -90,12 +96,14 @@ public class TCPClient {
 
     // -------------------------------------- //
     /*
-     * Function: TCP Parameters: None (void) ================== Purpose
-     * ================== Perform TCP connection if selected
+     * Function: TCP 
+     * Parameters: None (void)
+     *  ================== Purpose ================== 
+     * Perform TCP connection if selected
      */
     public static void TCP(String address, int port) throws NullPointerException {
         Socket socket = null;
-        DataInputStream input = null;
+        BufferedReader   input   = null; 
         DataOutputStream out = null;
 
         // establish a connection
@@ -104,7 +112,7 @@ public class TCPClient {
             System.out.println("Connected");
 
             // takes input from terminal
-            input = new DataInputStream(System.in);
+            input = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 
             // sends output to the socket
             out = new DataOutputStream(socket.getOutputStream());
@@ -139,8 +147,10 @@ public class TCPClient {
 
     // -------------------------------------- //
     /*
-     * Function: UDP Parameters: None (void) ================== Purpose
-     * ================== Perform UDP connection if selected
+     * Function: UDP
+     * Parameters: None (void) 
+     * ================== Purpose ================== 
+     * Perform UDP connection if selected
      */
     public static void UDP()throws IOException{
 
@@ -176,21 +186,15 @@ public class TCPClient {
 
     // -------------------------------------- //
     /*
-     * Function: Multicast Parameters: None (void) ================== Purpose
-     * ================== Perform Multicast broadcasting if selected
+     * Function: Multicast 
+     * Parameters: None (void) 
+     * ================== Purpose================== 
+     * Perform Multicast broadcasting if selected
      */
     public static void Multicast() {
         System.out.println("TBD");
     }
-    // -------------------------------------- //
 
-    /*
-     * Function: Unicast Parameters: None (void) ================== Purpose
-     * ================== Perform Unicast broadcasting if selected
-     */
-    public static void Unicast() {
-        System.out.println("TBD");
-    }
     // -------------------------------------- //
 
     public static void main(String[] args) throws Exception {
@@ -210,7 +214,7 @@ public class TCPClient {
         } else if (protocal.equals("Multicast")) {
 
         } else if (protocal.equals("Unicast")) {
-
+            System.out.println("Unicast is done by default");
         } else {
             System.out.println("No protocal was selected");
         }

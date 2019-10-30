@@ -19,11 +19,11 @@
 #------------------------------------------------------------------
 # Linux and Windows instructions
 
-javac MobileDevice.java    # Compile the class to translate into bytecode
-javac Projector.java       # Compile the class to translate into bytecode
+javac Client.java           # Compile the class to translate into bytecode
+javac Server.java           # Compile the class to translate into bytecode
 
-java MobileDevice          # Start search on Mobile Device 
-java Projector             # Start pair on Projector
+java Server                 # Start Server
+java Client                 # Start Client 
 #------------------------------------------------------------------
 ```
 `If you just set it up as a project : `

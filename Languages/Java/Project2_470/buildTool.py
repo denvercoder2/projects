@@ -12,16 +12,16 @@ def compile_run():
     the programs
     '''
     print("Compiling Projector.java . . .")
-    subprocess.call(['javac', 'Projector.java'])
+    subprocess.call(['javac', 'Server.java'])
 
     print("Compiling MobileDevices.java . . .")
-    subprocess.call(['javac', 'MobileDevice.java'])
+    subprocess.call(['javac', 'Client.java'])
 
     print("\nRunning Projector . . .")
-    subprocess.call(['java', 'Projector'])
+    subprocess.call(['java', 'Server'])
 
     print("\nRunning MobileDevices . . .")
-    subprocess.call(['java', 'MobileDevice'])
+    subprocess.call(['java', 'Client'])
 
 
 

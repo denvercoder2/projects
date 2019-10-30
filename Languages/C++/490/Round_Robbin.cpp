@@ -1,10 +1,7 @@
 // Scott Holley
 // CS490: Operating Systems
 // Homework 4
-
 // Implementation for the HW4
-
-
 
 /*
 ========== Overview ==========
@@ -79,8 +76,9 @@ void findWaitingTime(int processes[], int n,
         }
 
         // If all processes are done
-        if (done == true)
+        if (done == true){
             break;
+        }
     }
 }
 
