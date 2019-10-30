@@ -1,11 +1,19 @@
+// Scott Holley
+// CS490: Operating Systems
+// Homework 4
+
+// Implementation for the HW4
+
+
+
 /*
-Scott Holley
-CS490: Operating Systems
-Homework 4
-
-Implementation for the HW4
+========== Overview ==========
+This program should take a file 
+that contains CPU execution times
+and do statistical analysis on 
+said execution time
+========== Overview ==========
 */
-
 
 
 // this is a sample execution
