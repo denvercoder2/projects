@@ -1,8 +1,6 @@
 /*
 Multicast Implementation
 */
-//Java program to illustrate various 
-//MulticastSocket class methods 
 import java.io.IOException; 
 import java.net.InetAddress; 
 import java.net.MulticastSocket; 
@@ -22,7 +20,7 @@ public class Multicast
         // use setTimeToLive() method 
         // Un-commenting below line would throw 
         // a warning as the method is deprecated 
-        ms.setTTL((byte) 25); 
+        ms.setTimeToLive((byte) 25); 
   
         // setTimeToLive() method, will override 
         // setting by setTTL() method 
@@ -30,7 +28,7 @@ public class Multicast
   
         // getTTL() method 
         // deprecated, so use getTimeToLive() method instead 
-        System.out.println("TTL : " + ms.getTTL()); 
+        System.out.println("TTL : " + ms.getTimeToLive()); 
   
         // getTimeToLive() method 
         System.out.println("Time to Live : " +  
