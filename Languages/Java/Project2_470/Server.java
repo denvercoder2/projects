@@ -27,7 +27,7 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 
-public class Server {
+class Server {
    private Socket socket = null;
    private ServerSocket server = null;
    private DataInputStream input = null;
@@ -95,7 +95,12 @@ public class Server {
          System.out.println(i);
       }
 
+      class UDP{
+         
+      }
+
    }
+
        // Call the function, this is essentially a driver function
    public static void main(String args[]) 
    { 
