@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream> 
 #include <string>
+#include <vector>
 
 /*
 =================== Program Overview =================== 
@@ -159,78 +160,46 @@ void calcAWT(int processes[],int counter,int burstTime[],int q){
 
     }
     // display the average times
-    std::cout << "Average Waiting Time: " << (float)totalWait / (float)counter << std::endl;
+    std::cout << "\nAverage Waiting Time: " << (float)totalWait / (float)counter << std::endl;
     std::cout << "Average Turnaround Time: " << (float)totalTAT / (float)counter << std::endl;
 
 }
 
+
 /*
+
 ====================================================
-Function: * getExec
+Function: std::vector<int> getQuantums
 --
 Arguments: String Filname
 --
-Return type: pointer to an integer Array
-            
+Return type: vector
 ========== Purpose ==========
-This function will provide a reference
-to an integer array gathered from the input file
+Function will gather file contents to store in vector
 ====================================================
+
 */
-int* getExec(std::string filename,int n){
-
+std::vector<int> getQuantums()
+{
     /*
-    Read in the file and assign the 
-    values in the file as needed
-    as indexes of array to use in calculations 
-    in main
+    Read in the quantum values from the file
+    Put them as indexes into the vector using
+    test.push_back()
     */
-
-
-    // variable to check for ints in string
-    int* CPUarr = new int[n]; 
-    int qchecker;
-    int stchecker;
-    std::stringstream strs;
-    std::string line1, line2;
-    std::string temp;
-    std::ifstream infile (filename);
-
-    if(infile.is_open()){
-        std::cout << "\n\n=====================================================" << "\n";
-        std::cout << "Information given from text: " << "\n";
-        std::getline(infile, line1);
-        std::cout << line1 << std::endl;
-        std::getline(infile, line2);
-        std::cout << line2 << std::endl;
-
-        for (int i = 0; i < line1.length(); i++){
-            if(isdigit(line1[i])){
-                std::cout<< line1[i] << std::endl;
-
-            }
-        }
-           
-        std::cout << "\n=====================================================" << "\n\n";
-
+    
+    int limit = 10;
+    int i = 0;
+    std::vector<int> test{};
+    
+    for(int i = 1; i < limit; i++){
+        test.push_back(i);
     }
 
-    // creating the stringstream object to hold our line
-
-    // make a dynamic array to be added to
-    // via values from the file
-
-    // variable to pull out integers from line
-
-
-    // Some operations on arr[]
-    // values of the array get assigned here
-    CPUarr[1] = 10; 
-    CPUarr[2] = 50;
-
-    return CPUarr; 
+    return test;
 }
+
 /*
+
 ====================================================
 Function: Main
 --
@@ -240,26 +209,24 @@ Return Type: None (0)
 ========== Purpose ==========
 To provided a driver for the functions above
 ====================================================
+
 */
 
-int main(){
-
-    int processes[] = {1,2,3};
+int main()
+{
+    std::vector<int> results = getQuantums();
+    int processes[] = {1, 2, 3};
     int counter = sizeof processes / sizeof processes[0];
-
     // burst time initilization
     int burstTime[] = {10, 5, 8};
-
-    // q time initilization
-    int q = 2;
-        
-    int n = 2;
+    std::cout << "=================== Report Started ===================  \n";
     
-    int* ptr = getExec("sample.txt", n); 
-    std::cout << ptr[0] << " " << ptr[1] << " " << ptr[2] << std::endl; 
-
-    calcAWT(processes, counter, burstTime, q);
-
-    return 0;
+    for (int i = 0; i < results.size(); i++){
+        std::cout << results[i] << std::endl;
+        std::cout << " =================== Quantum #" << results[i] << 
+        " ======================= " << std::endl;
+        calcAWT(processes, counter, burstTime, results[i]); 
+        std::cout << " =================== End Quantum #" << results[i] << 
+        " =================== \n" << std::endl;
+    }
 }
-
