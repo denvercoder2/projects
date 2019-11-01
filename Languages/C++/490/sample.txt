@@ -1,2 +1,2 @@
 Values of q: 5 7
-Service times: 2 3 4 7 7 6 13 16 11 10 3 5 4 2 6 7
+Service times: 2 3 4 7 7 6 13 16 11 10 3 5 4 2 6 8
