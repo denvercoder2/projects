@@ -48,21 +48,19 @@ This function will calculate the
 waiting time for all given processes
 ====================================================
 */
-void calcWaitTime(int processes[], int counter, int burstTime[], int waitTime[], int q)
-{
+void calcWaitTime(int processes[], int counter, int burstTime[], int waitTime[], int q){
 
     // we want something to store the burst times not yet used
     int remaining_burstTime[counter];
 
-    for (int i = 0; i < counter; i++)
-    {
+    for (int i = 0; i < counter; i++){
         remaining_burstTime[i] = burstTime[i];
     }
 
     // clocks at 0 initialization
     int e = 0;
 
- while (true){
+    while (true){
 
         bool done = true;
 
@@ -96,11 +94,9 @@ void calcWaitTime(int processes[], int counter, int burstTime[], int waitTime[],
         // If all processes are done
         if (done == true){
             break;
-
         }
     }
 }
-
 
 /*
 ====================================================
@@ -124,6 +120,41 @@ void calcTAT(int processes[],int counter,int burstTime[],int waitTime[],int TAT[
     }
 }
 
+std::string getLine(std::string filename){
+    std::ifstream infile (filename);
+
+    std::string str;
+    if (infile){
+
+        while(std::getline(infile, str)){
+            // if lines are present in the file
+            if(str.length()){
+                std::cout << str << std::endl;
+            }
+        }
+    }
+    else{
+        // error check if file can't be opened
+        std::cout << "File could not be opened" << std::endl;
+    }
+    return str;
+}
+
+/*
+====================================================
+Function: NormTAT
+--
+Arguments: String Filname
+Normalized TAT = TAT/Service Time
+--
+Return type: None(void)
+========== Purpose ==========
+Function will return the Normalized Turnaround time
+====================================================
+*/
+void NormTAT(std::string filename){
+
+}
 
 /*
 ====================================================
@@ -166,8 +197,8 @@ void calcAWT(int processes[],int counter,int burstTime[],int q){
 }
 
 
-/*
 
+/*
 ====================================================
 Function: std::vector<int> getQuantums
 --
@@ -177,7 +208,6 @@ Return type: vector
 ========== Purpose ==========
 Function will gather file contents to store in vector
 ====================================================
-
 */
 std::vector<int> getQuantums()
 {
@@ -187,8 +217,8 @@ std::vector<int> getQuantums()
     test.push_back()
     */
     
-    int limit = 10;
-    int i = 0;
+    // this will be dynamic in the near future
+    int limit = 15;
     std::vector<int> test{};
     
     for(int i = 1; i < limit; i++){
@@ -199,7 +229,6 @@ std::vector<int> getQuantums()
 }
 
 /*
-
 ====================================================
 Function: Main
 --
@@ -209,15 +238,15 @@ Return Type: None (0)
 ========== Purpose ==========
 To provided a driver for the functions above
 ====================================================
-
 */
 
 int main()
 {
     std::vector<int> results = getQuantums();
+    // process array
     int processes[] = {1, 2, 3};
     int counter = sizeof processes / sizeof processes[0];
-    // burst time initilization
+    // burst time array
     int burstTime[] = {10, 5, 8};
     std::cout << "=================== Report Started ===================  \n";
     

@@ -1,36 +1,33 @@
-/* Extract all integers from string */
-#include <iostream> 
+#include <iostream>
+#include <fstream>
 #include <sstream> 
-using namespace std; 
-  
-void extractIntegerWords(string str) 
-{ 
-    stringstream ss;     
-  
-    /* Storing the whole string into string stream */
-    ss << str; 
-  
-    /* Running loop till the end of the stream */
-    string temp; 
-    int found; 
-    while (!ss.eof()) { 
-  
-        /* extracting word by word from stream */
-        ss >> temp; 
-  
-        /* Checking the given word is integer or not */
-        if (stringstream(temp) >> found) 
-            cout << found << " "; 
-  
-        /* To save from space at the end of string */
-        temp = ""; 
-    } 
-} 
-  
-// Driver code 
-int main() 
-{ 
-    string str = "Values of q: 5 7"; 
-    extractIntegerWords(str); 
-    return 0; 
-} 
+#include <string>
+#include <vector>
+
+std::vector<int> getLine(std::string filename){
+    std::vector<int> test;
+    std::ifstream infile (filename);
+
+
+    std::string str;
+    while(std::getline(infile, str)){
+        int new_line = stoi(str);
+        test.push_back(new_line);
+    }
+    return test;
+}
+
+int main(){
+    std::vector<int> test = getLine("sample.txt");
+    std::cout << test[0] << std::endl;
+    std::cout << test[1] << std::endl;
+}
+/*
+Information in the file
+5 7
+2 3 4 7 7 6 13 16 11 10 3 5 4 2 6 8
+
+Output:
+5 // for test[0]
+2 // for test[1]
+*/
