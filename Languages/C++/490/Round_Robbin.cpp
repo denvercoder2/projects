@@ -1,8 +1,16 @@
+/*
+Scott Holley
+CS490: Operating Systems
+Homework 4
+Due: November 14th, 2019
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream> 
 #include <string>
 #include <vector>
+#include <tuple>
 
 /*
 =================== Program Overview =================== 
@@ -119,25 +127,98 @@ void calcTAT(int processes[],int counter,int burstTime[],int waitTime[],int TAT[
         TAT[i] = burstTime[i] + waitTime[i];
     }
 }
-
-std::string getLine(std::string filename){
+//------------------------------------------------------
+/*
+====================================================
+Function: getLine
+--
+Arguments: String Filname
+--
+Return type: std::tuple<std::string, std::string>
+========== Purpose ==========
+Function will return a tuple of
+the input files contents
+====================================================
+*/
+std::tuple<std::string, std::string> getLine(std::string filename){
     std::ifstream infile (filename);
-
-    std::string str;
+    std::string line1;
+    std::string line2;
+    int max = 2;
     if (infile){
 
-        while(std::getline(infile, str)){
-            // if lines are present in the file
-            if(str.length()){
-                std::cout << str << std::endl;
-            }
+        for(int i = 0; i < max; i++){
+            std::getline(infile, line1);
+            std::getline(infile, line2);
         }
     }
     else{
         // error check if file can't be opened
         std::cout << "File could not be opened" << std::endl;
     }
-    return str;
+    return std::make_tuple(line1, line2);
+}
+
+/*
+====================================================
+Function: parseLine
+--
+Arguments: std::tuple<std::string, std::string>
+--
+Return type: std::vector<std::vector<int>>
+========== Purpose ==========
+Function will return a vector
+containing the file line vectors
+====================================================
+*/
+std::vector<std::vector<int>> parseLine(std::tuple<std::string, std::string> test){
+    std::string str1 = std::get<0>(test);
+    std::string str2 = std::get<1>(test);
+    
+    // line 1 vector
+    std::vector<int> retmp;
+    // line 2 vector
+    std::vector<int> retmp2;
+
+    // container for other vectors
+    std::istringstream stm(str1);
+    std::istringstream stm2(str2);
+    int value;
+    while(stm >> value){
+        retmp.push_back(value);
+    }
+    while(stm2 >> value){
+        retmp2.push_back(value);
+    }
+    
+    std::vector<std::vector <int>> tmp{ {retmp},
+                                        {retmp2}};
+
+    return tmp;
+}
+
+/*
+====================================================
+Function: getQuantums
+--
+Arguments: std::tuple<std::string, std::string>
+--
+Return type: vector
+========== Purpose ==========
+Take a tuple, use values from vector in tuple to 
+use as quantum values
+====================================================
+*/
+std::vector<int> getQuantums(std::tuple<std::string, std::string> q_times){
+    std::vector<std::vector<int>> testerInts = parseLine(q_times);
+    std::vector<int> test;
+    // can't have time of 0
+    for (int i = 1; i < 1; i++){
+        for(int j = 0; j < testerInts[i].size(); j++)
+            std::cout <<  testerInts[i][j];
+                test.push_back(i);
+    }
+    return test;
 }
 
 /*
@@ -197,37 +278,6 @@ void calcAWT(int processes[],int counter,int burstTime[],int q){
 }
 
 
-
-/*
-====================================================
-Function: std::vector<int> getQuantums
---
-Arguments: String Filname
---
-Return type: vector
-========== Purpose ==========
-Function will gather file contents to store in vector
-====================================================
-*/
-std::vector<int> getQuantums()
-{
-    /*
-    Read in the quantum values from the file
-    Put them as indexes into the vector using
-    test.push_back()
-    */
-    
-    // this will be dynamic in the near future
-    int limit = 15;
-    std::vector<int> test{};
-    
-    for(int i = 1; i < limit; i++){
-        test.push_back(i);
-    }
-
-    return test;
-}
-
 /*
 ====================================================
 Function: Main
@@ -242,15 +292,17 @@ To provided a driver for the functions above
 
 int main()
 {
-    std::vector<int> results = getQuantums();
+    std::tuple<std::string, std::string> q_tuple = getLine("sample.txt");
+    std::vector<int> results = getQuantums(q_tuple);
     // process array
     int processes[] = {1, 2, 3};
+    int q_timeMax = 2;
     int counter = sizeof processes / sizeof processes[0];
     // burst time array
     int burstTime[] = {10, 5, 8};
     std::cout << "=================== Report Started ===================  \n";
     
-    for (int i = 0; i < results.size(); i++){
+    for (int i = 0; i < q_timeMax; i++){
         std::cout << results[i] << std::endl;
         std::cout << " =================== Quantum #" << results[i] << 
         " ======================= " << std::endl;
