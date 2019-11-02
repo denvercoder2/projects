@@ -228,7 +228,7 @@ Return type: None(void)
 Function will return the Normalized Turnaround time
 ====================================================
 */
-void NormTAT(std::string filename){
+void NormTAT(std::vector<int> serviceTime){
 
 }
 
@@ -239,13 +239,14 @@ Function: calcAWT
 Arguments: int processes[],int counter,int burstTime[],int q
 --
 Return type: None (void)
-            
+            S
 ========== Purpose ==========
 This function will calculate the
 Turnaround Time
 ====================================================
 */
 void calcAWT(int processes[],int counter,int burstTime[],int q){
+    // std::vector<int> serviceTime = getServiceTimes()
     int waitTime[counter], TAT[counter];
     int totalWait = 0, totalTAT = 0;
 
@@ -268,7 +269,8 @@ void calcAWT(int processes[],int counter,int burstTime[],int q){
     }
     // display the average times
     std::cout << "\nAverage Waiting Time: " << (float)totalWait / (float)counter << std::endl;
-    std::cout << "Average Turnaround Time: " << (float)totalTAT / (float)counter << std::endl;
+    std::cout << "Average System Turnaround Time: " << (float)totalTAT / (float)counter << std::endl;
+
 
 }
 
@@ -294,7 +296,7 @@ int main()
     std::vector<int> s_results = getServiceTimes(q_tuple);
 
     // process array
-    int processes[] = {1, 2, 3};
+    int processes[] = {1, 2, 3,4,5,6,7,8,9,10,11,12,13,14,15};
     int q_timeMax = 2;
     int counter = sizeof processes / sizeof processes[0];
     // burst time array
