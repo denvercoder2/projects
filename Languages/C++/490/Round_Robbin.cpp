@@ -294,7 +294,7 @@ int main()
     std::vector<int> q_results = getQuantumTimes(q_tuple);
     //service time vector
     std::vector<int> s_results = getServiceTimes(q_tuple);
-
+    
     // process array
     int processes[] = {1, 2, 3,4,5,6,7,8,9,10,11,12,13,14,15};
     int q_timeMax = 2;
