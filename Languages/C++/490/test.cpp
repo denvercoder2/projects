@@ -29,33 +29,38 @@ std::tuple<std::string, std::string> getLine(std::string filename){
     }
     return std::make_tuple(str1, str2);
 }
-
-std::vector<std::vector<int>> parse_line(std::tuple<std::string, std::string> test){
+std::vector<int> parseLine(std::tuple<std::string, std::string> test){
     std::string str1 = std::get<0>(test);
     std::string str2 = std::get<1>(test);
-    
-    // std::vector<std::vector<int>> result; 
 
-    // line 1 vector
-    std::vector<int> retmp;
+    // std::cout << str1 << std::endl;
+    // std::cout << str2 << std::endl;
+
+
     // line 2 vector
     std::vector<int> retmp2;
 
+    // container for other vectors
     std::istringstream stm(str1);
-    std::istringstream stm2(str2);
+    // std::istringstream stm2(str2);
+    
     int value;
+    // line 1 vector
+    std::vector<int> retmp;
     while(stm >> value){
         retmp.push_back(value);
     }
-    while(stm2 >> value){
-        retmp2.push_back(value);
-    }
+    // while(stm2 >> value){
+    //     retmp2.push_back(value);
+    // }
     
-    // container for other vectors
-    std::vector<std::vector <int>> tmp{ {retmp},
-                                        {retmp2}};
+    // std::vector<std::vector <int>> tmp{ {retmp},
+    //                                     {retmp2}};
+    for (int i = 0; i < retmp.size(); i++){
+        std::cout << retmp2[i] << std::endl;
+    }
 
-    return tmp;
+    return retmp;
 }
 
 
@@ -63,11 +68,10 @@ int main(){
     // std::vector<std::vector<int>> test = getLine("sample.txt");
     int max = 2;
     std::tuple<std::string, std::string> tester = getLine("sample.txt");
-    std::vector<std::vector<int>> testerInts = parse_line(tester);
+    std::vector<int> testerInts = parseLine(tester);
 
     for (int i = 0; i < testerInts.size(); i++){
-        for(int j = 0; j < testerInts[i].size(); j++)
-            std::cout << testerInts[i][j] << " ";
+            std::cout << testerInts[i] << " ";
         std::cout << std::endl;
 
     }

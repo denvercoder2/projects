@@ -127,7 +127,6 @@ void calcTAT(int processes[],int counter,int burstTime[],int waitTime[],int TAT[
         TAT[i] = burstTime[i] + waitTime[i];
     }
 }
-//------------------------------------------------------
 /*
 ====================================================
 Function: getLine
@@ -137,7 +136,7 @@ Arguments: String Filname
 Return type: std::tuple<std::string, std::string>
 ========== Purpose ==========
 Function will return a tuple of
-the input files contents
+the input files contents (lines as strings)
 ====================================================
 */
 std::tuple<std::string, std::string> getLine(std::string filename){
@@ -150,6 +149,7 @@ std::tuple<std::string, std::string> getLine(std::string filename){
         for(int i = 0; i < max; i++){
             std::getline(infile, line1);
             std::getline(infile, line2);
+
         }
     }
     else{
@@ -161,64 +161,59 @@ std::tuple<std::string, std::string> getLine(std::string filename){
 
 /*
 ====================================================
-Function: parseLine
+Function: getQuantumTimes
 --
 Arguments: std::tuple<std::string, std::string>
 --
 Return type: std::vector<std::vector<int>>
 ========== Purpose ==========
 Function will return a vector
-containing the file line vectors
+containing the quantum times from file
 ====================================================
 */
-std::vector<std::vector<int>> parseLine(std::tuple<std::string, std::string> test){
+std::vector<int> getQuantumTimes(std::tuple<std::string, std::string> test){
     std::string str1 = std::get<0>(test);
-    std::string str2 = std::get<1>(test);
-    
-    // line 1 vector
-    std::vector<int> retmp;
-    // line 2 vector
-    std::vector<int> retmp2;
 
     // container for other vectors
-    std::istringstream stm(str1);
-    std::istringstream stm2(str2);
+    std::stringstream stm(str1);
+    // std::istringstream stm2(str2);
+    
     int value;
+    // line 1 vector
+    std::vector<int> retmp;
     while(stm >> value){
         retmp.push_back(value);
     }
-    while(stm2 >> value){
-        retmp2.push_back(value);
-    }
-    
-    std::vector<std::vector <int>> tmp{ {retmp},
-                                        {retmp2}};
-
-    return tmp;
+    return retmp;
 }
+
 
 /*
 ====================================================
-Function: getQuantums
+Function: getServiceTimes
 --
 Arguments: std::tuple<std::string, std::string>
 --
-Return type: vector
+Return type: std::vector<std::vector<int>>
 ========== Purpose ==========
-Take a tuple, use values from vector in tuple to 
-use as quantum values
+Function will return a vector
+containing the service times from file
 ====================================================
 */
-std::vector<int> getQuantums(std::tuple<std::string, std::string> q_times){
-    std::vector<std::vector<int>> testerInts = parseLine(q_times);
-    std::vector<int> test;
-    // can't have time of 0
-    for (int i = 1; i < 1; i++){
-        for(int j = 0; j < testerInts[i].size(); j++)
-            std::cout <<  testerInts[i][j];
-                test.push_back(i);
+std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
+    // get the second string from the tuple
+    std::string str2 = std::get<1>(test);
+    std::istringstream stm2(str2);
+    
+    int value;
+    // line 2 vector
+    std::vector<int> vecStr2;
+    // store int values in vector from string
+    while(stm2 >> value){
+        vecStr2.push_back(value);
     }
-    return test;
+
+    return vecStr2;
 }
 
 /*
@@ -293,7 +288,11 @@ To provided a driver for the functions above
 int main()
 {
     std::tuple<std::string, std::string> q_tuple = getLine("sample.txt");
-    std::vector<int> results = getQuantums(q_tuple);
+    // quantum time vector
+    std::vector<int> q_results = getQuantumTimes(q_tuple);
+    //service time vector
+    std::vector<int> s_results = getServiceTimes(q_tuple);
+
     // process array
     int processes[] = {1, 2, 3};
     int q_timeMax = 2;
@@ -302,12 +301,13 @@ int main()
     int burstTime[] = {10, 5, 8};
     std::cout << "=================== Report Started ===================  \n";
     
-    for (int i = 0; i < q_timeMax; i++){
-        std::cout << results[i] << std::endl;
-        std::cout << " =================== Quantum #" << results[i] << 
+    for (int i = 0; i < q_results.size(); i++){
+        std::cout << " \n=================== Quantum #" << q_results[i] << 
         " ======================= " << std::endl;
-        calcAWT(processes, counter, burstTime, results[i]); 
-        std::cout << " =================== End Quantum #" << results[i] << 
+        calcAWT(processes, counter, burstTime, q_results[i]); 
+        std::cout << " =================== End Quantum #" << q_results[i] << 
         " =================== \n" << std::endl;
     }
+    std::cout << "=================== Report Finished ===================  \n";
+
 }
