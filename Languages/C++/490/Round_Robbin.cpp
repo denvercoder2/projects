@@ -246,7 +246,11 @@ Turnaround Time
 ====================================================
 */
 void calcAWT(int processes[],int counter,int burstTime[],int q){
-    // std::vector<int> serviceTime = getServiceTimes()
+
+    // grab the service times from the tuple -> vector
+    std::tuple<std::string, std::string> s_tuple = getLine("sample.txt");
+    std::vector<int> serviceTimes = getServiceTimes(s_tuple);
+
     int waitTime[counter], TAT[counter];
     int totalWait = 0, totalTAT = 0;
 
@@ -270,7 +274,7 @@ void calcAWT(int processes[],int counter,int burstTime[],int q){
     // display the average times
     std::cout << "\nAverage Waiting Time: " << (float)totalWait / (float)counter << std::endl;
     std::cout << "Average System Turnaround Time: " << (float)totalTAT / (float)counter << std::endl;
-
+    std::cout << "Average System Normalized Turnaround Time: " << (float)totalTAT / (float)serviceTimes.size() << std::endl;
 
 }
 
