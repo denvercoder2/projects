@@ -1,12 +1,40 @@
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
  
 public class Receiver {
-    
-    public static void connect(String addr, int port) throws UnknownHostException{
+
+    /*
+    * Function: connectTCP
+    * --
+    * Arguments: String, Int
+    * --
+    * =============== Purpose =============== 
+    * If the user chooses, server can interact with the
+    * client through a Unicast method, using TCP
+    */
+    public static void connectTCP(String addr, int port) throws IOException{
+    Socket clientSocket;
+    PrintWriter out;
+    BufferedReader in;
+ 
+    clientSocket = new Socket(addr, port);
+    out = new PrintWriter(clientSocket.getOutputStream(), true);
+    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    in.close();
+    out.close();
+    clientSocket.close();
+
+    }
+    /*
+    * Function: connectUDP
+    * --* 
+    * Arguments: String, Int
+    * --
+    * =============== Purpose =============== 
+    * If the user chooses, server can interact with the
+    * client through a Multicast method using UDP
+    */
+    public static void connectUDP(String addr, int port) throws UnknownHostException{
          // Get the address that we are going to connect to.
          InetAddress address = InetAddress.getByName(addr);
          
@@ -33,9 +61,40 @@ public class Receiver {
              ex.printStackTrace();
          }
      }
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws UnknownHostException, IOException{
         String addr = "127.0.0.1";
         int port = 5000;
-        connect(addr, port);
+        String choice = null;
+        
+        Socket socket            = null;
+        BufferedReader input     = null; 
+        DataOutputStream output  = null; 
+
+        socket = new Socket(addr, port);
+        System.out.println("Enter the choice for testing: \n1) Unicast via TCP\n2) Multicast via UDP");
+        input = new BufferedReader(new InputStreamReader(System.in));
+        output = new DataOutputStream(socket.getOutputStream()); 
+        choice = input.readLine();
+        output.writeUTF(choice);
+        if (choice.equals("1")) {
+            InputStream in = socket.getInputStream();
+            InputStreamReader inputReader = new InputStreamReader(in);
+            BufferedReader breader = new BufferedReader(inputReader);
+            String message = breader.readLine();
+            System.out.println("Message recieved from server : " +message);
+            // connectTCP(addr, port);
+        }
+        else if (choice.equals("2")) {
+            addr = "224.0.0.255";
+            port = 8888;
+            connectUDP(addr, port);
+        }
+        else{
+            System.out.println("You entered a choice that was not available");
+            System.exit(1);
+        }
+        input.close(); 
+        output.close(); 
+        socket.close(); 
     }
 }

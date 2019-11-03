@@ -11,17 +11,17 @@ def compile_run():
     Use the subprocess module to compile and run 
     the programs
     '''
-    print("Compiling Projector.java . . .")
+    print("Compiling Server.java . . .")
     subprocess.call(['javac', 'Server.java'])
 
-    print("Compiling MobileDevices.java . . .")
-    subprocess.call(['javac', 'Client.java'])
+    print("Compiling Client.java . . .")
+    subprocess.call(['javac', 'Receiver.java'])
 
-    print("\nRunning Projector . . .")
+    print("\nRunning Server . . .")
     subprocess.call(['java', 'Server'])
 
-    print("\nRunning MobileDevices . . .")
-    subprocess.call(['java', 'Client'])
+    print("\nRunning Client . . .")
+    subprocess.call(['java', 'Receiver'])
 
 
 
