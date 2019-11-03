@@ -1,8 +1,6 @@
 import java.io.*;
 import java.net.*;
 
-import javax.naming.BinaryRefAddr;
-
 public class Server{
     /*
     * Function: sendOutTCP
@@ -86,15 +84,7 @@ public class Server{
          
      // Initially set the client string to an empty string
      String client_line = "";
-     /* 
-     read in the client_line var and conditionally decide whether or
-     not to update the software on the client side 
-     */
      client_line = input.readUTF();
-     // Case 1: User chooses to not update the software
-     // Case 2: User chooses to update the software
-     // we send the message containing the new software version
-     // to the client
      if(client_line.equals("1")){
 
          try{
@@ -102,7 +92,7 @@ public class Server{
             sendOutTCP(portNum);
          }
          catch(BindException b){
-            System.out.print("State has changed from Multicast to unicast");
+            System.out.print("State has changed from Multicast to unicast.\n");
             System.out.print("Client has been sent a message through Unicast with TCP");
             portNum = 5001;
             OutputStream output = socket.getOutputStream();
