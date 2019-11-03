@@ -6,30 +6,22 @@ Using python3.7
 '''
 import subprocess
 
-def compile_run():
+def compile():
     '''
-    Use the subprocess module to compile and run 
-    the programs
+    Use the subprocess module to compile programs
     '''
     print("Compiling Server.java . . .")
     subprocess.call(['javac', 'Server.java'])
 
-    print("Compiling Client.java . . .")
+    print("Compiling Receiver.java . . .")
     subprocess.call(['javac', 'Receiver.java'])
-
-    print("\nRunning Server . . .")
-    subprocess.call(['java', 'Server'])
-
-    print("\nRunning Client . . .")
-    subprocess.call(['java', 'Receiver'])
-
 
 
 def main():
     '''
     Call all subprocesses
     '''
-    compile_run()
+    compile()
 
 if __name__ == "__main__":
     main()

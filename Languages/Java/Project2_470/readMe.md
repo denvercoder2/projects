@@ -6,6 +6,7 @@
 
 ```bash
     # running the build tool
+    # all this does is compile the java code for you
     python3.7 buildTool.py  # Use your instance of python to call the 
 
     
@@ -19,11 +20,11 @@
 #------------------------------------------------------------------
 # Linux and Windows instructions
 
-javac Client.java           # Compile the class to translate into bytecode
-javac Server.java           # Compile the class to translate into bytecode
+javac Receiver.java             # Compile the class to translate into bytecode
+javac Server.java               # Compile the class to translate into bytecode
 
-java Server                 # Start Server
-java Client                 # Start Client 
+java Server                     # Start Server
+java Receiver                   # Start Receiver 
 #------------------------------------------------------------------
 ```
 `If you just set it up as a project : `
