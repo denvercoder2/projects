@@ -18,16 +18,16 @@ public class Server{
       PrintWriter out;
       BufferedReader in;
       // at this point, we're just testing to send a message through TCP
-      serverSocket = new ServerSocket(port);
-      clientSocket = serverSocket.accept();
-      out = new PrintWriter(clientSocket.getOutputStream(), true);
-      in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+         serverSocket = new ServerSocket(port);
+         clientSocket = serverSocket.accept();
+         out = new PrintWriter(clientSocket.getOutputStream(), true);
+         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-      // Close resources
-      in.close();
-      out.close();
-      clientSocket.close();
-      serverSocket.close();
+         // Close resources
+         in.close();
+         out.close();
+         clientSocket.close();
+         serverSocket.close();
    }
     /*
     * Function: sendOutUDP
@@ -95,17 +95,20 @@ public class Server{
      if(client_line.equals("1")){
          try{
             System.out.println("\n========Server Start========\n"); 
-            sendOutTCP(portNum);
+            sendOutTCP(portNum); 
          }
+         // the server is needs to change it's state
+         // essentially the TCP
          catch(BindException b){
-            System.out.print("State has changed from Multicast to unicast.\n");
-            System.out.print("Client has been sent a message through Unicast with TCP");
-            portNum = 5001;
-            OutputStream output = socket.getOutputStream();
-            OutputStreamWriter outWriter = new OutputStreamWriter(output);
-            BufferedWriter bwriter = new BufferedWriter(outWriter);
-            bwriter.write(TCPmessage);
-            bwriter.flush();
+               System.out.print("State has changed from Multicast to unicast.\n");
+               System.out.print("Client has been sent a message through Unicast with TCP\n");
+               portNum = 5001;
+               OutputStream output = socket.getOutputStream();
+               OutputStreamWriter outWriter = new OutputStreamWriter(output);
+               BufferedWriter bwriter = new BufferedWriter(outWriter);
+               bwriter.write(TCPmessage);
+               bwriter.flush();
+               
          }
      } 
      // if client chooses 2, then call the UDP function

@@ -4,33 +4,6 @@ import java.net.*;
 public class Receiver {
 
     /*
-    * Function: connectTCP
-    * --
-    * Arguments: String, Int
-    * --
-    * =============== Purpose =============== 
-    * If the user chooses, server can interact with the
-    * client through a Unicast method, using TCP
-    */
-    public static void connectTCP(String addr, int port) throws IOException{
-    // initialize the network/IO we'll need
-    Socket clientSocket;
-    PrintWriter out;
-    BufferedReader in;
-    
-    // make a new socket object
-    clientSocket = new Socket(addr, port);
-    // establish and use TCP/Unicast
-    out = new PrintWriter(clientSocket.getOutputStream(), true);
-    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-    // Close all resources
-    in.close();
-    out.close();
-    clientSocket.close();
-
-    }
-    /*
     * Function: connectUDP
     * --* 
     * Arguments: String, Int
@@ -80,18 +53,19 @@ public class Receiver {
             
             // Get the user input and decide which path to go from there
             socket = new Socket(addr, port);
-            System.out.println("Enter the choice for testing: \n1) Slide Simulation with TCP (Unicast)\n2) Movie Simulation with UDP (Multicast)");
+            System.out.println("Enter the choice for testing: \n1) Slide Simulation with TCP (Unicast: Classroom)\n2) Movie Simulation with UDP (Multicast: Dorm)");
             input = new BufferedReader(new InputStreamReader(System.in));
             output = new DataOutputStream(socket.getOutputStream()); 
             choice = input.readLine();
             output.writeUTF(choice);
             // Path 1: User chooses Unicast with TCP
             if (choice.equals("1")) {
+                // this is the tcp function essentially just within the block
                 InputStream in = socket.getInputStream();
                 InputStreamReader inputReader = new InputStreamReader(in);
                 BufferedReader breader = new BufferedReader(inputReader);
                 String message = breader.readLine();
-                System.out.println("Message recieved from server : " +message);
+                System.out.println("Message recieved from server : " + message);
             }
             // Path 2: User chooses Mulitcast with UDP
             else if (choice.equals("2")) {
