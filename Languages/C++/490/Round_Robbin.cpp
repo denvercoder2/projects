@@ -60,7 +60,7 @@ Due: November 14th, 2019
 *   waiting time for all given processes
 ====================================================
 */
-void calcWaitTime(int processes[], int counter, int burstTime[], int waitTime[], int q){
+void calcWaitTime(int processes[], int counter, std::vector<int> burstTime, int waitTime[], int q){
 
     // we want something to store the burst times not yet used
     int remaining_burstTime[counter];
@@ -116,7 +116,7 @@ void calcWaitTime(int processes[], int counter, int burstTime[], int waitTime[],
 *   Turnaround Time
 ====================================================
 */
-void calcTAT(int processes[],int counter,int burstTime[],int waitTime[],int TAT[]){
+void calcTAT(int processes[],int counter, std::vector<int> burstTime,int waitTime[],int TAT[]){
 
     //calculate the turnaround time
     for(int i = 0; i < counter; i++){
@@ -223,7 +223,7 @@ std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
 *   individual and system reports
 ====================================================
 */
-void showReport(int processes[],int counter,int burstTime[],int q){
+void showReport(int processes[],int counter,std::vector<int> burstTime,int q){
 
     // grab the service times from the tuple -> vector
     std::tuple<std::string, std::string> s_tuple = getLine("sample.txt");
@@ -294,7 +294,7 @@ int main()
     // quantum time vector
     std::vector<int> q_results = getQuantumTimes(q_tuple);
     //service time vector
-    std::vector<int> s_results = getServiceTimes(q_tuple);
+    std::vector<int> burstTime = getServiceTimes(q_tuple);
     
     // process array
     int processes[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
@@ -303,7 +303,7 @@ int main()
     // initialize counter to use in functions below
     int counter = sizeof processes / sizeof processes[0];
     // burst time array (0 can't be present)
-    int burstTime[] = {8,6,6,6,5,8,4,5,4,10,2,1,3,8,9};
+    // int burstTime[] = {8,6,6,6,5,8,4,5,4,10,2,1,3,8,9};
     std::cout << "======================================= Report Started =======================================  \n";
 
     // finding the clock tics
@@ -333,6 +333,5 @@ int main()
 }
 
 /*
- May need to implement something that gets the burst time
- Depends on the input
+ burst time = service time?
 */
