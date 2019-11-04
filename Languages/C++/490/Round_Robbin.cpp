@@ -27,15 +27,15 @@ Due: November 14th, 2019
 *    - medium (finishes within two quanta)
 *    - long (requires more than two quanta to complete);  
 *       
-*    - Display turnaround time and normalized turnaround time 
+*    - Display turnaround time and normalized turnaround time -D
 *    - Turnaround Time = Completion time - arrival time (Waiting time - Burst Time)
 *    - Normalized TAT = TAT/Service Time
 -------------------------------------------------------------
 *    System Statistics:
-*    - Length of simulation in clock ticks
-*    - Total number of processes
+*    - Length of simulation in clock ticks -D
+*    - Total number of processes -D
 *    - Number of jobs in each category (short, medium, long);
-*    - Average turnaround time and average normalized turnaround time, 
+*    - Average turnaround time and average normalized turnaround time, -D 
 *        within each category and for the system as a whole.
 
 *    Important notes:
@@ -263,6 +263,18 @@ void showReport(int processes[],int counter,int burstTime[],int q){
 
 }
 
+
+/*
+====================================================
+*   Function: vec2arr
+*   --
+*   Arguments: std::vector<int>
+*   --
+*   Return Type: * arr
+*   ========== Purpose ==========
+*   Take a vector and convert it to an array
+====================================================
+*/
 
 /*
 ====================================================
