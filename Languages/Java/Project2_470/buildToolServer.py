@@ -17,6 +17,8 @@ def compile():
     subprocess.call(['javac', 'Receiver.java'])
 
 
+    print("\nReady to Run Queue: \n Server.java\n Receiver.java")
+
 def main():
     '''
     Call all subprocesses

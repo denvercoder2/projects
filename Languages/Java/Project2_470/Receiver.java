@@ -80,7 +80,7 @@ public class Receiver {
             
             // Get the user input and decide which path to go from there
             socket = new Socket(addr, port);
-            System.out.println("Enter the choice for testing: \n1) Unicast via TCP\n2) Multicast via UDP");
+            System.out.println("Enter the choice for testing: \n1) Slide Simulation with TCP (Unicast)\n2) Movie Simulation with UDP (Multicast)");
             input = new BufferedReader(new InputStreamReader(System.in));
             output = new DataOutputStream(socket.getOutputStream()); 
             choice = input.readLine();
