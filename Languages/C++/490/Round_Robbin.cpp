@@ -162,7 +162,7 @@ std::tuple<std::string, std::string> getLine(std::string filename){
 *   Arguments: std::tuple<std::string, std::string>
 *   --
 *   Return type: std::vector<std::vector<int>>
-*   ====*   ====== Purpose ==========
+*   ========== Purpose ==========
 *   Function will return a vector
 *   containing the quantum times from file
 ====================================================
