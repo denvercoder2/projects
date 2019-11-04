@@ -263,19 +263,6 @@ void showReport(int processes[],int counter,std::vector<int> burstTime,int q){
 
 }
 
-
-/*
-====================================================
-*   Function: vec2arr
-*   --
-*   Arguments: std::vector<int>
-*   --
-*   Return Type: * arr
-*   ========== Purpose ==========
-*   Take a vector and convert it to an array
-====================================================
-*/
-
 /*
 ====================================================
 *   Function: Main
