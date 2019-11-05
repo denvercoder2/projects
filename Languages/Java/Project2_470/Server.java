@@ -44,16 +44,16 @@ public class Server{
       // Open a new DatagramSocket, which will be used to send the data.
       try (DatagramSocket serverSocket = new DatagramSocket()) {
          while(true) {
-               String msg = "=== Movie Data sample ===";
+               String message = "=== Movie Data sample ===";
             
                // Create a packet that will contain the data
                // (in the form of bytes) and send it.
                // this is where the movie data simulation should come through
-               DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(),
-                     msg.getBytes().length, address, port);
+               DatagramPacket msgPacket = new DatagramPacket(message.getBytes(),
+                     message.getBytes().length, address, port);
                serverSocket.send(msgPacket);
    
-               System.out.println("Server sent packet with msg: " + msg);
+               System.out.println("Server sent packet with msg: " + message);
                // Sleep to mimic streaming
                Thread.sleep(100);
          }
@@ -68,19 +68,22 @@ public class Server{
       Socket socket           = null; 
       ServerSocket server     = null; 
       DataInputStream input   = null; 
-      // local variables for function calls above
+      // initialize a port and message for when TCP connection happens
       int portNum = 5000;
       String TCPmessage = "Successfully sent with TCP";
       server = new ServerSocket(portNum); 
+      // Start server broadcasting
       System.out.println("\n======== Server Up ========\n"); 
       InetAddress machineIP = InetAddress.getLocalHost();
       String ipaddr_local = machineIP.getHostAddress();
       System.out.printf("Broadcasting IP: %s", ipaddr_local);
 
-      // accept the client
+      // accept the client once client finds the IP
       socket = server.accept(); 
+      // display the client and IP it came from
       String IPaddress = socket.getRemoteSocketAddress().toString();
-      System.out.println("Client accepted at IP and port: " + IPaddress);
+      System.out.println(" Client accepted at IP and port: " + IPaddress);
+      // Wait for the client to send which protocal
       System.out.println("Waiting for them to choose a protocol");
       // wait and see what the client chooses, TCP or UDP
       input = new DataInputStream( 

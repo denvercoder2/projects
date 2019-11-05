@@ -13,7 +13,7 @@ public class Receiver {
     * client through a Multicast method using UDP
     */
     public static void connectUDP(String addr, int port) throws UnknownHostException{
-        // Get the address that we are going to connect to.
+        // Get the address that we are going to connect to from port
         InetAddress address = InetAddress.getByName(addr);
         
         // create a small buffer to store the message in.
@@ -24,7 +24,7 @@ public class Receiver {
         // clients to be apart of a group, and receive all of the same
         // info from the server.
         try (MulticastSocket clientSocket = new MulticastSocket(port)){
-            //Joint the Multicast group.
+            //Join the Multicast group.
             clientSocket.joinGroup(address);
             // this is where the simulated "movie data" should come through
             while (true) {
@@ -42,10 +42,10 @@ public class Receiver {
     public static void main(String[] args) throws UnknownHostException, IOException{
         
         try{
-            // local variables to use with function calls 
+            // Local Variables to use with function calls 
+            // 
             InetAddress local = InetAddress.getLocalHost();
             String addr = local.getHostAddress();
-
             int port = 5000;
             String choice = null;
             // initialize the objects we'll need
@@ -71,6 +71,7 @@ public class Receiver {
             }
             // Path 2: User chooses Mulitcast with UDP
             else if (choice.equals("2")) {
+                // specific multicast port after intial connection
                 addr = "224.0.0.255";
                 port = 8888;
                 connectUDP(addr, port);
