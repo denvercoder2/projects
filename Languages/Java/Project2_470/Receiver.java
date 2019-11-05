@@ -43,7 +43,9 @@ public class Receiver {
         
         try{
             // local variables to use with function calls 
-            String addr = "127.0.0.1";
+            InetAddress local = InetAddress.getLocalHost();
+            String addr = local.getHostAddress();
+
             int port = 5000;
             String choice = null;
             // initialize the objects we'll need

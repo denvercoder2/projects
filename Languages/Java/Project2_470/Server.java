@@ -40,13 +40,12 @@ public class Server{
     */
    public static void sendOutUDP(String addr, int port)throws UnknownHostException, InterruptedException{
       // Get the address that we are going to connect to.
-      InetAddress address = InetAddress.getByName(addr);
-   
+      InetAddress address = InetAddress.getByName(addr);   
       // Open a new DatagramSocket, which will be used to send the data.
       try (DatagramSocket serverSocket = new DatagramSocket()) {
          while(true) {
                String msg = "=== Movie Data sample ===";
-
+            
                // Create a packet that will contain the data
                // (in the form of bytes) and send it.
                // this is where the movie data simulation should come through
@@ -107,17 +106,18 @@ public class Server{
                OutputStreamWriter outWriter = new OutputStreamWriter(output);
                BufferedWriter bwriter = new BufferedWriter(outWriter);
                bwriter.write(TCPmessage);
-               bwriter.flush();
-               
+               bwriter.flush();   
          }
      } 
      // if client chooses 2, then call the UDP function
      // and edit some of the local variables to accomodate 
      // the differences required between UDP and TCP
      else if (client_line.equals("2")){
-         System.out.println("\n========Server Start========\n");
-         portNum = 8888;
-         IPaddress = "224.0.0.255";
+        System.out.println("\n========Server Start========\n");
+        portNum = 8888;
+        // not passing the IP in
+        InetAddress local = InetAddress.getLocalHost();
+        IPaddress = local.getHostAddress();
         sendOutUDP(IPaddress, portNum);
      }
      // Close resources
