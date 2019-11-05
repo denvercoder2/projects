@@ -7,7 +7,7 @@
 ```bash
     # running the build tool
     # all this does is compile the java code for you
-    python3.7 buildTool.py  # Use your instance of python to call the 
+    python3.7 buildTool.py  # Use your instance of python to call this 
 
     
     # This may act weird due to some java environments

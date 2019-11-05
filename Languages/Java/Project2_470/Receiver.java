@@ -33,7 +33,7 @@ public class Receiver {
                 clientSocket.receive(msgPacket);
                 // give us an output to see on screen
                 String msg = new String(buf, 0, buf.length);
-                System.out.println("Client has received msg: " + msg);
+                System.out.println("\nClient has received msg: " + msg);
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -53,15 +53,18 @@ public class Receiver {
             BufferedReader input     = null; 
             DataOutputStream output  = null; 
             
-            // Get the user input and decide which path to go from there
+            // Get the user input and decide which path to go from there (same network)
             socket = new Socket(addr, port);
-            System.out.println("Enter the choice for testing: \n1) Slide Simulation with TCP (Unicast: Classroom)\n2) Movie Simulation with UDP (Multicast: Dorm)");
+            // let the user choose which to test
+            System.out.println("\nEnter the choice for testing: \n1) Slide Simulation with TCP (Unicast: Classroom)\n2) Movie Simulation with UDP (Multicast: Dorm)");
             input = new BufferedReader(new InputStreamReader(System.in));
             output = new DataOutputStream(socket.getOutputStream()); 
+            // read that input and go with correct option
             choice = input.readLine();
             output.writeUTF(choice);
             // Path 1: User chooses Unicast with TCP
             if (choice.equals("1")) {
+                System.out.printf("Client has joined at: %s at port: %d", addr, port);
                 // this is the tcp function essentially just within the block
                 InputStream in = socket.getInputStream();
                 InputStreamReader inputReader = new InputStreamReader(in);
@@ -74,6 +77,7 @@ public class Receiver {
                 // specific multicast port after intial connection
                 addr = "224.0.0.255";
                 port = 8888;
+                System.out.printf("Client has joined at: %s at port: %d", addr, port);
                 connectUDP(addr, port);
             }
             // User enters something else (not UDP or TCP)
@@ -88,7 +92,7 @@ public class Receiver {
         }
         // Catch if server isn't started
         catch(ConnectException w){
-            System.out.println("Server is not up and running");
+            System.out.println("Client is searching . . .");
         }
     }
 }

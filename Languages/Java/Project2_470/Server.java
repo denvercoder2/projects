@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 
+
 public class Server{
     /*
     * Function: sendOutTCP
@@ -44,6 +45,7 @@ public class Server{
       // Open a new DatagramSocket, which will be used to send the data.
       try (DatagramSocket serverSocket = new DatagramSocket()) {
          while(true) {
+            // keep sending to emulate a movie being streamed
                String message = "=== Movie Data sample ===";
             
                // Create a packet that will contain the data
@@ -76,13 +78,13 @@ public class Server{
       System.out.println("\n======== Server Up ========\n"); 
       InetAddress machineIP = InetAddress.getLocalHost();
       String ipaddr_local = machineIP.getHostAddress();
-      System.out.printf("Broadcasting IP: %s", ipaddr_local);
+      System.out.printf("Broadcasting IP: %s", ipaddr_local, "\n");
 
       // accept the client once client finds the IP
       socket = server.accept(); 
       // display the client and IP it came from
       String IPaddress = socket.getRemoteSocketAddress().toString();
-      System.out.println(" Client accepted at IP and port: " + IPaddress);
+      System.out.println("\nClient accepted at IP: " + IPaddress);
       // Wait for the client to send which protocal
       System.out.println("Waiting for them to choose a protocol");
       // wait and see what the client chooses, TCP or UDP
@@ -102,17 +104,17 @@ public class Server{
             System.out.println("\n========Server Start========\n"); 
             sendOutTCP(portNum); 
          }
-         // the server is needs to change it's state
-         // essentially the TCP
+         // essentially the TCP function
          catch(BindException b){
-               System.out.print("State has changed from Multicast to unicast.\n");
-               System.out.print("Client has been sent a message through Unicast with TCP\n");
-               portNum = 5001;
-               OutputStream output = socket.getOutputStream();
-               OutputStreamWriter outWriter = new OutputStreamWriter(output);
-               BufferedWriter bwriter = new BufferedWriter(outWriter);
-               bwriter.write(TCPmessage);
-               bwriter.flush();   
+            // if a bind happens, open another port for other clients
+            portNum = 5001;
+            OutputStream output = socket.getOutputStream();
+            OutputStreamWriter outWriter = new OutputStreamWriter(output);
+            BufferedWriter bwriter = new BufferedWriter(outWriter);
+            bwriter.write(TCPmessage);
+            // Send the TCP message to client
+            System.out.print("\nClient has been sent a message through Unicast with TCP\n");
+            bwriter.flush();   
          }
      } 
      // if client chooses 2, then call the UDP function
@@ -121,10 +123,9 @@ public class Server{
      else if (client_line.equals("2")){
         System.out.println("\n========Server Start========\n");
         portNum = 8888;
-        // not passing the IP in
-        InetAddress local = InetAddress.getLocalHost();
-        IPaddress = local.getHostAddress();
-        sendOutUDP(IPaddress, portNum);
+        // not passing the IP in, grabbing it
+        String addr = "224.0.0.255";
+        sendOutUDP(addr, portNum);
      }
      // Close resources
       server.close(); 
