@@ -64,7 +64,6 @@ public class Server{
 
 
    public static void main(String[] args)throws UnknownHostException, InterruptedException, IOException {
-
       // get and initialize the objects we'll need
       Socket socket           = null; 
       ServerSocket server     = null; 
@@ -74,6 +73,10 @@ public class Server{
       String TCPmessage = "Successfully sent with TCP";
       server = new ServerSocket(portNum); 
       System.out.println("\n======== Server Up ========\n"); 
+      InetAddress machineIP = InetAddress.getLocalHost();
+      String ipaddr_local = machineIP.getHostAddress();
+      System.out.printf("Broadcasting IP: %s", ipaddr_local);
+
       // accept the client
       socket = server.accept(); 
       String IPaddress = socket.getRemoteSocketAddress().toString();
