@@ -141,17 +141,17 @@ std::tuple<std::string, std::string> getLine(std::string filename){
     std::string line2;
     int max = 2;
     if (infile){
-
+        // get both lines of the file
         for(int i = 0; i < max; i++){
             std::getline(infile, line1);
             std::getline(infile, line2);
-
         }
     }
     else{
         // error check if file can't be opened
         std::cout << "File could not be opened" << std::endl;
     }
+    // return the tuple container of both strings
     return std::make_tuple(line1, line2);
 }
 
@@ -170,16 +170,16 @@ std::tuple<std::string, std::string> getLine(std::string filename){
 std::vector<int> getQuantumTimes(std::tuple<std::string, std::string> test){
     std::string str1 = std::get<0>(test);
 
-    // container for other vectors
+    // Read the string into a sstream object to 
+    // load into a vector
     std::stringstream stm(str1);
-    // std::istringstream stm2(str2);
-    
     int value;
     // line 1 vector
     std::vector<int> retmp;
     while(stm >> value){
         retmp.push_back(value);
     }
+    // return the vector of string 1
     return retmp;
 }
 /*
@@ -197,6 +197,8 @@ std::vector<int> getQuantumTimes(std::tuple<std::string, std::string> test){
 std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
     // get the second string from the tuple
     std::string str2 = std::get<1>(test);
+    // Read the string into a sstream object to 
+    // load into a vector
     std::istringstream stm2(str2);
     
     int value;
@@ -206,7 +208,7 @@ std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
     while(stm2 >> value){
         vecStr2.push_back(value);
     }
-
+    // return the vector of string 2
     return vecStr2;
 }
 
@@ -217,7 +219,6 @@ std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
 *   Arguments: std::vector<int> processes,int counter,int burstTime[],int q
 *   --
 *   Return type: None (void)
-*               S
 *   ========== Purpose ==========
 *   This function will calculate and show
 *   individual and system reports
@@ -243,6 +244,8 @@ void showReport(std::vector<int> processes,int counter,std::vector<int> burstTim
             << " Waiting Time |" << " Turnaround Time |" << " Service Time |"
             << " Normalized Turnaround Time|\n";
 
+    // Printing out to the screen the 
+    // System and Individual Statistics
     for (int i = 0; i < counter; i++){
         NTAT = TAT[i] / serviceTimes[i];
         totalWait = totalWait + waitTime[i];
@@ -322,7 +325,3 @@ int main()
 
 
 }
-
-/*
- burst time = service time?
-*/
