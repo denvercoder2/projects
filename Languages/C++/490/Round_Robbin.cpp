@@ -294,9 +294,8 @@ int main()
     // we only have two values for the q times
     int q_timeMax = 2;
     // initialize counter to use in functions below
+    // counter should count 0 - 15 (16 processes)
     int counter = processes.size();
-    // burst time array (0 can't be present)
-    // int burstTime[] = {8,6,6,6,5,8,4,5,4,10,2,1,3,8,9};
     std::cout << "======================================= Report Started =======================================  \n";
 
     // finding the clock tics
