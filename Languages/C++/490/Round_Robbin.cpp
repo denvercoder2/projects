@@ -51,7 +51,7 @@ Due: November 14th, 2019
 ====================================================
 *   Function: calcWaitTime
 *   --
-*   Arguments: int processes[], int counter, int burstTime[],
+*   Arguments: std::vector<int> processes, int counter, int burstTime[],
 *               int waitTime[], int q
 *   --
 *   Return type: None (void) 
@@ -60,7 +60,7 @@ Due: November 14th, 2019
 *   waiting time for all given processes
 ====================================================
 */
-void calcWaitTime(int processes[], int counter, std::vector<int> burstTime, int waitTime[], int q){
+void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burstTime, int waitTime[], int q){
 
     // we want something to store the burst times not yet used
     int remaining_burstTime[counter];
@@ -107,7 +107,7 @@ void calcWaitTime(int processes[], int counter, std::vector<int> burstTime, int 
 ====================================================
 *   Function: calcTAT
 *   --
-*   Arguments: int processes[], int counter, int burstTime[],
+*   Arguments: std::vector<int> processes, int counter, int burstTime[],
 *               int waitTime[], int TAT[]
 *   --
 *   Return type: None (void)          
@@ -116,7 +116,7 @@ void calcWaitTime(int processes[], int counter, std::vector<int> burstTime, int 
 *   Turnaround Time
 ====================================================
 */
-void calcTAT(int processes[],int counter, std::vector<int> burstTime,int waitTime[],int TAT[]){
+void calcTAT(std::vector<int> processes,int counter, std::vector<int> burstTime,int waitTime[],int TAT[]){
 
     //calculate the turnaround time
     for(int i = 0; i < counter; i++){
@@ -214,7 +214,7 @@ std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
 ====================================================
 *   Function: showReport
 *   --
-*   Arguments: int processes[],int counter,int burstTime[],int q
+*   Arguments: std::vector<int> processes,int counter,int burstTime[],int q
 *   --
 *   Return type: None (void)
 *               S
@@ -223,7 +223,7 @@ std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
 *   individual and system reports
 ====================================================
 */
-void showReport(int processes[],int counter,std::vector<int> burstTime,int q){
+void showReport(std::vector<int> processes,int counter,std::vector<int> burstTime,int q){
 
     // grab the service times from the tuple -> vector
     std::tuple<std::string, std::string> s_tuple = getLine("sample.txt");
@@ -248,7 +248,7 @@ void showReport(int processes[],int counter,std::vector<int> burstTime,int q){
         totalWait = totalWait + waitTime[i];
         totalTAT = totalTAT + TAT[i];
 
-        std::cout << "  " << i+1 << "\t\t" << burstTime[i] <<"\t\t "
+        std::cout << "  " << i << "\t\t" << burstTime[i] <<"\t\t "
         << waitTime[i] <<"\t\t " << TAT[i] << "\t\t" << serviceTimes[i] << "\t\t"
         << NTAT << std::endl;
 
@@ -282,13 +282,16 @@ int main()
     std::vector<int> q_results = getQuantumTimes(q_tuple);
     //service time vector
     std::vector<int> burstTime = getServiceTimes(q_tuple);
-    
+    std::vector<int> processes;
     // process array
-    int processes[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    for (int i = 0; i < burstTime.size(); i++){
+        processes.push_back(i);
+    }
+    
     // we only have two values for the q times
     int q_timeMax = 2;
     // initialize counter to use in functions below
-    int counter = sizeof processes / sizeof processes[0];
+    int counter = processes.size();
     // burst time array (0 can't be present)
     // int burstTime[] = {8,6,6,6,5,8,4,5,4,10,2,1,3,8,9};
     std::cout << "======================================= Report Started =======================================  \n";
@@ -318,7 +321,6 @@ int main()
     std::cout << "======================================= Report Finished =======================================  \n";
 
 
-    system("pause");
 }
 
 /*
