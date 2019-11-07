@@ -13,7 +13,9 @@
   ```
   # run the following code to compile this program
   g++ Round_Robbin.cpp -o main -std=c++11 
+  
 
   # Now run the code with following command
-  ./main
+  ./main sample.txt     # I added the ability to use command line args for the file you wany
+                        # to use as input
   ```
