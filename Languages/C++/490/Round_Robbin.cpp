@@ -3,18 +3,18 @@ Scott Holley
 CS490: Operating Systems
 Homework 4
 Due: November 14th, 2019
-*/ 
+*/
 
 #include <iostream>
-#include<iomanip>
+#include <iomanip>
 #include <time.h>
 #include <fstream>
-#include <sstream> 
+#include <sstream>
 #include <string>
 #include <vector>
 #include <tuple>
 #include <numeric>
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 
 /*
 =================== Program Overview =================== 
@@ -50,7 +50,6 @@ Due: November 14th, 2019
 *
 */
 
-
 /*
 ====================================================
 *   Function: calcWaitTime
@@ -79,8 +78,7 @@ void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burs
         // iterate through all processes one by one
         for (int i = 0; i < counter; i++){
             if (remaining_burstTime[i] > 0){
-                done = false; 
-
+                done = false;
                 if (remaining_burstTime[i] > q){
                     // increment e by quantum
                     e += q;
@@ -120,11 +118,11 @@ void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burs
 *   Turnaround Time
 ====================================================
 */
-void calcTAT(std::vector<int> processes,int counter, std::vector<int> burstTime,int waitTime[],int TAT[]){
+void calcTAT(std::vector<int> processes, int counter, std::vector<int> burstTime, int waitTime[], int TAT[]){
 
     //calculate the turnaround time
     // process arival is 0, so TAT is = completion time
-    for(int i = 0; i < counter; i++){
+    for (int i = 0; i < counter; i++){
         TAT[i] = burstTime[i] + waitTime[i];
     }
 }
@@ -141,13 +139,13 @@ void calcTAT(std::vector<int> processes,int counter, std::vector<int> burstTime,
 ====================================================
 */
 std::tuple<std::string, std::string> getLine(std::string filename){
-    std::ifstream infile (filename);
+    std::ifstream infile(filename);
     std::string line1;
     std::string line2;
     int max = 2;
     if (infile){
         // get both lines of the file
-        for(int i = 0; i < max; i++){
+        for (int i = 0; i < max; i++){
             std::getline(infile, line1);
             std::getline(infile, line2);
         }
@@ -175,13 +173,13 @@ std::tuple<std::string, std::string> getLine(std::string filename){
 std::vector<int> getQuantumTimes(std::tuple<std::string, std::string> test){
     std::string str1 = std::get<0>(test);
 
-    // Read the string into a sstream object to 
+    // Read the string into a sstream object to
     // load into a vector
     std::stringstream stm(str1);
     int value;
     // line 1 vector
     std::vector<int> retmp;
-    while(stm >> value){
+    while (stm >> value){
         retmp.push_back(value);
     }
     // return the vector of string 1
@@ -202,15 +200,15 @@ std::vector<int> getQuantumTimes(std::tuple<std::string, std::string> test){
 std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
     // get the second string from the tuple
     std::string str2 = std::get<1>(test);
-    // Read the string into a sstream object to 
+    // Read the string into a sstream object to
     // load into a vector
     std::istringstream stm2(str2);
-    
+
     int value;
     // line 2 vector
     std::vector<int> vecStr2;
     // store int values in vector from string
-    while(stm2 >> value){
+    while (stm2 >> value){
         vecStr2.push_back(value);
     }
     // return the vector of string 2
@@ -230,9 +228,9 @@ std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
 *   individual and system reports
 ====================================================
 */
-void showReport(std::vector<int> processes,int counter,std::vector<int> burstTime,int q, std::string filename){
-    
-    // for getting the clock ticks 
+void showReport(std::vector<int> processes, int counter, std::vector<int> burstTime, int q, std::string filename){
+
+    // for getting the clock ticks
     clock_t start, end, ticks;
     int count;
     start = clock();
@@ -258,15 +256,19 @@ void showReport(std::vector<int> processes,int counter,std::vector<int> burstTim
     int arrivalTime = 0;
 
     // count intitialization
-    int shortCount = 0; 
-    int medCount = 0; 
+    int shortCount = 0;
+    int medCount = 0;
     int longCount = 0;
 
-    std::cout << "| Process # |" << " Arrival Time |"
-            << " Waiting Time |" << " Turnaround Time |" << " Service Time |"
-            << " Normalized Turnaround Time |" << " Classification |\n";
+    std::cout << "| Process # |"
+              << " Arrival Time |"
+              << " Waiting Time |"
+              << " Turnaround Time |"
+              << " Service Time |"
+              << " Normalized Turnaround Time |"
+              << " Classification |\n";
 
-    // Printing out to the screen the 
+    // Printing out to the screen the
     // System and Individual Statistics
     for (int i = 0; i < counter; i++){
         NTAT = TAT[i] / serviceTimes[i];
@@ -276,49 +278,48 @@ void showReport(std::vector<int> processes,int counter,std::vector<int> burstTim
         // getting the classification and count
 
         // one quanta to complete (or less)
-        if(TAT[i] <= quantumTimes[0]){
+        if (TAT[i] <= quantumTimes[0]){
             classification = "Short";
             shortCount += 1;
         }
         // Up to two quantas to complete
-        else if(TAT[i] > quantumTimes[0] && TAT[i] <= quantumTimes[1]){
+        else if (TAT[i] > quantumTimes[0] && TAT[i] <= quantumTimes[1]){
             classification = "Medium";
             medCount += 1;
-        } 
+        }
         // More than two quanta to complete
         else{
             classification = "Long";
             longCount += 1;
         }
 
-
-        std::cout << "  " << i << "\t\t" << arrivalTime <<"\t\t "
-        << waitTime[i] <<"\t\t " << TAT[i] << "\t\t" << serviceTimes[i] << "\t\t\t"
-        << NTAT << "\t\t\t" << classification << std::endl;
-
+        std::cout << "  " << i << "\t\t" << arrivalTime << "\t\t "
+                  << waitTime[i] << "\t\t " << TAT[i] << "\t\t" << serviceTimes[i] << "\t\t\t"
+                  << NTAT << "\t\t\t" << classification << std::endl;
     }
     // get the sum of service times for the system statistics
     int serviceTimeTotal = std::accumulate(serviceTimes.begin(), serviceTimes.end(), 0);
 
     // display the average times to two decimal places
 
-    std::cout << std::setfill('=') << std::setw(146)<<"=" << std::endl;
-    std::cout << "\nFor this Quantum Time, Process counts are: " << "\nShort Count: " 
-    << shortCount << "\nMedium Count: "<< medCount << "\nLong Count: " << longCount << std::endl;
+    std::cout << std::setfill('=') << std::setw(146) << "=" << std::endl;
+    std::cout << "\nFor this Quantum Time, Process counts are: "
+              << "\nShort Count: "
+              << shortCount << "\nMedium Count: " << medCount << "\nLong Count: " << longCount << std::endl;
 
     std::cout << std::fixed << std::setprecision(2) << "\nAverage System Waiting Time: " << (float)totalWait / (float)counter << std::endl;
     std::cout << std::fixed << std::setprecision(2) << "Average System Turnaround Time: " << (float)totalTAT / (float)counter << std::endl;
-    std::cout << std::fixed << std::setprecision(2) <<  "Average System Normalized Turnaround Time: " << (float)totalTAT / (float)serviceTimeTotal << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "Average System Normalized Turnaround Time: " << (float)totalTAT / (float)serviceTimeTotal << std::endl;
 
     // calculate system time
     ticks = clock() - ticks;
     end = clock();
-    double time = double(end - start) / double(CLOCKS_PER_SEC); 
-    std::cout << "Time taken to run through processes: " << std::fixed  
-    << time << std::setprecision(5); 
-    std::cout << " Seconds " << "With: " << ticks << " Clock Ticks "<< std::endl; 
-    std::cout << std::setfill('=') << std::setw(146)<<"=" << std::endl;
-
+    double time = double(end - start) / double(CLOCKS_PER_SEC);
+    std::cout << "Time taken to run through processes: " << std::fixed
+              << time << std::setprecision(5);
+    std::cout << " Seconds "
+              << "With: " << ticks << " Clock Ticks " << std::endl;
+    std::cout << std::setfill('=') << std::setw(146) << "=" << std::endl;
 }
 
 /*
@@ -344,14 +345,12 @@ int main(int argc, char *argv[]){
     for (int i = 0; i < burstTime.size(); i++){
         processes.push_back(i);
     }
-    
-    // we only have two values for the q times
-    int q_timeMax = 2;
+
     // initialize counter to use in functions below
     // counter should count 0 - 15 (16 processes)
     int counter = processes.size();
-    std::cout << "=================================================================== Report Started " << 
-    "===================================================================\n";
+    std::cout << "=================================================================== Report Started "
+              << "===================================================================\n";
 
     // finding the clock tics
     // clock_t start, end, ticks;
@@ -361,22 +360,19 @@ int main(int argc, char *argv[]){
 
     // this is all formatting
     for (int i = 0; i < q_results.size(); i++){
-        std::cout << " \n=================================================================== Quantum #" << q_results[i] << 
-        " =================================================================== " << std::endl;
-        showReport(processes, counter, burstTime, q_results[i], argv[1]); 
-        std::cout << "=================================================================== End Quantum #" << q_results[i] << 
-        " ===============================================================\n" << std::endl;
+        std::cout << " \n=================================================================== Quantum #" << q_results[i] << " =================================================================== " << std::endl;
+        showReport(processes, counter, burstTime, q_results[i], argv[1]);
+        std::cout << "=================================================================== End Quantum #" << q_results[i] << " ===============================================================\n"
+                  << std::endl;
     }
     // getting the system statistics clock ticks and time
     // ticks = clock() - ticks;
     // end = clock();
-    // double time = double(end - start) / double(CLOCKS_PER_SEC); 
-    // std::cout << "Time taken to run through processes: " << std::fixed  
-    // << time << std::setprecision(5); 
-    // std::cout << " Seconds " << "With: " << ticks << " Clock Ticks "<< std::endl; 
+    // double time = double(end - start) / double(CLOCKS_PER_SEC);
+    // std::cout << "Time taken to run through processes: " << std::fixed
+    // << time << std::setprecision(5);
+    // std::cout << " Seconds " << "With: " << ticks << " Clock Ticks "<< std::endl;
 
-    std::cout << "=================================================================== Report Finished " << 
-    "===================================================================\n";
-
-
+    std::cout << "=================================================================== Report Finished "
+              << "===================================================================\n";
 }
