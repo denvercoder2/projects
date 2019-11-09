@@ -38,7 +38,7 @@ Due: November 14th, 2019
 *    - Number of jobs in each category (short, medium, long);
 *    - Average turnaround time and average normalized turnaround time, -D 
 *        within each category and for the system as a whole.
-
+-------------------------------------------------------------
 *    Important notes:
 *    - Service time = an integer that represents the CPU run time required – provided as input data
 *    - Arrival time = an integer that represents the time the process entered the system.
@@ -47,7 +47,7 @@ Due: November 14th, 2019
 *                    Initially set to 0, but recomputed each time a process “executes”
 *
 *   - Since we're assuming that arrival times are at 0, turnaround time = completion time
-*
+-------------------------------------------------------------
 */
 
 /*
@@ -98,7 +98,8 @@ void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burs
                 }
             }
         }
-        // If all processes are done
+        // If all processes are done, then break
+        // because there is no more work to be done
         if (done == true){
             break;
         }
@@ -155,7 +156,7 @@ std::tuple<std::string, std::string> getLine(std::string filename){
         // error check if file can't be opened
         std::cout << "File could not be opened" << std::endl;
     }
-    // return the tuple container of both strings
+    // return the tuple container of both strings (lines)
     return std::make_tuple(line1, line2);
 }
 
@@ -304,7 +305,7 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
 
     // display the average times to two decimal places
 
-    std::cout << std::setfill('=') << std::setw(146) << "=" << std::endl;
+    std::cout << std::setfill('=') << std::setw(125) << "=" << std::endl;
     std::cout << "\nFor this Quantum Time, Process counts are: "
               << "\nShort Count: "
               << shortCount << "\nMedium Count: " << medCount << "\nLong Count: " << longCount << std::endl;
@@ -317,11 +318,10 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
     ticks = clock() - ticks;
     end = clock();
     double time = double(end - start) / double(CLOCKS_PER_SEC);
-    std::cout << "Time taken to run through processes: " << std::fixed
-              << time << std::setprecision(5);
-    std::cout << " Seconds "
-              << "With: " << ticks << " Clock Ticks " << std::endl;
-    std::cout << std::setfill('=') << std::setw(146) << "=" << std::endl;
+    std::cout << std::fixed << std::setprecision(5) << "\nTime taken to run through processes: " 
+              << (time*1000) << " Milliseconds "
+              << "\nWith: " << ticks << " Clock Ticks " << std::endl;
+    std::cout << std::setfill('=') << std::setw(125) << "=" << std::endl;
 }
 
 /*
@@ -333,13 +333,12 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
 *   Return Type: None (0)
 *   ========== Purpose ==========
 *   To provided a driver for the functions above
+*   As well as implement calls, variables etc.. that
+*   Complete the program
 ====================================================
 */
 
 int main(int argc, char *argv[]){
-    // setting the output as the second
-    // command line argument
-    freopen(argv[2],"w",stdout); 
     // service time vector
     std::tuple<std::string, std::string> q_tuple = getLine(argv[1]);
     // quantum time vector
@@ -355,10 +354,13 @@ int main(int argc, char *argv[]){
     // initialize counter to use in functions below
     // counter should count 0 - 15 (16 processes)
     int counter = processes.size();
+
+    // setting the output as the second
+    // command line argument
+    freopen(argv[2],"w",stdout); 
+
     std::cout << "=================================================================== Report Started "
               << "===================================================================\n";
-
-
 
     // this is all formatting
     for (int i = 0; i < q_results.size(); i++){
@@ -371,8 +373,6 @@ int main(int argc, char *argv[]){
         q_results[i] << " ===============================================================\n"
                   << std::endl;
     }
-
-
     std::cout<< "=================================================================== Report Finished "
               << "===================================================================\n";
 
