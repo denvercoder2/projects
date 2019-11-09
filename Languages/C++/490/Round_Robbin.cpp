@@ -126,6 +126,7 @@ void calcTAT(std::vector<int> processes, int counter, std::vector<int> burstTime
         TAT[i] = burstTime[i] + waitTime[i];
     }
 }
+
 /*
 ====================================================
 *   Function: getLine
@@ -185,6 +186,7 @@ std::vector<int> getQuantumTimes(std::tuple<std::string, std::string> test){
     // return the vector of string 1
     return retmp;
 }
+
 /*
 ====================================================
 *  *     Function: getServiceTimes
@@ -335,6 +337,10 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
 */
 
 int main(int argc, char *argv[]){
+    // setting the output as the second
+    // command line argument
+    freopen(argv[2],"w",stdout); 
+    // service time vector
     std::tuple<std::string, std::string> q_tuple = getLine(argv[1]);
     // quantum time vector
     std::vector<int> q_results = getQuantumTimes(q_tuple);
@@ -352,27 +358,23 @@ int main(int argc, char *argv[]){
     std::cout << "=================================================================== Report Started "
               << "===================================================================\n";
 
-    // finding the clock tics
-    // clock_t start, end, ticks;
-    // int count;
-    // start = clock();
-    // ticks = clock();
+
 
     // this is all formatting
     for (int i = 0; i < q_results.size(); i++){
-        std::cout << " \n=================================================================== Quantum #" << q_results[i] << " =================================================================== " << std::endl;
+        std::cout << " \n============================================== Quantum #" <<
+         q_results[i] << " Individual Statistics ============================================== " << std::endl;
+
         showReport(processes, counter, burstTime, q_results[i], argv[1]);
-        std::cout << "=================================================================== End Quantum #" << q_results[i] << " ===============================================================\n"
+
+        std::cout << "=================================================================== End Quantum #" << 
+        q_results[i] << " ===============================================================\n"
                   << std::endl;
     }
-    // getting the system statistics clock ticks and time
-    // ticks = clock() - ticks;
-    // end = clock();
-    // double time = double(end - start) / double(CLOCKS_PER_SEC);
-    // std::cout << "Time taken to run through processes: " << std::fixed
-    // << time << std::setprecision(5);
-    // std::cout << " Seconds " << "With: " << ticks << " Clock Ticks "<< std::endl;
 
-    std::cout << "=================================================================== Report Finished "
+
+    std::cout<< "=================================================================== Report Finished "
               << "===================================================================\n";
+
+    
 }
