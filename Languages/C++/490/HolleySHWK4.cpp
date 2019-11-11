@@ -318,7 +318,7 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
     ticks = clock() - ticks;
     end = clock();
     double time = double(end - start) / double(CLOCKS_PER_SEC);
-    std::cout << std::fixed << std::setprecision(5) << "\nTime taken to run through processes: " 
+    std::cout << std::fixed << std::setprecision(2) << "\nTime taken to run through processes: " 
               << (time*1000) << " Milliseconds "
               << "\nWith: " << ticks << " Clock Ticks " << std::endl;
     std::cout << std::setfill('=') << std::setw(125) << "=" << std::endl;
