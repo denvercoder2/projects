@@ -252,10 +252,10 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
 
     // call function for the for Turnaround Time
     calcTAT(processes, counter, burstTime, waitTime, TAT);
-    int NTAT;
+    double NTAT;
 
     std::string classification;
-    // setting up for the count for processes
+    // all processes arrive at 0
     int arrivalTime = 0;
 
     // count intitialization
@@ -274,7 +274,7 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
     // Printing out to the screen the
     // System and Individual Statistics
     for (int i = 0; i < counter; i++){
-        NTAT = TAT[i] / serviceTimes[i];
+        NTAT = (double)TAT[i] / (double)serviceTimes[i];
         totalWait = totalWait + waitTime[i];
         totalTAT = totalTAT + TAT[i];
 
@@ -296,8 +296,8 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
             longCount += 1;
         }
 
-        std::cout << "  " << i << "\t\t" << arrivalTime << "\t\t "
-                  << waitTime[i] << "\t\t " << TAT[i] << "\t\t" << serviceTimes[i] << "\t\t\t"
+        std::cout << std::fixed << std::setprecision(2) << "  " << i << "\t\t" << arrivalTime << "\t\t "
+                  << (double)waitTime[i] << "\t\t " << (double)TAT[i] << "\t\t" << serviceTimes[i] << "\t\t\t"
                   << NTAT << "\t\t\t" << classification << std::endl;
     }
     // get the sum of service times for the system statistics
@@ -365,7 +365,7 @@ int main(int argc, char *argv[]){
     // this is all formatting
     for (int i = 0; i < q_results.size(); i++){
         std::cout << " \n============================================== Quantum #" <<
-         q_results[i] << " Individual Statistics ============================================== " << std::endl;
+         q_results[i] << " Individual Statistics =================================================================== " << std::endl;
 
         showReport(processes, counter, burstTime, q_results[i], argv[1]);
 
