@@ -281,12 +281,12 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
         // getting the classification and count
 
         // one quanta to complete (or less)
-        if (TAT[i] <= quantumTimes[0]){
+        if (serviceTimes[i]/quantumTimes[0] <= 1){
             classification = "Short";
             shortCount += 1;
         }
         // Up to two quantas to complete
-        else if (TAT[i] > quantumTimes[0] && TAT[i] <= quantumTimes[1]){
+        else if (serviceTimes[i]/quantumTimes[0] > 1 && serviceTimes[i]/quantumTimes[0] <= 2){
             classification = "Medium";
             medCount += 1;
         }
