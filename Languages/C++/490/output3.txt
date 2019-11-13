@@ -28,9 +28,7 @@ Long Count: 1
 Average System Waiting Time: 62.44
 Average System Turnaround Time: 69.12
 Average System Normalized Turnaround Time: 10.34
-
-Time taken to run through processes: 0.25 Milliseconds 
-With: 251 Clock Ticks 
+Processes completed with: 65 clock ticks
 =============================================================================================================================
 =================================================================== End Quantum #5 ===============================================================
 
@@ -63,9 +61,7 @@ Long Count: 1
 Average System Waiting Time: 54.25
 Average System Turnaround Time: 60.94
 Average System Normalized Turnaround Time: 9.11
-
-Time taken to run through processes: 0.20 Milliseconds 
-With: 207 Clock Ticks 
+Processes completed with: 42 clock ticks
 =============================================================================================================================
 =================================================================== End Quantum #7 ===============================================================
 

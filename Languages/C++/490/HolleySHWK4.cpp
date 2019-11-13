@@ -2,7 +2,7 @@
 Scott Holley
 CS490: Operating Systems
 Homework 4
-Due: November 14th, 2019
+Due: November 13th, 2019
 */
 
 #include <iostream>
@@ -63,7 +63,7 @@ Due: November 14th, 2019
 *   waiting time for all given processes
 ====================================================
 */
-void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burstTime, int waitTime[], int q){
+int calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burstTime, int waitTime[], int q){
 
     // we want something to store the Service Times not yet used
     int remaining_burstTime[counter];
@@ -72,6 +72,7 @@ void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burs
     }
     // clocks at 0 initialization
     int e = 0;
+    int clock = 0;
     // Continue this until processes are finished
     while (true){
         bool done = true;
@@ -84,6 +85,8 @@ void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burs
                     e += q;
                     // decriment process by quantum
                     remaining_burstTime[i] -= q;
+                    // increment clocks
+                    clock += q;
                 }
                 else{
                     // e is increased to show the time it has been processing
@@ -101,9 +104,11 @@ void calcWaitTime(std::vector<int> processes, int counter, std::vector<int> burs
         // If all processes are done, then break
         // because there is no more work to be done
         if (done == true){
+            // std::cout << "Clocks: " << clock << std::endl;
             break;
         }
     }
+        return clock;
 }
 
 /*
@@ -234,10 +239,7 @@ std::vector<int> getServiceTimes(std::tuple<std::string, std::string> test){
 void showReport(std::vector<int> processes, int counter, std::vector<int> burstTime, int q, std::string filename){
 
     // for getting the clock ticks
-    clock_t start, end, ticks;
     int count;
-    start = clock();
-    ticks = clock();
 
     // grab the service times from the tuple -> vector
     std::tuple<std::string, std::string> s_tuple = getLine(filename);
@@ -248,7 +250,7 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
     int totalWait = 0, totalTAT = 0;
 
     // call function for the waiting time
-    calcWaitTime(processes, counter, burstTime, waitTime, q);
+    int clocks = calcWaitTime(processes, counter, burstTime, waitTime, q);
 
     // call function for the for Turnaround Time
     calcTAT(processes, counter, burstTime, waitTime, TAT);
@@ -314,14 +316,9 @@ void showReport(std::vector<int> processes, int counter, std::vector<int> burstT
     std::cout << std::fixed << std::setprecision(2) << "Average System Turnaround Time: " << (float)totalTAT / (float)counter << std::endl;
     std::cout << std::fixed << std::setprecision(2) << "Average System Normalized Turnaround Time: " << (float)totalTAT / (float)serviceTimeTotal << std::endl;
 
-    // calculate system time
-    ticks = clock() - ticks;
-    end = clock();
-    double time = double(end - start) / double(CLOCKS_PER_SEC);
-    std::cout << std::fixed << std::setprecision(2) << "\nTime taken to run through processes: " 
-              << (time*1000) << " Milliseconds "
-              << "\nWith: " << ticks << " Clock Ticks " << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "Processes completed with: " << clocks << " clock ticks" << std::endl;
     std::cout << std::setfill('=') << std::setw(125) << "=" << std::endl;
+
 }
 
 /*
