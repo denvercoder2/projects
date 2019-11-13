@@ -1,0 +1,60 @@
+Data set 1
+Results for first 15 processes || Quantum: 5
+       PID   Arrival   Service       CPU Departure       TAT      NTAT     Class
+
+         0         0         2         2         2         2         1     short
+         1         0         3         3         5         5         1     short
+         2         0         4         4         9         9         2     short
+        10         0         3         3        47        47        15     short
+        11         0         5         5        52        52        10     short
+        12         0         4         4        56        56        14     short
+        13         0         2         2        58        58        29     short
+         3         0         7         7        70        70        10    medium
+         4         0         7         7        72        72        10    medium
+         5         0         6         6        73        73        12    medium
+         9         0        10        10        93        93         9    medium
+        14         0         6         6        94        94        15    medium
+         6         0        13        13       100       100         7      long
+         8         0        11        11       106       106         9      long
+         7         0        16        16       107       107         6      long
+
+Number of clock tics: 107
+
+Number of Shorts: 7
+Number of Mediums: 5
+Number of Longs: 3
+Number of Processes: 15
+Average TAT: 65
+Average NTAT: 10
+System: 16
+
+Data set 2
+Results for last 15 processes || Quantum: 7
+       PID   Arrival   Service       CPU Departure       TAT      NTAT     Class
+
+         0         0         2         2         2         2         1     short
+         1         0         3         3         5         5         1     short
+         2         0         4         4         9         9         2     short
+         3         0         7         7        16        16         2     short
+         4         0         7         7        23        23         3     short
+         5         0         6         6        29        29         4     short
+        10         0         3         3        60        60        20     short
+        11         0         5         5        65        65        13     short
+        12         0         4         4        69        69        17     short
+        13         0         2         2        71        71        35     short
+        14         0         6         6        77        77        12     short
+         6         0        13        13        90        90         6    medium
+         8         0        11        11       101       101         9    medium
+         9         0        10        10       104       104        10    medium
+        15         0         8         8       105       105        13    medium
+         7         0        16        16       107       107         6      long
+
+Number of clock tics: 107
+
+Number of Shorts: 11
+Number of Mediums: 4
+Number of Longs: 1
+Number of Processes: 16
+Average TAT: 58
+Average NTAT: 9
+System: 16
