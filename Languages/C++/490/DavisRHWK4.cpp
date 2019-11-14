@@ -171,7 +171,7 @@ int main()
 		{
 			process1->calcTAT(clock);
 			process1->calcNTAT();
-			if (process1->processID >= 0 && process1->processID < 15)
+			while (process1->processID >= 0 && process1->processID < 15)
 			{
 				outFile << setw(10) << process1->processID << setw(10) << process1->arrivalTime
 					<< setw(10) << process1->serviceTime << setw(10) << process1->CPUtime
