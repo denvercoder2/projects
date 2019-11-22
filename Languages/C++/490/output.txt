@@ -1,71 +1,67 @@
 =================================================================== Report Started ===================================================================
  
-============================================== Quantum #5 Individual Statistics ============================================== 
+============================================== Quantum #5 Individual Statistics =================================================================== 
 | Process # | Arrival Time | Waiting Time | Turnaround Time | Service Time | Normalized Turnaround Time | Classification |
-  0		0		 0		 2		2			1			Short
-  1		0		 2		 5		3			1			Short
-  2		0		 5		 9		4			2			Long
-  3		0		 68		 75		7			10			Long
-  4		0		 70		 77		7			11			Long
-  5		0		 72		 78		6			13			Long
-  6		0		 97		 110		13			8			Long
-  7		0		 106		 122		16			7			Long
-  8		0		 105		 116		11			10			Long
-  9		0		 88		 98		10			9			Long
-  10		0		 44		 47		3			15			Long
-  11		0		 47		 52		5			10			Long
-  12		0		 52		 56		4			14			Long
-  13		0		 56		 58		2			29			Long
-  14		0		 93		 99		6			16			Long
-  15		0		 94		 102		8			12			Long
+  0		0		 0.00		 2.00		2			1.00			Short
+  1		0		 2.00		 5.00		3			1.67			Short
+  2		0		 5.00		 9.00		4			2.25			Short
+  3		0		 68.00		 75.00		7			10.71			Short
+  4		0		 70.00		 77.00		7			11.00			Short
+  5		0		 72.00		 78.00		6			13.00			Short
+  6		0		 97.00		 110.00		13			8.46			Medium
+  7		0		 106.00		 122.00		16			7.62			Long
+  8		0		 105.00		 116.00		11			10.55			Medium
+  9		0		 88.00		 98.00		10			9.80			Medium
+  10		0		 44.00		 47.00		3			15.67			Short
+  11		0		 47.00		 52.00		5			10.40			Short
+  12		0		 52.00		 56.00		4			14.00			Short
+  13		0		 56.00		 58.00		2			29.00			Short
+  14		0		 93.00		 99.00		6			16.50			Short
+  15		0		 94.00		 102.00		8			12.75			Short
 =============================================================================================================================
 
 For this Quantum Time, Process counts are: 
-Short Count: 2
-Medium Count: 0
-Long Count: 14
+Short Count: 12
+Medium Count: 3
+Long Count: 1
 
 Average System Waiting Time: 62.44
 Average System Turnaround Time: 69.12
 Average System Normalized Turnaround Time: 10.34
-
-Time taken to run through processes: 0.25 Milliseconds 
-With: 251 Clock Ticks 
+Processes completed with: 65 clock ticks
 =============================================================================================================================
 =================================================================== End Quantum #5 ===============================================================
 
  
-============================================== Quantum #7 Individual Statistics ============================================== 
+============================================== Quantum #7 Individual Statistics =================================================================== 
 | Process # | Arrival Time | Waiting Time | Turnaround Time | Service Time | Normalized Turnaround Time | Classification |
-  0		0		 0		 2		2			1			Short
-  1		0		 2		 5		3			1			Short
-  2		0		 5		 9		4			2			Long
-  3		0		 9		 16		7			2			Long
-  4		0		 16		 23		7			3			Long
-  5		0		 23		 29		6			4			Long
-  6		0		 84		 97		13			7			Long
-  7		0		 105		 121		16			7			Long
-  8		0		 97		 108		11			9			Long
-  9		0		 101		 111		10			11			Long
-  10		0		 57		 60		3			20			Long
-  11		0		 60		 65		5			13			Long
-  12		0		 65		 69		4			17			Long
-  13		0		 69		 71		2			35			Long
-  14		0		 71		 77		6			12			Long
-  15		0		 104		 112		8			14			Long
+  0		0		 0.00		 2.00		2			1.00			Short
+  1		0		 2.00		 5.00		3			1.67			Short
+  2		0		 5.00		 9.00		4			2.25			Short
+  3		0		 9.00		 16.00		7			2.29			Short
+  4		0		 16.00		 23.00		7			3.29			Short
+  5		0		 23.00		 29.00		6			4.83			Short
+  6		0		 84.00		 97.00		13			7.46			Medium
+  7		0		 105.00		 121.00		16			7.56			Long
+  8		0		 97.00		 108.00		11			9.82			Medium
+  9		0		 101.00		 111.00		10			11.10			Medium
+  10		0		 57.00		 60.00		3			20.00			Short
+  11		0		 60.00		 65.00		5			13.00			Short
+  12		0		 65.00		 69.00		4			17.25			Short
+  13		0		 69.00		 71.00		2			35.50			Short
+  14		0		 71.00		 77.00		6			12.83			Short
+  15		0		 104.00		 112.00		8			14.00			Short
 =============================================================================================================================
 
 For this Quantum Time, Process counts are: 
-Short Count: 2
-Medium Count: 0
-Long Count: 14
+Short Count: 12
+Medium Count: 3
+Long Count: 1
 
 Average System Waiting Time: 54.25
 Average System Turnaround Time: 60.94
 Average System Normalized Turnaround Time: 9.11
-
-Time taken to run through processes: 0.20 Milliseconds 
-With: 207 Clock Ticks 
+Processes completed with: 42 clock ticks
 =============================================================================================================================
 =================================================================== End Quantum #7 ===============================================================
 
