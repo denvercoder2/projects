@@ -3,6 +3,7 @@ Examples of things in c++ for christian
 */
 
 #include <iostream>
+#include <string.h>
 
 /*
 *   Function Name: getCircumference(double)
