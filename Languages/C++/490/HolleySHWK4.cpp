@@ -14,7 +14,6 @@ Due: November 13th, 2019
 #include <vector>
 #include <tuple>
 #include <numeric>
-#include <bits/stdc++.h>
 
 /*
 =================== Program Overview =================== 
