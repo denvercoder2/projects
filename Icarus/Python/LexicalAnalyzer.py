@@ -1,5 +1,5 @@
 '''
-Lexical Analyzer for Icarus
+Lexical Analyzer and Parser for Icarus
 '''
 # DIgits
 DIGITS = '0123456789'
@@ -205,9 +205,6 @@ class Parser:
         return left
     
  
-
-
-
 def run(fn: str, text: str):
     lexer = Lexer(fn, text)
     tokens, error = lexer.make_tokens()
@@ -219,5 +216,5 @@ def run(fn: str, text: str):
 
 
     return AbsTree, None
-
+    
             
