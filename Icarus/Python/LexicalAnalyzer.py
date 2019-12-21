@@ -1,4 +1,3 @@
-# icarus.py
 '''
 Lexical Analyzer for Icarus
 '''
@@ -141,10 +140,84 @@ class Lexer:
             return Token(TT_FLOAT, float(num_str))
 
 
-def run(fn: str, text: str) -> list:
+
+###################################################
+# Nodes
+###################################################
+class NumberNodes:
+    def __init__(self, tok):
+        self.tok = tok
+    
+    def __repr__(self):
+        return f'{self.tok}'
+
+class BinaryOperation:
+    def __init__(self, lft_node, op_tok, rht_node):
+        self.lft_node = lft_node
+        self.op_tok = op_tok
+        self.rht_node = rht_node
+
+
+    def __repr__(self):
+        return f'({self.lft_node}, {self.op_tok}, {self.rht_node})'
+
+class Parser:
+    def __init__(self, tokens):
+        self.tokens = tokens
+        self.token_index = 1
+        self.advance()
+
+    def advance(self) -> int:
+        self.token_index += 1
+        if self.token_index < len(self.tokens):
+            self.current_token = self.tokens[self.token_index]
+        
+        return self.current_token
+
+    def parse(self):
+        res = self.expr()
+
+        return res
+
+
+    def factor(self):
+        tok = self.current_token
+
+        if tok.type in (TT_INT, TT_FLOAT):
+            self.advance()
+            return NumberNodes(tok)
+
+    def term(self):
+        return self.binary_op(self.factor, (TT_MUL, TT_DIV))
+    
+    def expr(self):
+        return self.binary_op(self.factor, (TT_PLUS, TT_MINUS))
+
+    def binary_op(self, func, ops):
+        left = func()
+
+        while self.current_token.type in ops:
+            op_tok = self.current_token
+            self.advance()
+            right = func()
+            left = BinaryOperation(left, op_tok, right)
+
+        return left
+    
+ 
+
+
+
+def run(fn: str, text: str):
     lexer = Lexer(fn, text)
     tokens, error = lexer.make_tokens()
+    if error:
+        return None, error
 
-    return tokens, error
+    parser = Parser(tokens)
+    AbsTree = parser.parse()
+
+
+    return AbsTree, None
 
             

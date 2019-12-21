@@ -1,10 +1,10 @@
 # runner
-import Icarus
+import LexicalAnalyzer
 
 
 while True:
     text = input("Icarus >>> ")
-    result, error = Icarus.run('<stdin>', text)
+    result, error = LexicalAnalyzer.run('<stdin>', text)
 
     if error:
         print(error.as_string())
