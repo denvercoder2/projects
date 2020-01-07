@@ -1,30 +1,13 @@
 #include<stdio.h>
 #include<vector>
+#include<string.h>
+#include<iostream>
 
 
 class SimpleCompArc{
 
     // access specifier
     public:
-    
-    /*
-    Function: byteSwap
-    Parameters: int input
-
-    This function takes an integer
-    as input and swaps it to it's high or low 
-    position. High if 0, Low if 1
-    */
-    int byteSwap(int input){
-        if (input == 1){
-            input = 0;
-        }
-        else{
-            input = 1;
-        }
-
-        return input;
-    }
 
     /*
     Function: bin2dec
@@ -66,25 +49,52 @@ class SimpleCompArc{
 
         return tempCounter;
     }
+
+    /*
+    Function: hex2dec
+    Parameters: char []
+
+    This function will read in a char array
+    and reverse it, while applying the laws
+    of hex conversion to each element until the end
+    */
+    int hex2dec(char hexVal[]){
+        int length = strlen(hexVal);
+
+        int base = 1;
+        int decVal = 0;
+
+        for(int i = length - 1; i >= 0; i--){
+
+            if(hexVal[i] >= '0' && hexVal[i] <= '9'){
+                decVal += (hexVal[i] - 48) * base;
+
+                base = base * 16;
+            }
+
+            else if(hexVal[i]>='A' && hexVal[i]<='F'){
+                decVal += (hexVal[i] - 55) * base;
+
+                base = base * 16;
+            }
+        }
+        return decVal;
+    }
+
 };
 
 int main(void){
 
     // call the class to create obj
     SimpleCompArc comp;
-
-
     std::vector<int> Data = {1,0,0,1,1,1,1,0};
-
-    int byteReturn;
-
-    for(int i : Data){
-        byteReturn = comp.byteSwap(i);
-        printf("Byte Swapped values: %d \n", byteReturn);
-    }
     int decVal = comp.bin2dec(Data);
-
+    
     printf("Decimal Value of initial vector: %d \n", decVal);
 
+    char hexTemp[] = "A3C2";
+    int hexVal = comp.hex2dec(hexTemp);
+
+    printf("Hex Value of initial vector: %d \n", hexVal);
     return 0;
 }
