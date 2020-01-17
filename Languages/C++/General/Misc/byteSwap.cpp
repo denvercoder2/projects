@@ -9,15 +9,17 @@ class SimpleCompArc{
     // access specifier
     public:
 
+    
+    
     /*
-    Function: bin2dec
-    Parameters: std::vector<int>
-
-    This function is a simplified case
-    statement representing the vector 
-    as a stack of binary values and converting them
-    to their correct decimal values
-    depending on the spot
+    * Function: bin2dec
+    * Parameters: std::vector<int>
+    * 
+    * This function is a simplified case
+    * statement representing the vector 
+    * as a stack of binary values and converting them
+    * to their correct decimal values
+    * depending on the spot
     */
     int bin2dec(std::vector<int> testData){
         int tempCounter = 0;
@@ -51,12 +53,12 @@ class SimpleCompArc{
     }
 
     /*
-    Function: hex2dec
-    Parameters: char []
+    * Function: hex2dec
+    * Parameters: char []
 
-    This function will read in a char array
-    and reverse it, while applying the laws
-    of hex conversion to each element until the end
+    * This function will read in a char array
+    * and reverse it, while applying the laws
+    * of hex conversion to each element until the end
     */
     int hex2dec(char hexVal[]){
         int length = strlen(hexVal);
