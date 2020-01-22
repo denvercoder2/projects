@@ -17,7 +17,7 @@ def make_matrix(rows: int, columns: int) -> list:
         a =[] 
 
         for j in range(columns):     
-            a.append(random.randint(1, 9)) 
+            a.append(random.randint(0, 9)) 
 
         matrix.append(a)
 
@@ -26,7 +26,7 @@ def make_matrix(rows: int, columns: int) -> list:
 
 def matrixify(row:str) -> str:
     '''
-    Function: maTRIXIFY
+    Function: matrtixify
     Parameters: rows: STR
     Return Type: str
     Purpose: format the matrix as sudoku

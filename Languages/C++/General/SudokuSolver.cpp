@@ -6,19 +6,32 @@
 */
 
 
-#include<stdlib.h>
-#include<vector>
-#include<iostream>
+#include <bits/stdc++.h> 
+
+
+/* Define for preprocessor directive*/
+#define UNASSIGNED 0
+
+
+
 
 
 /*
-*   Function: createMatrix
-*   Parameters: None
+*   Function: print
+*   Parameters: std::string
+*   Return Type: None
+*   Purpose: Emulate python's print statement 
+*/
+void print(std::string text){
+    std::cout << text << std::endl; 
+}
+
+
+/*
+*   Function: readMatrix
+*   Parameters: std::string
+*   Return Type: Array of arrays (Matrix)
 *   Purpose: Create matrix of given size 
 */
 
-int createMatrix(){
-    //TODO: Fix this in the near future.
-    std::vector <std::vector <int> > Mat(6, std::vector<int>(6, 0));
 
-}
