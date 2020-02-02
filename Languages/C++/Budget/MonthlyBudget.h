@@ -5,7 +5,7 @@
 */
 
 /* 
-    * Function: func
+    * Function: show_bills
     * Type: Void
     * Parameters: struct
     * 
@@ -13,4 +13,4 @@
     * To print out the different attributes of bills
     * in the struct
 */
-void func(struct bills);
+static void show_bills(struct bills);
