@@ -1,5 +1,7 @@
 ------------------------------------------------- Locals
 local WS = game:GetService("Workspace")
+local SP = game:GetService("StarterPack")
+local SPLR = game:GetService("StarterPlayer")
 local PLRS = game:GetService("Players")
 local LIGHTING = game:GetService("Lighting")
 local RF = game:GetService("ReplicatedStorage")
@@ -17,8 +19,8 @@ local phaseOneBool = RS.Bools.Phase1_Day
 local phaseTwoBool = RS.Bools.Phase2_Dusk
 local phaseThreeBool = RS.Bools.Phase3_Night
 local phaseFourBool = RS.Bools.Phase4_MidNight
-local preLength = 5
-local warnLength = 5
+local preLength = 10
+local warnLength = 10
 local inLength = 10
 local postLength = 5
 local mainGui = SG.MainGui
@@ -28,6 +30,7 @@ local chadSurvivors = Teamss.Survivors
 local virginiaLobby = Teamss.Lobby
 local Remotes = RS.RESs
 local fadeEvent = Remotes.roundFade
+local warningEvent = game.ReplicatedStorage.RESs.WarningEvent
 local soundS = RS.localSounds
 local survivor_team = game.Teams.Survivors
 local maps = game.ServerStorage.Maps:GetChildren()
@@ -44,8 +47,9 @@ local EFogStart = enValues.FogStart
 local EOutdoorAmbience = enValues.OutdoorAmbient
 local ESS = enValues.ShadowSoftness
 local Etod = enValues.TimeOfDay
-
+local monster_team = game.Teams.Monster
 local lobbyCounter = game.Workspace.Timer.SurfaceGui.Frame.TextBox
+
 local TPort1 
 local TPort2 
 local TPort3 
@@ -54,6 +58,8 @@ local TPort5
 local TPort6 
 local TPort7 
 local TPort8 
+local KTort
+
 ------------------------------------------------- Very Specific Locals
 local tickNoise = soundS.Tick
 local TSound = soundS.Teleport
@@ -66,14 +72,20 @@ local LobbySounds = {
 }
 
 local GameSounds = {
-	"rbxassetid://155791979",
-	"rbxassetid://245939390",
-	"rbxassetid://4439690368"
+	"rbxassetid://4902259058", -- One Winged Angel
+	"rbxassetid://314056258", -- Cirno
+	"rbxassetid://170955412",  -- Cursed Abbey
+	"rbxassetid://191387304", -- TF2
+	"rbxassetid://5535591768" -- Girei
 }
 
 local TPSound = {
-	"rbxassetid://6460019977"
+	"rbxassetid://6460019977" -- Basher :]
 
+}
+
+local warningSounds ={
+	"rbxassetid://154229993" --MVM Start
 }
 ------------------------------------------------- Functions
 
@@ -123,7 +135,46 @@ local function returnPlayers()
 		end
 	end
 end
-------------------------------------------------- IFS
+
+
+
+local function pickMonster()
+	local PlayerTable = game:GetService("Players")
+	local RandomPlayer = PlayerTable:GetPlayers()[math.random(#PlayerTable:GetPlayers())]
+	local monster_name = RandomPlayer.Name
+	local character = RS.Monsters.Monster:Clone()
+	character.Name = "StarterCharacter"
+	character.Parent = SPLR
+	RandomPlayer.Team = monster_team
+	wait(1)
+	RandomPlayer:LoadCharacter()
+	character.Parent = nil
+	return monster_name	
+end
+
+local function destroyMonster()
+	local players = game:GetService("Players")
+	local checkPlayer = players:GetPlayers()
+	if checkPlayer.Team == monster_team then
+		checkPlayer:Destroy()
+	end
+end
+
+
+
+local function format(Int)
+	return string.format("%02i", Int)
+end
+
+
+local function ConvertTime(seconds)
+	seconds = tonumber(seconds)
+	local minutes = (seconds - seconds%60)/60
+	seconds = seconds - minutes*60
+	local hours = (minutes - minutes%60)/60
+	minutes = minutes - hours*60
+	return format(minutes)..":"..format(seconds)
+end
 
 --------------------------------------------------MAP STUFF 
 
@@ -140,7 +191,8 @@ local function PickTPortSpot(map)
 	TPort6 = {map.TPort6.Position.X, map.TPort6.Position.Y, map.TPort6.Position.Z}
 	TPort7 = {map.TPort7.Position.X, map.TPort7.Position.Y, map.TPort7.Position.Z}
 	TPort8 = {map.TPort8.Position.X, map.TPort8.Position.Y, map.TPort8.Position.Z}
-
+	KTort  = {map.KTPort.Position.X, map.KTPort.Position.Y, map.KTPort.Position.Z}
+	
 	local player_count = game.Players:GetPlayers()
 	local TPort_Str = "TPort"
 	local TPort
@@ -154,7 +206,7 @@ local function PickTPortSpot(map)
 	hash_map["TPort6"] = TPort6
 	hash_map["TPort7"] = TPort7
 	hash_map["TPort8"] = TPort8
-	
+	hash_map["KTPort"] = KTort
 
 	for i = 1, #player_count, 1 do
 		print("Teleporting Players")
@@ -162,7 +214,10 @@ local function PickTPortSpot(map)
 		local spot = hash_map[TPort]
 		for _, player in pairs(game.Players:GetChildren()) do
 			if player.Team == survivor_team then
+				print("Chose spot "..spot)
 				TeleportPlayer(spot[1], spot[2], spot[3])
+			elseif player.Team == monster_team then
+				TeleportPlayer(KTort[1], KTort[2], KTort[3])
 			end
 		end
 	end
@@ -188,6 +243,10 @@ local function roundLogic()
 			Status.Value = ""..i..""
 			lobbyCounter.Text = "PreRound: "..i..""
 		end
+		music:Stop()
+		music_Count = math.random(1, #warningSounds)
+		playMusic(warningSounds, music_Count)
+		music:Play()
 		for i = warnLength, 0, -1 do
 			bolt.Value = true --REMEMBER TO CHANGE THIS
 			phaseOneBool.Value = false
@@ -197,9 +256,14 @@ local function roundLogic()
 			wait(1)
 			Status.Value = ""..i..""
 			lobbyCounter.Text = "Warning: "..i..""
+			if i == warnLength then
+				local warningFrame = SG.WARNING.Frame
+				warningFrame.Visible = true
+				warningEvent:FireAllClients(i)
+			end
 			if i <= 2 then
-				music:Stop()
 				fadeEvent:FireAllClients(i)
+				music:Stop()
 			end
 		end
 		wait(2)
@@ -207,32 +271,17 @@ local function roundLogic()
 		
 		round_map = pickMap(maps)
 		print(round_map)
---[[		
-		local ReplicatedStorage = game:GetService("ReplicatedStorage")
-		local MapToClone = ReplicatedStorage.Maps:WaitForChild(round_map):Clone()
-		MapToClone.Parent = game.Workspace
-
-		local map
-		if round_map == "NoEH" then
-			map = game.Workspace.NoEH
-			--CHANGE TO A FUNCTION/LIGHTING STUFF TOO
-		elseif round_map == "Noeh2" then
-			map = game.Workspace.NoEH2
-			--CHANGE TO A FUNCTION/LIGHTING STUFF TOO
-		end
-		
-		
-		wait(4)
-		--ReplicatedStorage.Maps:WaitForChild(round_map, 15)
-]]
 
 		for k,v in ipairs(round_map:GetChildren()) do
 			v:Clone().Parent = game.Workspace.CurrentMap
 			wait(0.1)						
-		end
-		
+		end		
 		print("Map loaded: ", round_map)
-
+		local monster_for_round = pickMonster()
+		Status.Value = "Monster for round: " ..monster_for_round
+		lobbyCounter.Text = "Monster for round: " ..monster_for_round
+		wait(1)
+		
 		PickTPortSpot(round_map)
 		music_Count = math.random(1, #GameSounds)
 		playMusic(GameSounds, music_Count)
@@ -252,6 +301,8 @@ local function roundLogic()
 		music:Stop()
 		wait(1)
 		returnPlayers()
+		clone:Destroy()
+		
 		
 		workspace.CurrentMap:ClearAllChildren()
 		for i = postLength, 0, -1 do
